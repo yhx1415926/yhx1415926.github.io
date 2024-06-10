@@ -11,7 +11,7 @@ tags:
 
 ### Introduction
 
-在新高考改革背景下，Attention 作为了本次高考压轴题的考察点
+在新高考改革背景下，$Attention$ 作为了本次高考压轴题的考察点
 
 ### Problem Presentation
 
@@ -26,6 +26,20 @@ $a_{1},a_{2},a_{3},\ \dots\ ,a_{4m+2}$ 是 公差为 $d$ 的等差数列.
 <p>$(3)$ 任取 $i,j$ 使得 $0\le i < j\le 4m+2$; 令 $P_{m}$ 为 $\{a_{n}\}$ 是 $(i,j)$ 可分 的概率.</p>
 
 &emsp;&emsp;求证: $P_{m}>\frac{1}{8}$
+
+### Solution
+
+$(1)$ $(i,j)=(1,2) or (5,6) or (1,6)$ .
+
+$(2)$ 注意到可以如下划分:
+
+<p>&emsp;&emsp; $\{a_{1},a_{4},a_{7},a_{10}\}$ </p><br>
+<p>&emsp;&emsp; $\{a_{3},a_{6},a_{9},a_{12}\}$ </p><br>
+<p>&emsp;&emsp; $\{a_{5},a_{8},a_{11},a_{14}\}$ </p><br>
+&emsp;&emsp; 之后都取连续的四项即可
+
+$(3)$ 使用 $Attention$ ,可以注意到:<br>
+&emsp;&emsp;....................
 
 ### Reference
 
