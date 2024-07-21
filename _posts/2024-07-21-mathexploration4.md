@@ -122,8 +122,7 @@ $deg\prod_{j=1}^{m}(1-F_j(x)^{p-1})\le (p-1)\sum degF_j<(p-1)n$
 <p>\begin{align}F(x)=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_px_p^{p-1}\in \mathbb{F}_p[x]\end{align}</p>
 $degF\le p-1< p$<br><br>
 <p>$x=(x_1,x_2,\dots,x_n)\in \mathbb{F} _p^n$</p>
-<p>$x\in \mathcal{Z}(F),\ x_{i_1},x_{i_2},\dots,x_{i_k}\ne 0,\ other\ x_i=0$</p>
-<p>$a_{i_1}+a_{i_2}+\cdots+a_{i_k}\equiv 0\ (mod\ p)$</p><br>
+<p>$x\in \mathcal{Z}(F),\ x_{i_1},x_{i_2},\dots,x_{i_k}\ne 0,\ other\ x_i=0\ \Leftrightarrow\ a_{i_1}+a_{i_2}+\cdots+a_{i_k}\equiv 0\ (mod\ p)$</p><br>
 <p>$N_k:=\#\{B\subset A\ |\ |B|=k,\sigma(B)\equiv 0\ (mod\ p)\}\ 0\le k\le p$,即 $k$ 元 $Zero-sum-subset$</p>
 <p>\begin{align}\#\mathcal{Z}(F)=\sum_{k=0}^pN_k(p-1)^k\overset{C-W}{\equiv}0\ (mod\ p)\end{align}</p>
 <p>\begin{align}\#\mathcal{Z}(F)=\sum_{k=0}^p(-1)^kN_k\equiv 0\ (mod\ p)\end{align}</p>
@@ -145,7 +144,7 @@ $(a_i,b_i)\subset \mathbb{Z}^2\ ,i=1,2,\dots,2p-1$
 <p>\begin{align}F_1=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
 <p>\begin{align}F_2=b_1x_1^{p-1}+b_2x_2^{p-1}+\cdots b_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
 <p>$degF_1+degF_2\le 2p-2< 2p-1\ \Rightarrow\ \#\mathcal{Z}(F_1,F_2)\equiv 0\ (mod\ p)$</p>
-<p>x=(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)\ \Rightarrow\ \exists\ x\ne(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2) </p>
+<p>$x=(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)\ \Rightarrow\ \exists\ x\ne(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)$</p>
 <p align="right">$\Box$</p>
 
 ### Kemnitz’_Conjecture's_Proof
@@ -172,3 +171,4 @@ $C.\ Reiher\ \ 2007,(German),1999-2003\ IMO\ 4G1B$<br>
 #### Conclusion
 
 ### Reference
+[On Kemnitz’ conjecture concerning lattice-points in the plane](https://yhx1415926.github.io/quote_img/mathexploration-4/On_Kemnitz’_conjecture_concerning_lattice-points_in_the_plane.pdf)
