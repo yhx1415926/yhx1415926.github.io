@@ -34,7 +34,7 @@ $G$ 为有限交换群, $A$ 是由 $G$ 中元素构成的可重集。<br>
 $exp(G):=\underset{x\in G}{max}\ ord(x)$<br>
 $G=C_{n_1}\oplus C_{n_2}\oplus\cdots\oplus C_{n_l},\ n_1|n_2|\cdots|n_l,\ exp(G)=n_l$
 
-$\sigma(B):=\sum_{x\in B}x$   约定 $\sigma(\emptyset)=0$ <br><br>
+$\sigma(B):=\sum_{x\in B}x$, 约定 $\sigma(\emptyset)=0$ <br><br>
 (Con.1中, $G=\mathbb{Z} /n\mathbb{Z}=C_n$)<br>
 (Con.2中, $G=C_n,k=n=exp(C_n)$ )
 
@@ -93,7 +93,7 @@ $\emptyset\in S_{(0,0)}\ \Rightarrow\ \exists\ |B|\ne 0,\ s.t.\ \sigma(B)\equiv 
 ### Solution_2-Chevalley_Warning_Theorem
 $F_1,F_2,\dots,F_m\in\mathbb{F}_p[x_1,x_2,\dots,x_n]$<br>
 <p>$\mathcal{Z}(F_1,F_2,\dots,F_m)=\{x\in(\mathbb{F}_p)^n\ |\ F_1(x)=F_2(x)=\cdots=F_m(x)=0\}$</p>
-<p>$\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$ if $\sum_{i=1}^{n}deg(F_i)< n$</p>
+<p>$\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)\ \ \ if\ \ \ \sum_{i=1}^{n}deg(F_i)< n$</p>
 
 #### Theorem's_Proof
 $x=(x_1,x_2,\dots,x_n)\in \mathbb{F}_p^n $
@@ -114,16 +114,52 @@ $\forall a\ge 0$
 $deg\prod_{j=1}^{m}(1-F_j(x)^{p-1})\le (p-1)\sum degF_j<(p-1)n$
 <p>\begin{align}\#\mathcal{Z}=\sum_{\{a_k\}}\ \sum_{(x_1,x_2,\dots,x_n)\in \mathbb{F}_p ^n}x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}=\sum_{\{a_k\}}(\sum_{x_1\in \mathbb{F}}x_1^{a_1})(\cdots)(\cdots)\cdots(\cdots)\end{align}</p>
 又 $a_1+a_2+\cdots+a_n<(p-1)n\ \Rightarrow\ \exists \ a_j\le p-2.$<br>
-<p>故 $\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$</p><br>
+<p>故 $\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$</p>
 <p align="right">$\Box$</p>
 
 #### For_Con.1
+<p>$A=\{a_1,a_2,\dots,a_p\},a_1,a_2,\dots,a_p>0$</p>
+<p>\begin{align}F(x)=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_px_p^{p-1}\in \mathbb{F}_p[x]\end{align}</p>
+$degF\le p-1< p$<br><br>
+<p>$x=(x_1,x_2,\dots,x_n)\in \mathbb{F} _p^n$</p>
+<p>$x\in \mathcal{Z}(F),\ x_{i_1},x_{i_2},\dots,x_{i_k}\ne 0,\ other\ x_i=0$</p>
+<p>$a_{i_1}+a_{i_2}+\cdots+a_{i_k}\equiv 0\ (mod\ p)$</p><br>
+<p>$N_k:=\#\{B\subset A\ |\ |B|=k,\sigma(B)\equiv 0\ (mod\ p)\}\ 0\le k\le p$,即 $k$ 元 $Zero-sum-subset$</p>
+<p>\begin{align}\#\mathcal{Z}(F)=\sum_{k=0}^pN_k(p-1)^k\overset{C-W}{\equiv}0\ (mod\ p)\end{align}</p>
+<p>\begin{align}\#\mathcal{Z}(F)=\sum_{k=0}^p(-1)^kN_k\equiv 0\ (mod\ p)\end{align}</p>
+$ N_0=1\ (\emptyset)\ \Rightarrow\ \exists\ 0< k\le p,N_k\ne 0 $
+<p align="right">$\Box$</p>
 
 #### For_Con.2
+$Erdo ̋s,Ginzburg\ and\ Ziv\ Theorem$<br>
+$a_1,a_2,\dots,a_{2p-1}\in \mathbb{F}_p $
+<p>\begin{align}F_1=x_1^{p-1}+x_2^{p-1}+\cdots x_{2p-1}^{p-1}\end{align}</p>
+<p>\begin{align}F_2=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
+$degF_1+degF_2\le 2p-2< 2p-1$
+<p>\begin{align}\#\mathcal{Z}(F_1,F_2)=N_0+(p-1)^pN_p\equiv 0\ (mod\ p) \end{align}</p>
+$\Rightarrow\ N_p\equiv N_0=1\ (mod\ p)$, obviously $N_p\ne 0$.
+<p align="right">$\Box$</p>
 
 #### For_Problem-1
+$(a_i,b_i)\subset \mathbb{Z}^2\ ,i=1,2,\dots,2p-1$
+<p>\begin{align}F_1=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
+<p>\begin{align}F_2=b_1x_1^{p-1}+b_2x_2^{p-1}+\cdots b_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
+<p>$degF_1+degF_2\le 2p-2< 2p-1\ \Rightarrow\ \#\mathcal{Z}(F_1,F_2)\equiv 0\ (mod\ p)$</p>
+<p>x=(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)\ \Rightarrow\ \exists\ x\ne(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2) </p>
+<p align="right">$\Box$</p>
 
 ### Kemnitz’_Conjecture's_Proof
+$C.\ Reiher\ \ 2007,(German),1999-2003\ IMO\ 4G1B$<br>
+<p>
+\begin{cases}
+    F_1=x_1^{p-1}+x_2^{p-1}+\cdots x_{m}^{p-1}\\
+    F_2=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{m}x_{m}^{p-1}\\
+    F_3=b_1x_1^{p-1}+b_2x_2^{p-1}+\cdots b_{m}x_{m}^{p-1}
+\end{cases}
+</p>
+<p>$A=\{(a_i,b_i)\ |\ i=1,2,\dots,m\}$</p>
+<p>$N_k(A):=\{B\subset A\ |\ |B|=k,\sigma(B)\equiv(0,0)\ (mod\ p)\}$</p>
+使用 $C-W\ Theorem$ 前提: $m>3(p-1)$ 即 $m\ge 3p-2$
 
 #### Corollary_1
 
