@@ -96,8 +96,8 @@ $F_1,F_2,\dots,F_m\in\mathbb{F}_p[x_1,x_2,\dots,x_n]$<br>
 <p>$\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$ if $\sum_{i=1}^{n}deg(F_i)< n$</p>
 
 #### Theorem's_Proof
-$x=(x_1,x_2,\dots,x_n)\in \mathbb{F}_p^n $<br>
-According to Fermat's Little Theorem,<br>
+$x=(x_1,x_2,\dots,x_n)\in \mathbb{F}_p^n $
+<p>According to Fermat's Little Theorem,</p>
 $x\in \mathcal{Z}(F_1,F_2,\dots,F_m)\ \Leftrightarrow\ \prod_{j=1}^{m}(1-F_j(x)^{p-1})=1\in\mathbb{F}_p$
 <p>\begin{align}\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv \sum_{x\in\mathbb{F}_p}\prod_{j=1}^{m}(1-F_j(x)^{p-1})\ (mod\ p)\end{align}</p>
 约定 $x^0|_{x=0}=1.$<br>
@@ -114,7 +114,7 @@ $\forall a\ge 0$
 $deg\prod_{j=1}^{m}(1-F_j(x)^{p-1})\le (p-1)\sum degF_j<(p-1)n$
 <p>\begin{align}\#\mathcal{Z}=\sum_{\{a_k\}}\ \sum_{(x_1,x_2,\dots,x_n)\in \mathbb{F}_p ^n}x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}=\sum_{\{a_k\}}(\sum_{x_1\in \mathbb{F}}x_1^{a_1})(\cdots)(\cdots)\cdots(\cdots)\end{align}</p>
 又 $a_1+a_2+\cdots+a_n<(p-1)n\ \Rightarrow\ \exists \ a_j\le p-2.$<br>
-故 $\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$
+<p>故 $\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$</p><br>
 <p align="right">$\Box$</p>
 
 #### For_Con.1
