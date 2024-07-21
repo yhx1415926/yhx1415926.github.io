@@ -34,11 +34,11 @@ $G$ 为有限交换群, $A$ 是由 $G$ 中元素构成的可重集。<br>
 $exp(G):=\underset{x\in G}{max}\ ord(x)$<br>
 $G=C_{n_1}\oplus C_{n_2}\oplus\cdots\oplus C_{n_l},\ n_1|n_2|\cdots|n_l,\ exp(G)=n_l$
 
-$\sigma(B):=\sum_{x\in B}x$<br><br>
+$\sigma(B):=\sum_{x\in B}x$ 约定 $\sigma(\emptyset)=0$ <br><br>
 (Con.1中, $G=\mathbb{Z} /n\mathbb{Z}=C_n$)<br>
 (Con.2中, $G=C_n,k=n=exp(C_n)$ )
 
-#### Comcerning_Problem
+#### Concerning_Problem
 考虑 $G$ 秩为 $2$ 且 $n=p$ 的情形,即<br>
 <p>$A=\{(a_1,b_1),(a_2,b_2),\dots,(a_m,b_m)\}\subset\mathbb{Z}^2$</p>
 (1) 当 $m$ 多大时, $\exists B \subseteq A$ and $|B|\ne 0$ ,s.t. $\sigma(B)\equiv (0,0)\ (mod\ p)$<br>
@@ -48,8 +48,37 @@ $Ans_2\ =\ 4p-3$ ($4p-4$ 反例: $p-1$ 个 $(0,0),(0,1),(1,0),(1,1)$ )<br>
 (注意到解决Con.1的鸽巢原理无法应用于此处)<br>
 
 ### Solution_1-Generating_Function
+<p>可重集 $A=\{a_1,a_2,\dots,a_m\}$, $a_1,a_2,\dots,a_m \in \mathbb{Z}_{>0}$ </p>
+<p>\begin{align}(1+x^{a_1})(1+x^{a_2})\cdots(1+x^{a_m})=\sum_{B\subset A}x^{\sigma(B)}\end{align}</p>
+利用:
+<p>\begin{align}(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}\end{align}</p>
+
+#### For_Con.1
+$n=p,\ a_1,a_2,\dots,a_m\in \mathbb{Z}_{>0}$<br>
+<p>$S_k:=\{B\subset A\ |\ \sigma(B)\equiv k\ (mod\ p)\}$</p>
+<p>\begin{align}f(x):=(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})\in \mathbb{F}_p/(x^p-1) \end{align}</p>
+<p>\begin{align}f(x)=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}=\sum_{k=0}^{p-1}(\sum_{B\in S_k}(-1)^{|B|})x^k\ \ (\star)\end{align}</p>
+另一方面,又有 $(1-x^{a_j})=(1-x)(\cdots)$ ,则
+<p>\begin{align}f(x)=(1-x)^pg(x)\end{align}</p>
+<p>\begin{align}(1-x)^p=1-\binom{p}{1}x+ \binom{p}{2}x^2+\cdots+(-1)^px^p \overset{mod\ p}{==}1-x^p\overset{mod\ x^p-1}{==}0\end{align}</p>
+$\Rightarrow\ f(x)=0$ 结合 $(\star)$ $\Rightarrow $
+<p>\begin{align}\forall\  0\le k\le p-1,\ \sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p)$ \end{align}</p>
+特别的，$k=0$ 时，$\emptyset \in S_k$ 而 $\sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p)$<br>
+$\Rightarrow\ \exists\ B\in S_0$ and $|B|\ne 0$ ,s.t. \sigma(B)\equiv 0\ (mod\ p).
+<p align="right">$\Box$</p>
+注意到这种方法给出了比鸽巢原理更多的信息.
+
+#### For_Con.2
 
 ### Solution_2-Chevalley_Warning_Theorem
+
+#### Theorem's_Proof
+
+#### For_Con.1
+
+#### For_Con.2
+
+#### For_Problem-1
 
 ### Kemnitz’_Conjecture's_Proof
 
