@@ -125,7 +125,7 @@ $degF\le p-1< p$<br><br>
 <p>$x\in \mathcal{Z}(F),\ x_{i_1},x_{i_2},\dots,x_{i_k}\ne 0,\ other\ x_i=0\ \Leftrightarrow\ a_{i_1}+a_{i_2}+\cdots+a_{i_k}\equiv 0\ (mod\ p)$</p><br>
 <p>$N_k:=\#\{B\subset A\ |\ |B|=k,\sigma(B)\equiv 0\ (mod\ p)\}\ 0\le k\le p$,即 $k$ 元 $Zero-sum-subset$</p>
 <p>\begin{align}\#\mathcal{Z}(F)=\sum_{k=0}^pN_k(p-1)^k\overset{C-W}{\equiv}0\ (mod\ p)\end{align}</p>
-<p>\begin{align}\#\mathcal{Z}(F)=\sum_{k=0}^p(-1)^kN_k\equiv 0\ (mod\ p)\end{align}</p>
+<p>\begin{align}\#\mathcal{Z}(F)\equiv\sum_{k=0}^p(-1)^kN_k\equiv 0\ (mod\ p)\end{align}</p>
 $ N_0=1\ (\emptyset)\ \Rightarrow\ \exists\ 0< k\le p,N_k\ne 0 $
 <p align="right">$\Box$</p>
 
@@ -146,6 +146,7 @@ $(a_i,b_i)\subset \mathbb{Z}^2\ ,i=1,2,\dots,2p-1$
 <p>$degF_1+degF_2\le 2p-2< 2p-1\ \Rightarrow\ \#\mathcal{Z}(F_1,F_2)\equiv 0\ (mod\ p)$</p>
 <p>$x=(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)\ \Rightarrow\ \exists\ x\ne(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)$</p>
 <p align="right">$\Box$</p>
+类似的，可以证明 $D((C_p)^r)=r(p-1)+1$.
 
 ### Kemnitz’_Conjecture's_Proof
 $C.\ Reiher\ \ 2007,(German),1999-2003\ IMO\ 4G1B$<br>
