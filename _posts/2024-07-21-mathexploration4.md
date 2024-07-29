@@ -161,15 +161,7 @@ $C.\ Reiher\ \ 2007,(German),1999-2003\ IMO\ 4G1B$<br>
 <p>$N_k(A):=\{B\subset A\ |\ |B|=k,\sigma(B)\equiv(0,0)\ (mod\ p)\}$</p>
 使用 $C-W\ Theorem$ 前提: $m>3(p-1)$ 即 $m\ge 3p-2$
 
-#### Corollary_1
-
-#### Corollary_2
-
-#### Corollary_3
-
-#### Corollary_4
-
-#### Conclusion
+后续技巧具体可见[Reference](#Reference)
 
 ### Reference
 [On Kemnitz’ conjecture concerning lattice-points in the plane](https://yhx1415926.github.io/quote_img/mathexploration-4/On_Kemnitz’_conjecture_concerning_lattice-points_in_the_plane.pdf)
