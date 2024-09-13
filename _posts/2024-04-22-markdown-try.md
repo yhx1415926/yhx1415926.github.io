@@ -11,7 +11,7 @@ header-style: text
 # 标题1
 ## 标题2
 ### 标题3
-#### 标题4
+#### 标题4xx
 ##### 标题5
 ###### 标题6
 正文
@@ -27,6 +27,15 @@ $<br>
   \nabla\times\vec{\mathbf{E}}+\frac{1}{c}\frac{\partial\vec{\mathbf{B}}}{\partial t} &amp;= \vec{\mathbf{0}} \\
   \nabla\cdot\vec{\mathbf{B}} &amp;= 0
 \end{align}<br /></p>
+
+
+$$
+  \nabla\times\vec{\mathbf{B}}-\frac{1}{c}\frac{\partial\vec{\mathbf{E}}}{\partial t} &amp;= \frac{4\pi}{c}\vec{\mathbf{j}} \\
+  \nabla\cdot\vec{\mathbf{E}} &amp;= 4\pi\rho \\
+  \nabla\times\vec{\mathbf{E}}+\frac{1}{c}\frac{\partial\vec{\mathbf{B}}}{\partial t} &amp;= \vec{\mathbf{0}} \\
+  \nabla\cdot\vec{\mathbf{B}} &amp;= 0
+$$
+<br>
 
 <font color="gray" size=3 face="楷体">灰色尺寸三楷体</font>
 
