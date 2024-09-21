@@ -1,0 +1,38 @@
+import pandas as pd
+df = pd.read_excel('qmcj.xls')
+
+#df['总分'] = df.sum(axis=1)
+
+df0 = df[['语文','数学','英语']]
+df['总分'] = df0.sum(axis=1)
+print(df)
+print()
+
+#df1 = df.groupby("班级",as_index=False).sum()
+#df2 = df.groupby("班级",as_index=True).sum()
+
+#print(df1)
+#print()
+#print(df2)
+#print()
+
+#print(pd.Series([5, 6], index=[1, 2]))
+
+df3 = df.groupby("班级",as_index=True)
+print(df3['总分'].sum())
+
+df4 = df.groupby(['班级','性别'],as_index=False)['总分'].mean()
+print(df4)
+
+#df6 = df.groupby('班级',as_index=False).sum()
+#df7 = df6.groupby('性别',as_index=False).sum()
+#print(df7)
+
+'''
+df5 = df.sort_values('总分',ascending=True)
+print(df5)
+
+print(df5[-3:])
+print(df5.tail(3))
+
+'''
