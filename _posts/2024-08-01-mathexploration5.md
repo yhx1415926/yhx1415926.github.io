@@ -51,6 +51,49 @@ Prove: 可将 $\triangle ABC$ 划分为 $2n+1$ 个小三角形, $s.t.$每个小�
 
 ### 2023-CTST-23
 
+#### Problem
+
+设 $p$ 质数,实数 $\lambda \in (0,1)$ ,正整数 $s\le t<\frac{\lambda p}{12}$ .($k$ 给定)<br>
+$S,T$ 分别是由 $s,t$ 个连续正整数构成的集合, $s.t.$ <br>
+<p><center>$|\{(x,y)\in S\times T:kx\equiv y\ (mod\ p)\}|\ge 1+\lambda s$</center></p>
+Prove: $\exists\ a,b \in \mathbb{Z},s.t.\ 1\le a \le \frac {1}{\lambda},|b|\le \frac{t}{\lambda s} $ and $ka \equiv  b \ (mod\ p)$ .
+
+#### Solution
+
+$Proof:$<br>
+考虑这 $n(\ge 1+\lambda s)$ 个点形成的凸包 $\Gamma$ .(记 $Vol(\Gamma)=:[\Gamma]$ )<br>
+假设这些点不共线,则 $[\Gamma]>0$ .<br>
+<p>$\{(x,y):p|(y-kx)\}=\Lambda=<(1,k),(0,p)>$  Form a lattice</p>
+其中每个三角形的面积都可表示为:
+<p>\begin{align}
+\frac{1}{2}|det
+\begin{bmatrix}
+  x_1&y_1 \\
+  x_2&y_2
+\end{bmatrix}|
+\end{align}</p>
+
+由于 $p|(y_1-kx_1),p|(y_2-kx_2)\ \Rightarrow\ \frac{p}{2}|S_{\triangle}$<br>
+$\Rightarrow [\Gamma]\ge \frac{p}{2} (n-2)$ (考虑'最差'三角剖分)<br>
+Or by Pick's Theorem:
+<p>\begin{align}
+[\Gamma]\ge |det
+\begin{bmatrix}
+1&k\\
+0&p
+\end{bmatrix}
+\cdot(\frac{n}{2}-1)|=frac{p}{2} (n-2)
+\end{align}</p>
+
+又 $[\Gamma]\le (s-1)(t-1)\le (s-1)(\frac{\lambda p}{4}-1)$  (注:$\frac{\lambda p}{12}$可优化为$\frac{\lambda p}{4}$)<br>
+则 $\frac{p}{2}(n-2)\le(s-1)(\frac{\lambda p}{4}-1)<\frac{p}{4}\cdot\lambda s\ \Rightarrow\ n\le 3.$ 矛盾！<br>
+故 $[\Gamma]=0$.<br>
+取两相邻(最近)点, $(x_1,y_1),(x_2,y_2),x_1<x_2$.<br>
+则 $(1+\lambda s-1)(x_2-x_1)\le s,|(1+\lambda s-1)(y_2-y_1)|\le t$<br>
+$\Rightarrow\ 1\le x_2-x_1\le \frac{1}{\lambda},y_2-y_1\le \frac{p}{\lambda s}$ 且 $k(x_2-x_1)\equiv (y_2-y_1)\ (mod\ p)$ .<br>
+取 $a=x_2-x_1,b=y_2-y_1$ 即可.
+<p align="right">$\Box$</p>
+
 ### Pick's_theorem
 
 ### General_problem
