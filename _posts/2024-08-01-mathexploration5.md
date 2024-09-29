@@ -30,9 +30,9 @@ tags:
 #### Problem
 
 <div align="center"><table rules="none"><tr><td>
-<p>如图，锐角 $\triangle ABC$ ,外接圆 $\Omega $ ,外心 $O$ .</p><br>
-<p>$BB\cap CC=:M\ ,AA\cap BB=:N\ ,AM\cap BC=:D\ ,CN\cap AB=:F\ ,DF\cap \Omega =:P$</p><br>
-<p>$PQR\parallel BO\ ,Q\in AB\ ,R\in AC$.</p><br>
+<p>如图，锐角 $\triangle ABC$ ,外接圆 $\Omega $ ,外心 $O$ .</p>
+<p>$BB\cap CC=:M\ ,AA\cap BB=:N\ ,AM\cap BC=:D\ ,CN\cap AB=:F\ ,DF\cap \Omega =:P$</p>
+<p>$PQR\parallel BO\ ,Q\in AB\ ,R\in AC$.</p>
 <p>若 $PO^2=PQ\cdot PR$ ,求 $\angle ACB$ .</p>
 </td><td>
 <img src="https://yhx1415926.github.io/quote_img/mathexploration-5/2024CTST_8.png" style="zoom:50%"/>
@@ -40,13 +40,13 @@ tags:
 
 #### Solution
 
-See More in [Reference](#)
+See More in [Further_Reading](#further_reading)
 
 ### 2023-CTST-5
 
 #### Problem
 
-<p>$\triangle ABC$ , $P_1,\dots,P_n\ \in conv\{A,B,C\}\ ,s.t.\ P_1,\dots,P_n,A,B,C$ 任意三点不共线.</p><br>
+<p>$\triangle ABC$ , $P_1,\dots,P_n\ \in conv\{A,B,C\}\ ,s.t.\ P_1,\dots,P_n,A,B,C$ 任意三点不共线.</p>
 Prove: 可将 $\triangle ABC$ 划分为 $2n+1$ 个小三角形, $s.t.$每个小三角形的顶点都来自 $P_1,\dots,P_n,A,B,C$ <br>
 且含 $A,B,C$ 中至少一个的小三角形不少于 $n+\sqrt{n}+1$ 个.
 
