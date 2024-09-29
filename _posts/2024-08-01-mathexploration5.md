@@ -34,7 +34,7 @@ tags:
 <p>$PQR\parallel BO\ ,Q\in AB\ ,R\in AC$.</p>
 <p>若 $PO^2=PQ\cdot PR$ ,求 $\angle ACB$ .</p>
 </td><td>
-<img src="https://yhx1415926.github.io/quote_img/mathexploration-5/2024CTST_8.png" style="zoom:50%"/>
+<img src="https://yhx1415926.github.io/quote_img/mathexploration-5/2024CTST_8.png" style="zoom:80%"/>
 </td></tr></table></div>
 
 #### Solution
