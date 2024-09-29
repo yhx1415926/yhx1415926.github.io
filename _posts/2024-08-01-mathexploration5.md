@@ -23,15 +23,14 @@ tags:
 己知多面体 $P\ convex$ ,其每个顶点恰属于三个不同的面,且可以将 $P$ 的顶点 $BW$ 二染色，使得 $P$ 每条棱的两个端点不同色. <br>
 求证:可以将 $P$ 的每条棱 $RGB$ 三染色,使得每个顶点连的三条棱的颜色两两不同,且每个面恰含两种颜色的棱.
 
-#### Solution
-
 ### 2024-CTST-8
 
 #### Problem
 
 <div align="center"><table rules="none"><tr><td>
 <p>如图，锐角 $\triangle ABC$ ,外接圆 $\Omega $ ,外心 $O$ .</p>
-<p>$BB\cap CC=:M\ ,AA\cap BB=:N\ ,AM\cap BC=:D\ ,CN\cap AB=:F\ ,DF\cap \Omega =:P$</p>
+<p>$BB\cap CC=:M\ ,AA\cap BB=:N\ $.</p>
+<p>$AM\cap BC=:D\ ,CN\cap AB=:F\ ,DF\cap \Omega =:P$</p>
 <p>$PQR\parallel BO\ ,Q\in AB\ ,R\in AC$.</p>
 <p>若 $PO^2=PQ\cdot PR$ ,求 $\angle ACB$ .</p>
 </td><td>
@@ -49,8 +48,6 @@ See More in [Further_Reading](#further_reading)
 <p>$\triangle ABC$ , $P_1,\dots,P_n\ \in conv\{A,B,C\}\ ,s.t.\ P_1,\dots,P_n,A,B,C$ 任意三点不共线.</p>
 Prove: 可将 $\triangle ABC$ 划分为 $2n+1$ 个小三角形, $s.t.$每个小三角形的顶点都来自 $P_1,\dots,P_n,A,B,C$ <br>
 且含 $A,B,C$ 中至少一个的小三角形不少于 $n+\sqrt{n}+1$ 个.
-
-#### Solution
 
 ### 2023-CTST-23
 
