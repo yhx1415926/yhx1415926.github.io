@@ -87,7 +87,7 @@ $Proof:$<br>
 
 &emsp;&emsp;又 $[\Gamma]\le (s-1)(t-1)\le (s-1)(\frac{\lambda p}{4}-1)$  (注:$\frac{\lambda p}{12}$可优化为$\frac{\lambda p}{4}$)<br>
 &emsp;&emsp;则 $\frac{p}{2}(n-2)\le(s-1)(\frac{\lambda p}{4}-1)<\frac{p}{4}\cdot\lambda s\ \Rightarrow\ n\le 3.$ 矛盾！
-<p>故 <b>$[\Gamma]=0$</b></p>.<br>
+故 $[\Gamma]=0$ .<br>
 
 取两相邻(最近)点, $(x_1,y_1),(x_2,y_2),x_1<x_2$.<br>
 则 $(1+\lambda s-1)(x_2-x_1)\le s,|(1+\lambda s-1)(y_2-y_1)|\le t$<br>
