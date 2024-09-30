@@ -37,10 +37,6 @@ tags:
 <img src="https://yhx1415926.github.io/quote_img/mathexploration-5/2024CTST_8.png" style="zoom:80%"/>
 </td></tr></table></div>
 
-#### Solution
-
-See More in [Further_Reading](#further_reading)
-
 ### 2023-CTST-5
 
 #### Problem
@@ -48,6 +44,10 @@ See More in [Further_Reading](#further_reading)
 <p>$\triangle ABC$ , $P_1,\dots,P_n\ \in conv\{A,B,C\}\ ,s.t.\ P_1,\dots,P_n,A,B,C$ 任意三点不共线.</p>
 Prove: 可将 $\triangle ABC$ 划分为 $2n+1$ 个小三角形, $s.t.$每个小三角形的顶点都来自 $P_1,\dots,P_n,A,B,C$ <br>
 且含 $A,B,C$ 中至少一个的小三角形不少于 $n+\sqrt{n}+1$ 个.
+
+#### Solution
+
+See More in [Further_Reading](#further_reading)
 
 ### 2023-CTST-23
 
@@ -63,8 +63,8 @@ Prove: $\exists\ a,b \in \mathbb{Z},s.t.\ 1\le a \le \frac {1}{\lambda},|b|\le \
 $Proof:$<br>
 考虑这 $n(\ge 1+\lambda s)$ 个点形成的凸包 $\Gamma$ .(记 $Vol(\Gamma)=:[\Gamma]$ )<br>
 假设这些点不共线,则 $[\Gamma]>0$ .<br>
-<p>$\{(x,y):p|(y-kx)\}=\Lambda=<(1,k),(0,p)>\ \ \ \ $(Form a lattice)</p>
-其中每个三角形的面积都可表示为:
+<p>&emsp;&emsp;$\{(x,y):p|(y-kx)\}=\Lambda=<(1,k),(0,p)>\ \ \ \ $(Form a lattice)</p>
+&emsp;&emsp;其中每个三角形的面积都可表示为:
 <p>\begin{align}
 \frac{1}{2}|det
 \begin{bmatrix}
@@ -73,9 +73,9 @@ $Proof:$<br>
 \end{bmatrix}|
 \end{align}</p>
 
-由于 $p|(y_1-kx_1),p|(y_2-kx_2)\ \Rightarrow\ \frac{p}{2}|S_{\triangle}$<br>
-$\Rightarrow [\Gamma]\ge \frac{p}{2} (n-2)$ (考虑最差三角剖分)<br><br>
-Or by Pick's Theorem:
+&emsp;&emsp;由于 $p|(y_1-kx_1),p|(y_2-kx_2)\ \Rightarrow\ \frac{p}{2}|S_{\triangle}$<br>
+&emsp;&emsp;$\Rightarrow [\Gamma]\ge \frac{p}{2} (n-2)$ (考虑最差三角剖分)<br><br>
+&emsp;&emsp;Or by Pick's Theorem:
 <p>\begin{align}
 [\Gamma]\ge |det
 \begin{bmatrix}
@@ -85,9 +85,10 @@ Or by Pick's Theorem:
 \cdot(\frac{n}{2}-1)|=\frac{p}{2} (n-2)
 \end{align}</p>
 
-又 $[\Gamma]\le (s-1)(t-1)\le (s-1)(\frac{\lambda p}{4}-1)$  (注:$\frac{\lambda p}{12}$可优化为$\frac{\lambda p}{4}$)<br>
-则 $\frac{p}{2}(n-2)\le(s-1)(\frac{\lambda p}{4}-1)<\frac{p}{4}\cdot\lambda s\ \Rightarrow\ n\le 3.$ 矛盾！<br>
-故 $[\Gamma]=0$.<br><br>
+&emsp;&emsp;又 $[\Gamma]\le (s-1)(t-1)\le (s-1)(\frac{\lambda p}{4}-1)$  (注:$\frac{\lambda p}{12}$可优化为$\frac{\lambda p}{4}$)<br>
+&emsp;&emsp;则 $\frac{p}{2}(n-2)\le(s-1)(\frac{\lambda p}{4}-1)<\frac{p}{4}\cdot\lambda s\ \Rightarrow\ n\le 3.$ 矛盾！
+<p>故 <b>$[\Gamma]=0$</b></p>.<br>
+
 取两相邻(最近)点, $(x_1,y_1),(x_2,y_2),x_1<x_2$.<br>
 则 $(1+\lambda s-1)(x_2-x_1)\le s,|(1+\lambda s-1)(y_2-y_1)|\le t$<br>
 $\Rightarrow\ 1\le x_2-x_1\le \frac{1}{\lambda},y_2-y_1\le \frac{p}{\lambda s}$ 且 $k(x_2-x_1)\equiv (y_2-y_1)\ (mod\ p)$ .<br>
@@ -95,6 +96,51 @@ $\Rightarrow\ 1\le x_2-x_1\le \frac{1}{\lambda},y_2-y_1\le \frac{p}{\lambda s}$ 
 <p align="right">$\Box$</p>
 
 ### Pick's_theorem
+
+整点多边形 $\Gamma$ ,内部的点数为 $n$ ,边界点数为 $m$.<br>
+则 $S_{\Gamma}=n+\frac{m}{2}-1$ .
+
+#### Theorem's_Proof
+
+$Proof:$<br>
+可考虑三角剖分,并证明每个 $basic-triangle$ (内部无整点的三角形) 面积为 $\frac{1}{2}$ .
+<div align="center"><table rules="none"><tr><td>
+<img src="https://yhx1415926.github.io/quote_img/mathexploration-5/Pick.png" style="zoom:50%"/>
+</td><td>
+<p>$\vec{v},\vec{w}$ 三角形内部无整点</p>
+<p>$\Rightarrow\ \vec{v},\vec{w}$ 张成的 平行四边形 内部无整点 ($\star$) (否则关于平行四边形中心作对称点有矛盾)</p>
+</td></tr></table></div>
+<p>若有 $\lambda,\mu\ s.t.\ \lambda \vec{v}+\mu \vec{w} \in \mathbb{Z}^2\ \Rightarrow\ \{\lambda\} \vec{v}+\{\mu\} \vec{w} \in \mathbb{Z}^2$ </p>
+
+&emsp;&emsp;$\Rightarrow\ \lambda,\mu \in \mathbb{Z}$ . (否则与($\star$)矛盾)<br>
+又由($\star$) $\Rightarrow\ (1,0)=a\vec{v}+b\vec{w},a,b \in \mathbb{Z};\ (0,1)=c\vec{v}+d\vec{w},c,d\in \mathbb{Z}$ .
+$
+\begin{bmatrix}
+  1& 0\\
+  0&1
+\end{bmatrix}=
+\begin{bmatrix}
+  a& b\\
+ c &d
+\end{bmatrix}
+\begin{bmatrix}
+\vec{v} \\
+\vec{w}
+\end{bmatrix}\ \ \ det
+\begin{bmatrix}
+  a& b\\
+ c &d
+\end{bmatrix} \in \mathbb{Z}\ 
+\Rightarrow\ |det
+\begin{bmatrix}
+\vec{v} \\
+\vec{w}
+\end{bmatrix}
+|=1$ .
+
+$\Rightarrow\ S_{\triangle basis}=\frac{1}{2}$ .<br>
+(也可见于《Proofs from THE BOOK》)
+<p align="right">$\Box$</p>
 
 ### General_problem
 
