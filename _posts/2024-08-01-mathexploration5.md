@@ -108,7 +108,8 @@ $Proof:$<br>
 <img src="https://yhx1415926.github.io/quote_img/mathexploration-5/Pick.png" style="zoom:65%"/>
 </td><td>
 <p>$\vec{v},\vec{w}$ 三角形内部无整点</p>
-<p>$\Rightarrow\ \vec{v},\vec{w}$ 张成的 平行四边形 内部无整点 ($\star$)<br />(否则关于平行四边形中心作对称点有矛盾)</p>
+<p>$\Rightarrow\ \vec{v},\vec{w}$ 张成的 平行四边形 内部无整点 ($\star$)</p>
+<p>(否则关于平行四边形中心作对称点有矛盾)</p>
 </td></tr></table></div>
 <p>若有 $\lambda,\mu\ \ s.t.\ \lambda \vec{v}+\mu \vec{w} \in \mathbb{Z}^2\ \Rightarrow\ \{\lambda\} \vec{v}+\{\mu\} \vec{w} \in \mathbb{Z}^2\ \Rightarrow\ \lambda,\mu \in \mathbb{Z}$ . (否则与($\star$)矛盾)</p>
 
