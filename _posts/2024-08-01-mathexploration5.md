@@ -105,13 +105,13 @@ $\Rightarrow\ 1\le x_2-x_1\le \frac{1}{\lambda},y_2-y_1\le \frac{p}{\lambda s}$ 
 $Proof:$<br>
 可考虑三角剖分,并证明每个 $basic-triangle$ (内部无整点的三角形) 面积为 $\frac{1}{2}$ .
 <div align="center"><table rules="none"><tr><td>
-<img src="https://yhx1415926.github.io/quote_img/mathexploration-5/Pick.png" style="zoom:80%"/>
+<img src="https://yhx1415926.github.io/quote_img/mathexploration-5/Pick.png" style="zoom:65%"/>
 </td><td>
 <p>$\vec{v},\vec{w}$ 三角形内部无整点</p>
 <p>$\Rightarrow\ \vec{v},\vec{w}$ 张成的 平行四边形 内部无整点 ($\star$)<br />(否则关于平行四边形中心作对称点有矛盾)</p>
 </td></tr></table></div>
-<p>若有 $\lambda,\mu\ \ s.t.\ \lambda \vec{v}+\mu \vec{w} \in \mathbb{Z}^2\ \Rightarrow\ \{\lambda\} \vec{v}+\{\mu\} \vec{w} \in \mathbb{Z}^2$ </p>
-&emsp;&emsp;$\Rightarrow\ \lambda,\mu \in \mathbb{Z}$ . (否则与($\star$)矛盾)<br>
+<p>若有 $\lambda,\mu\ \ s.t.\ \lambda \vec{v}+\mu \vec{w} \in \mathbb{Z}^2\ \Rightarrow\ \{\lambda\} \vec{v}+\{\mu\} \vec{w} \in \mathbb{Z}^2\ \Rightarrow\ \lambda,\mu \in \mathbb{Z}$ . (否则与($\star$)矛盾)</p>
+
 又由($\star$) $\Rightarrow\ (1,0)=a\vec{v}+b\vec{w},a,b \in \mathbb{Z};\ (0,1)=c\vec{v}+d\vec{w},c,d\in \mathbb{Z}$ .
 <p>\begin{align}
 \begin{bmatrix}
