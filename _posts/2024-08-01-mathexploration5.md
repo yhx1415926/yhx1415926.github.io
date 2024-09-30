@@ -145,6 +145,14 @@ $\Rightarrow\ S_{\triangle basis}=\frac{1}{2}$ .<br>
 
 ### General_problem
 
+$\forall\ n\in\mathbb{N}^+ ,\epsilon >0,\exists\ C,\ s.t.$<br>
+$X\subseteq \mathbb{R}^n,\ X:=span<v_1,v_2,\dots,v_n>\ \ (or\ X=f(\mathbb{Z}^n),det\ f=\pm 1)(i.e.\ lattice)$<br>
+$Vol(\mathbb{R}^n/X)=1\ (i.e.\ det(v_1\ v_2\ \dots\ v_n)=\pm 1)$ (For case $n=2$ which shows above: ${\div}p$)<br>
+$T:=X\cap(\prod_{i=1}^{n}[u_i,v_i))$<br>
+若 $T$ 不含于 $C$ 个平行 $hyperplain$ 之并,<br>
+则  $||T|-\prod_{i=1}^{n}(v_i-u_i)|<\epsilon\cdot\prod_{i=1}^{n}(v_i-u_i)$ .<br>
+(未解决)
+
 ### Minkowski's_theorem
 
 ### Lagrange's_four-square_theorem
