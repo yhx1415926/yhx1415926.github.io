@@ -156,7 +156,7 @@ $T:=X\cap(\prod_{i=1}^{n}[u_i,v_i))$<br>
 ### Minkowski's_theorem
 
 (几何代数 基石)<br>
-$\Omega \subseteq \mathbb{R}^n,\ \Omega=-\Omega$(i.e. 中心对称)  $\Omega convex$ .<br>
+$\Omega \subseteq \mathbb{R}^n,\ \Omega=-\Omega$ ($i.e.$ 中心对称)   $\Omega\ \ convex$ .<br>
 $Vol(\Omega)>2^n\ \Rightarrow\ |\Omega\cap X|>1$ (不仅仅有 $(0,0)$) ($X=\mathbb{Z}^n$ or $f(\mathbb{Z}^n),det\ f=\pm 1$)
 
 #### Theorem's_Proof
@@ -164,15 +164,15 @@ $Vol(\Omega)>2^n\ \Rightarrow\ |\Omega\cap X|>1$ (不仅仅有 $(0,0)$) ($X=\mat
 $Proof:$<br>
 临界: $Vol((-1,1)^n)=2^n,\ |\Omega\cap\mathbb{Z}^n|=1$<br>
 思想: $Vol(\Omega)>2^n$ .用'类似'抽屉原理,取 $w,v\in\Omega,\ s.t.\ w-v\in (2\mathbb{Z})^n$ .<br>
-&emsp;&emsp;则 $\frac{w+(-v)}{2}$ 即为所求.<br>
+&emsp;&emsp;则 $\frac{w+(-v)}{2}$ 即为所求.<br><br>
 $dim=2,X=\mathbb{Z}^2:$<br>
 &emsp;&emsp;$\Omega_{t,s}=\Omega\cap ([2t,2t+2)\times[2s,2s+2))$<br>
 &emsp;&emsp;$\sum_{t,s\in\mathbb{Z}}Vol(\Omega_{t,s}-(2t,2s))=Vol(\Omega)>2^2$<br>
-&emsp;&emsp;$\Rightarrow$ 有非平凡交集,即 $\Omega$ 中有两点差为 $2(t-t;),2(s-s'). Q.E.D.$<br>
-$dim=n,X=\mathbb{Z}^n:$
+&emsp;&emsp;$\Rightarrow$ 有非平凡交集,即 $\Omega$ 中有两点差为 $2(t-t;),2(s-s'). Q.E.D.$<br><br>
+$dim=n,X=\mathbb{Z}^n:$<br>
 &emsp;&emsp;$\Omega_{a_1,a_2,\dots,a_n}=\Omega\cap (\prod_{d=1}^{n}[2a_d,2a_d+2))-(2a_1,2a_2,\dots,2a_n)\subseteq [0,2)^n\ .$<br>
-&emsp;&emsp;若两两均平凡相交, $\sum_{a_1,a_2,\dots,a_n\in \mathbb{Z}  }Vol(\Omega_{a_1,a_2,\dots,a_n})\le 2^n$ .
-&emsp;&emsp;而 $Vol(\Omega)=\sum_{a_1,a_2,\dots,a_n\in\mathbb{Z}}Vol(\Omega_{a_1,a_2,\dots,a_n})>2^n$ . 矛盾!
+&emsp;&emsp;若两两均平凡相交, $\sum_{a_1,a_2,\dots,a_n\in \mathbb{Z}  }Vol(\Omega_{a_1,a_2,\dots,a_n})\le 2^n$ .<br>
+&emsp;&emsp;而 $Vol(\Omega)=\sum_{a_1,a_2,\dots,a_n\in\mathbb{Z}}Vol(\Omega_{a_1,a_2,\dots,a_n})>2^n$ . 矛盾!<br>
 &emsp;&emsp;$\Rightarrow\ \exists\ w,v\in\Omega,w-v\in(2\mathbb{Z})^n$ .
 <p align="right">$\Box$</p>
 
