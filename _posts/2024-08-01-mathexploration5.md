@@ -18,14 +18,10 @@ tags:
 
 ### 2024-CTST-1
 
-#### Problem
-
 己知多面体 $P\ convex$ ,其每个顶点恰属于三个不同的面,且可以将 $P$ 的顶点 $BW$ 二染色，使得 $P$ 每条棱的两个端点不同色. <br>
 求证:可以将 $P$ 的每条棱 $RGB$ 三染色,使得每个顶点连的三条棱的颜色两两不同,且每个面恰含两种颜色的棱.
 
 ### 2024-CTST-8
-
-#### Problem
 
 <div align="center"><table rules="none"><tr><td>
 <p>如图，锐角 $\triangle ABC$ ,外接圆 $\Omega $ ,外心 $O$ .</p>
@@ -39,8 +35,6 @@ tags:
 
 ### 2023-CTST-5
 
-#### Problem
-
 <p>$\triangle ABC$ , $P_1,\dots,P_n\ \in conv\{A,B,C\}\ ,s.t.\ P_1,\dots,P_n,A,B,C$ 任意三点不共线.</p>
 Prove: 可将 $\triangle ABC$ 划分为 $2n+1$ 个小三角形, $s.t.$每个小三角形的顶点都来自 $P_1,\dots,P_n,A,B,C$ <br>
 且含 $A,B,C$ 中至少一个的小三角形不少于 $n+\sqrt{n}+1$ 个.
@@ -50,8 +44,6 @@ Prove: 可将 $\triangle ABC$ 划分为 $2n+1$ 个小三角形, $s.t.$每个小�
 See More in [Further_Reading](#further_reading)
 
 ### 2023-CTST-23
-
-#### Problem
 
 设 $p$ 质数,实数 $\lambda \in (0,1)$ ,正整数 $s\le t<\frac{\lambda p}{12}$ .($k$ 给定)<br>
 $S,T$ 分别是由 $s,t$ 个连续正整数构成的集合, $s.t.$ <br>
@@ -156,7 +148,7 @@ $T:=X\cap(\prod_{i=1}^{n}[u_i,v_i))$<br>
 ### Minkowski's_theorem
 
 (几何代数 基石)<br>
-$\Omega \subseteq \mathbb{R}^n,\ \Omega=-\Omega$ ($i.e.$ 中心对称)   $\Omega\ \ convex$ .<br>
+$\Omega \subseteq \mathbb{R}^n,\ \Omega=-\Omega$ ($i.e.$ 中心对称),$\Omega\ \ convex$ .<br>
 $Vol(\Omega)>2^n\ \Rightarrow\ |\Omega\cap X|>1$ (不仅仅有 $(0,0)$) ($X=\mathbb{Z}^n$ or $f(\mathbb{Z}^n),det\ f=\pm 1$)
 
 #### Theorem's_Proof
@@ -168,7 +160,7 @@ $Proof:$<br>
 $dim=2,X=\mathbb{Z}^2:$<br>
 &emsp;&emsp;$\Omega_{t,s}=\Omega\cap ([2t,2t+2)\times[2s,2s+2))$<br>
 &emsp;&emsp;$\sum_{t,s\in\mathbb{Z}}Vol(\Omega_{t,s}-(2t,2s))=Vol(\Omega)>2^2$<br>
-&emsp;&emsp;$\Rightarrow$ 有非平凡交集,即 $\Omega$ 中有两点差为 $2(t-t;),2(s-s'). Q.E.D.$<br><br>
+&emsp;&emsp;$\Rightarrow$ 有非平凡交集,即 $\Omega$ 中有两点差为 $2(t-t'),2(s-s').\ \ Q.E.D.$<br><br>
 $dim=n,X=\mathbb{Z}^n:$<br>
 &emsp;&emsp;$\Omega_{a_1,a_2,\dots,a_n}=\Omega\cap (\prod_{d=1}^{n}[2a_d,2a_d+2))-(2a_1,2a_2,\dots,2a_n)\subseteq [0,2)^n\ .$<br>
 &emsp;&emsp;若两两均平凡相交, $\sum_{a_1,a_2,\dots,a_n\in \mathbb{Z}  }Vol(\Omega_{a_1,a_2,\dots,a_n})\le 2^n$ .<br>
@@ -177,6 +169,23 @@ $dim=n,X=\mathbb{Z}^n:$<br>
 <p align="right">$\Box$</p>
 
 ### Lagrange's_four-square_theorem
+
+$\forall\ n\in\mathbb{N},\ \exists \ x,y,z,w\in\mathbb{N},\ s.t.\ n=x^2+y^2+z^2+w^2$
+
+#### Theorem's_Proof
+
+$Proof:$<br>
+By Hamilton's Quaternion,we have:<br>
+$(a+bi+cj+dk)(e+fi+gj+hk)=(ae-bf-cg-dh)+(be+af-dg+ch)i+(ce+df+ag-bh)j+(de-cf+bg+ah)k$ .<br>
+So, $(a^2+b^2+c^2+d^2)(e^2+f^2+g^2+h^2)=(ae-bf-cg-dh)^2+(be+af-dg+ch)^2+(ce+df+ag-bh)^2+(de-cf+bg+ah)^2$ .<br>
+故只需验证素数 $p$ 即可.<br>
+$\Leftrightarrow\ p|x^2+y^2+z^2+w^2$ (not a lattice), $x^2+y^2+z^2+w^2<2p$ (sphere,convex)<br>
+由鸽巢原理,取 $s,t$ s.t. $p|s^2+t^2+1$ ($p$奇素数)<br>
+则有 $p|z^2+w^2+(z^2+w^2)(s^2+t^2)=z^2+w^2+(sz+tw)^2+(sw-tz)^2$ .<br>
+<p>$X:=\{(x,y,z,w):p|x-(sz+tw),p|y-(sw-tz)\}$ (Form a lattice)(亦满足群的性质)</p>
+$X=span<(p,0,0,0),(0,p,0,0),(0,0,1,0),(0,0,0,1)>,\ det\ f=p^2$<br>
+又 $Vol(x^2+y^2+z^2+w^2< 2p)=\frac{\pi ^2}{2} (\sqrt{2p})^4>16p^2$ ,结合 $Minkowski's Theorem$ 得证.
+<p align="right">$\Box$</p>
 
 ### Further_reading
 
