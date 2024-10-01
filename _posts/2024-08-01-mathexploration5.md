@@ -176,15 +176,17 @@ $\forall\ n\in\mathbb{N},\ \exists \ x,y,z,w\in\mathbb{N},\ s.t.\ n=x^2+y^2+z^2+
 
 $Proof:$<br>
 By Hamilton's Quaternion,we have:<br>
-$(a+bi+cj+dk)(e+fi+gj+hk)=(ae-bf-cg-dh)+(be+af-dg+ch)i+(ce+df+ag-bh)j+(de-cf+bg+ah)k$ .<br>
-So, $(a^2+b^2+c^2+d^2)(e^2+f^2+g^2+h^2)=(ae-bf-cg-dh)^2+(be+af-dg+ch)^2+(ce+df+ag-bh)^2+(de-cf+bg+ah)^2$ .<br>
+$(a+bi+cj+dk)(e+fi+gj+hk)=$<br>
+$(ae-bf-cg-dh)+(be+af-dg+ch)i+(ce+df+ag-bh)j+(de-cf+bg+ah)k$<br>
+So, $(a^2+b^2+c^2+d^2)(e^2+f^2+g^2+h^2)=$<br>
+$(ae-bf-cg-dh)^2+(be+af-dg+ch)^2+(ce+df+ag-bh)^2+(de-cf+bg+ah)^2$<br>
 故只需验证素数 $p$ 即可.<br>
-$\Leftrightarrow\ p|x^2+y^2+z^2+w^2$ (not a lattice), $x^2+y^2+z^2+w^2<2p$ (sphere,convex)<br>
+$\Leftrightarrow\ p|x^2+y^2+z^2+w^2$ (not a lattice), $x^2+y^2+z^2+w^2<2p$ (sphere,convex)<br><br>
 由鸽巢原理,取 $s,t$ s.t. $p|s^2+t^2+1$ ($p$奇素数)<br>
 则有 $p|z^2+w^2+(z^2+w^2)(s^2+t^2)=z^2+w^2+(sz+tw)^2+(sw-tz)^2$ .<br>
 <p>$X:=\{(x,y,z,w):p|x-(sz+tw),p|y-(sw-tz)\}$ (Form a lattice)(亦满足群的性质)</p>
 $X=span<(p,0,0,0),(0,p,0,0),(0,0,1,0),(0,0,0,1)>,\ det\ f=p^2$<br>
-又 $Vol(x^2+y^2+z^2+w^2< 2p)=\frac{\pi ^2}{2} (\sqrt{2p})^4>16p^2$ ,结合 $Minkowski's Theorem$ 得证.
+又 $Vol(x^2+y^2+z^2+w^2< 2p)=\frac{\pi ^2}{2} (\sqrt{2p})^4>16p^2$ ,结合 $Minkowski's\ Theorem$ 得证.
 <p align="right">$\Box$</p>
 
 ### Further_reading
@@ -192,9 +194,12 @@ $X=span<(p,0,0,0),(0,p,0,0),(0,0,1,0),(0,0,0,1)>,\ det\ f=p^2$<br>
 [Empty Monochromatic Triangles](https://yhx1415926.github.io/quote_img/mathexploration-5/2023CTST_5.pdf)<br><br><br>
 Using generating functions to prove Lagrange's four-square theorem:
 
+$\sum t^{x^2+y^2+z^2+w^2}=(\sum t^{x^2})^4$
+
 [Modular Forms,Projective Structure and the Four Square Theorem](https://yhx1415926.github.io/quote_img/mathexploration-5/MODULAR_FORMS,PROJECTIVE_STRUCTURES,AND_THE_FOUR_SQUARES_THEOREM.pdf)
 
 ### Reference
 
 [Pick's theorem](https://yhx1415926.github.io/quote_img/mathexploration-5/Pick's_theorem.pdf)<br>
 [Minkowski's theorem](https://yhx1415926.github.io/quote_img/mathexploration-5/Minkowski's_theorem.pdf)
+[Volume of an n-ball](https://yhx1415926.github.io/quote_img/mathexploration-5/Volume_of_an_n-ball.pdf)
