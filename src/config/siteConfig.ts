@@ -10,14 +10,14 @@ export const siteConfig: SiteConfig = {
 	title: "Blog",
 
 	// 站点副标题
-	subtitle: "Yao1415926",
+	subtitle: "Yao",
 
 	// 站点 URL
 	site_url: "https://yhx1415926.github.io",
 
 	// 站点描述
 	description:
-		"Blog-Yao1415926 是一个使用 Firefly 模板开发的清新美观且现代化个人博客。",
+		"Blog-Yao 是一个使用 Firefly 模板开发的清新美观且现代化个人博客。",
 
 	// 站点关键词
 	keywords: [
