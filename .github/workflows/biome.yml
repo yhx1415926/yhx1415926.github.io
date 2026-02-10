@@ -1,10 +1,7 @@
 name: Code quality
 
 on:
-  push:
-    branches: [ master ] # Adjust branches as needed
-  pull_request:
-    branches: [ master ] # Adjust branches as needed
+  workflow_dispatch:
 
 jobs:
   quality:
