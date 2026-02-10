@@ -2,13 +2,13 @@ import type { ProfileConfig } from "../types/config";
 
 export const profileConfig: ProfileConfig = {
 	// 头像
-	avatar: "/assets/images/avatar.webp",
+	avatar: "/assets/music/cover/cover.jpeg",
 
 	// 名字
-	name: "Firefly",
+	name: "Yao1415926",
 
 	// 个人签名
-	bio: "Hello, I'm Firefly.",
+	bio: "Hello, I'm yao1415926.",
 
 	// 链接配置
 	// 已经预装的图标集：fa7-brands，fa7-regular，fa7-solid，material-symbols，simple-icons
@@ -20,19 +20,19 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "Bilibli",
 			icon: "fa7-brands:bilibili",
-			url: "https://space.bilibili.com/38932988",
+			url: "https://space.bilibili.com/3493272022420057",
 			showName: false,
 		},
 		{
 			name: "GitHub",
 			icon: "fa7-brands:github",
-			url: "https://github.com/CuteLeaf",
+			url: "https://github.com/yhx1415926",
 			showName: false,
 		},
 		{
 			name: "Email",
 			icon: "fa7-solid:envelope",
-			url: "mailto:xiaye@msn.com",
+			url: "yao1415926@outlook.com",
 			showName: false,
 		},
 		{
