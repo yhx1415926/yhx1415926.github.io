@@ -1,6 +1,14 @@
 # 关于我 / About Me
 
-你好！我是 **夏叶** ，一个在数字世界中默默无闻的一片叶子。
+
+所以，这位戴着这枚彰显魔女身份的胸针，披着一头灰色秀发，其美貌与才能散发的光芒，连太阳见了都会不由眯起眼睛的美女，究竟是谁呢？没错，就是我。<br>
+欢迎来到我的世界。<br>
+我是 **yao1415926** — 优雅的旅人、持证魔女、当然还有一点自信过头的自我评价大师。<br>
+我旅行不是为了逃避，而是为了收集这个世界那些奇妙又古怪的角落，偶尔还有奇怪的人。<br>
+有时候我会评判（好吧，其实不少），但我也在安静的天空与无星的夜里看到奇迹。<br>
+我不追求伟大，但伟大有时会追上我。<br>
+我来不是为了拯救世界 — 但可能会说服它变得更温柔。<br>
+欢迎来到我的旅途；停下脚步吧，也许你会遇见意想不到的美好。
 
 ## 🛠️ 关于本站
 
@@ -11,25 +19,17 @@
 
 **🖥️在线预览： [Firefly - Demo site](https://firefly.cuteleaf.cn/)**
 
-**🏠我的博客： [https://blog.cuteleaf.cn](https://blog.cuteleaf.cn/)**
-
-**📝Firefly使用文档： [https://docs-firefly.cuteleaf.cn](https://docs-firefly.cuteleaf.cn/)**
-
-**⭐Firefly开源地址：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)** 
-
-**⭐Fuwari开源地址：[https://github.com/saicaca/fuwari](https://github.com/saicaca/fuwari)**
+**🏠我的博客： [https://yhx1415926.github.io](https://yhx1415926.github.io/)**
 
 ::github{repo="CuteLeaf/Firefly"}
-
-::github{repo="saicaca/fuwari"}
 
 
 ## 📫 联系方式
 
 如果你想和我交流技术问题，分享有趣的想法，或者只是想打个招呼，欢迎通过以下方式联系我：
 
-- 💻 **GitHub**: [CuteLeaf](https://github.com/CuteLeaf)
-- ✉️ **Email**: [xiaye@msn.com](mailto:xiaye@msn.com)
+- 💻 **GitHub**: [yhx1415926](https://github.com/yhx1415926)
+- ✉️ **Email**: [yao1415926@outlook.com](mailto:yao1415926@outlook.com)
 
 ---
 
