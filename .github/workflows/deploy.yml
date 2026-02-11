@@ -3,8 +3,8 @@ name: Deploy to GitHub Pages
 on:
   # 每次推送到默认分支时触发这个“工作流程”
   # 仓库当前其余 workflow 使用的是 `master`，这里同时兼容 `main` 以避免分支名不一致导致不触发
-  push:
-    branches: [ master, main ]
+  #push:
+    #branches: [ master, main ]
   # 允许你在 GitHub 上的 Actions 标签中手动触发此“工作流程”
   workflow_dispatch:
 
