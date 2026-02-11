@@ -50,16 +50,16 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 	local: {
 		playlist: [
 			{
-				name: "[Animenz] Grand Escape",
+				name: "[Animenz] One Last Kiss",
 				artist: "Animenz",
-				url: "/assets/music/Grand_Escape.mp3",
+				url: "/assets/music/One_Last_Kiss.mp3",
 				cover: "/assets/music/cover/cover.jpeg",
 				lrc: "",
 			},
 			{
-				name: "[Animenz] One Last Kiss",
+				name: "[Animenz] Grand Escape",
 				artist: "Animenz",
-				url: "/assets/music/One_Last_Kiss.mp3",
+				url: "/assets/music/Grand_Escape.mp3",
 				cover: "/assets/music/cover/cover.jpeg",
 				lrc: "",
 			},

@@ -24,18 +24,21 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 是否启用主页横幅文字
 			enable: true,
 			// 主页横幅主标题
-			title: "Lovely firefly!",
+			title: "Elaina Forever!",
 			// 主页横幅主标题字体大小
 			titleSize: "3.8rem",
 			// 主页横幅副标题
 			subtitle: [
-				"In Reddened Chrysalis, I Once Rest",
-				"From Shattered Sky, I Free Fall",
-				"Amidst Silenced Stars, I Deep Sleep",
-				"Upon Lighted Fyrefly, I Soon Gaze",
-				"From Undreamt Night, I Thence Shine",
-				"In Finalized Morrow, I Full Bloom",
+				"Self-awarded best witch. Opinions included.",
+				"Even lost roads feel like home at sunset.",
+				"I travel. I judge. Occasionally I bless.",
+				"Some days whisper wonder, not noise.",
+				"I prefer profit to practice. Don’t @ me.",
+				"Soft skies recharge tired soles.",
+				"Yes, I’m brilliant. You’re welcome.",
+				"Kindness blooms where curiosity grows.",
 			],
+
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",
 			typewriter: {
