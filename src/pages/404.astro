@@ -5,44 +5,45 @@ import { url } from "@/utils/url-utils";
 
 /* 白昼旅途语录 */
 const dayQuotes = [
-  "就算是最美丽的魔女，也偶尔会飞错方向呢。",
-  "白云之上的世界很辽阔，迷路只是旅途的一部分。",
-  "看来我们闯入了一条未被记录的街道。",
-  "身为最优秀的旅行者，我也会偶尔偏离航线。",
-  "地图之外，也许藏着新的风景。",
-  "别担心，这只是一次计划外的小冒险。",
+  "清晨的风有点温柔呢——就算是最美丽的魔女，也会偶尔飞错方向。",
+  "阳光正好，我却带你闯进了一条陌生的小街……看来旅途又多了一站。",
+  "午后的云慢慢飘着，迷路只是旅行里最可爱的插曲。",
+  "身为最优秀的旅行者，我也会在白昼里小小偏航一下。",
+  "地图之外的世界闪闪发光，也许那里正等着我们。",
+  "别担心啦，现在还是白天，这只是一次计划外的小冒险。",
+  "风吹过屋顶的时候，我意识到——啊，我们走错路了呢。",
 ];
+
 
 /* 夜旅语录 */
 const nightQuotes = [
-  "夜色很深，就连最美丽的魔女也会短暂迷失。",
-  "星空之下的街道，总是更容易让人走错。",
-  "黑夜会放大距离，但不会终结旅途。",
-  "即使在夜航中，我依然优雅。",
-  "也许这个页面，已经悄悄踏上了夜之旅。",
-  "月光指引的方向，有时并不在地图上。",
+  "夜色降临啦，就连最美丽的魔女，也会在星光里短暂迷失。",
+  "月亮已经升起，我们好像悄悄拐进了夜之街道。",
+  "深夜的风有点凉，不过别怕，我依然优雅地飞着。",
+  "星空拉长了距离，但不会终结旅途——只是换成了夜航模式。",
+  "也许这个页面已经睡着了，而我正带你进行一次午夜散步。",
+  "街灯一盏一盏亮起的时候，我才发现……嗯，好像走反方向了。",
+  "现在是属于夜晚的旅途呢，迷路也要保持从容。",
 ];
+
 ---
 
 <MainGridLayout title="404" description="Page not found">
   <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-96">
     <div class="card-base z-10 px-9 py-12 relative w-full flex flex-col items-center justify-center text-center">
+
       <div class="text-8xl md:text-9xl font-bold text-(--primary) opacity-20 mb-4">
         404
-      </div>
-
-      <div class="mb-6">
-        <Icon name="material-symbols:error-outline" class="text-6xl text-(--primary)" />
       </div>
 
       <h1 class="text-3xl md:text-4xl font-bold mb-4 text-90">
         看来，这是一段意料之外的旅途
       </h1>
 
-      <p id="travel-quote" class="text-lg text-75 mb-4 max-w-md"></p>
+      <p id="travel-quote" class="travel-quote text-lg text-75 mb-4 max-w-md"></p>
 
       <p class="text-sm text-60 mb-8 italic">
-        —— 来自正在旅行中的最美丽魔女
+        —— 来自旅行中的灰之魔女
       </p>
 
       <a
@@ -60,6 +61,7 @@ const nightQuotes = [
       <div class="absolute bottom-4 right-4 opacity-10">
         <Icon name="material-symbols:search-off" class="text-4xl text-(--primary)" />
       </div>
+
     </div>
   </div>
 </MainGridLayout>
@@ -69,30 +71,86 @@ const nightQuotes = [
   const isNight = hour < 6 || hour >= 18;
 
   const pool = isNight ? nightQuotes : dayQuotes;
-  const quote = pool[Math.floor(Math.random() * pool.length)];
-
   const el = document.getElementById("travel-quote");
-  if (el) el.textContent = quote;
+
+  let lastIndex = -1;
+
+  function nextQuote() {
+    let i;
+    do {
+      i = Math.floor(Math.random() * pool.length);
+    } while (i === lastIndex && pool.length > 1);
+
+    lastIndex = i;
+
+    if (!el) return;
+
+    el.classList.remove("show");
+
+    setTimeout(() => {
+      el.textContent = pool[i];
+      requestAnimationFrame(() => el.classList.add("show"));
+    }, 200);
+  }
+
+  // 初始显示
+  nextQuote();
+
+  // 每 8 秒轮播一次（旅途广播）
+  setInterval(nextQuote, 8000);
 </script>
 
 <style>
-  .card-base {
-    animation: fadeInUp 0.6s ease-out;
-  }
+.card-base {
+  animation: fadeInUp 0.6s ease-out;
+}
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+/* 语录淡入 + 漂浮 */
+.travel-quote {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: transform 0.3s ease;
+}
+
+.travel-quote.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+/* 鼠标靠近上浮 */
+.travel-quote:hover {
+  transform: translateY(-4px);
+}
+
+@keyframes gentleFloat {
+  0% {
+    transform: translateY(0);
   }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+}
 </style>
