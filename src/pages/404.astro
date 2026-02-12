@@ -85,18 +85,20 @@ const nightQuotes = [
 
     if (!el) return;
 
+    // 先淡出
     el.classList.remove("show");
 
+    // 等淡出完成再换文字
     setTimeout(() => {
       el.textContent = pool[i];
       requestAnimationFrame(() => el.classList.add("show"));
-    }, 200);
+    }, 400);
   }
 
   // 初始显示
   nextQuote();
 
-  // 每 8 秒轮播一次（旅途广播）
+  // 每 8 秒轮播
   setInterval(nextQuote, 8000);
 </script>
 
@@ -116,11 +118,10 @@ const nightQuotes = [
   }
 }
 
-/* 语录淡入 + 漂浮 */
+/* 语录状态 */
 .travel-quote {
   opacity: 0;
   transform: translateY(6px);
-  transition: transform 0.3s ease;
 }
 
 .travel-quote.show {
@@ -132,21 +133,11 @@ const nightQuotes = [
   animation: gentleFloat 6s ease-in-out infinite;
 }
 
-/* 鼠标靠近上浮 */
-.travel-quote:hover {
-  transform: translateY(-4px);
-}
-
+/* 漂浮 */
 @keyframes gentleFloat {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
 }
 
 a:hover {
