@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 	subtitle: "Yao",
 
 	// 站点 URL
-	site_url: "https://yhx1415926.github.io",
+	site_url: "https://blog.yhx1415926.top",
 
 	// 站点描述
 	description:
@@ -38,7 +38,7 @@ export const siteConfig: SiteConfig = {
 		// 是否对访问者隐藏主题色选择器
 		fixed: false,
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
-		defaultMode: "light",
+		defaultMode: "dark",
 	},
 
 	// 网站Card样式配置
