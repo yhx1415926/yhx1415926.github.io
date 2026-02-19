@@ -16,8 +16,17 @@ export const friendsConfig: FriendLink[] = [
 		desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
 		siteurl: "https://blog.cuteleaf.cn",
 		tags: ["Blog"],
-		weight: 10, // 权重，数字越大排序越靠前
+		weight: 100, // 权重，数字越大排序越靠前
 		enabled: true, // 是否启用
+	},
+	{
+		title: "晓空blog",
+		imgurl: "https://cn.cravatar.com/avatar/7cbc71db79d1e7e0ce6f640851c86ade3d7fbcce4d42ac759dd617e13cf62533?s=192&d=mm&r=g",
+		desc: "来和我们一起来让世界变得更萌一些吧~",
+		siteurl: "https://blog.moeworld.tech/",
+		tags: ["Blog"],
+		weight: 90,
+		enabled: true,
 	},
 	{
 		title: "Firefly Docs",
