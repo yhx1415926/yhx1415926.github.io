@@ -1,6 +1,6 @@
 ---
 title: "Zero Sum Subsets"
-date: 2024-07-21
+published: 2024-07-21
 categories: Mathematics
 tags: [Mathematics,Combinatorics]
 pin: true
