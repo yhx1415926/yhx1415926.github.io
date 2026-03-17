@@ -10,7 +10,7 @@ description: "与优秀的朋友们一起成长"
 申请友链前请先在自己网站添加本站友链，请使用以下信息：
 
 ```yaml
-站点名称: Blog-Yao
+站点名称: 可爱のElaina
 站点描述: 或许是不知梦的缘故，流离之人追逐幻影
 站点链接: https://blog.yhx1415926.top
 头像链接: https://blog.yhx1415926.top/assets/music/cover/cover.jpeg
