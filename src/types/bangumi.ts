@@ -39,7 +39,7 @@ export type SlimSubject = {
 };
 
 // 1: 书籍，2: 动画，3: 音乐，4: 游戏，6: 三次元
-export type SubjectType = 1 | 2 | 3 | 4 | 6;
+export type SubjectType = 2 | 4 | 1 | 3 | 6;
 
 export type SubjectTag = {
 	name: string;
