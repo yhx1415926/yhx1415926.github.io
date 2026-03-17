@@ -23,8 +23,10 @@ Given $n$ integers $\{a_1,a_2,\dots,a_n\}$ , $\exists\ I\subseteq \{1,2,\dots,n\
 (其中 $n$ 为最佳,可取 $n-1$ 个 $1$.)
 
 #### Conclusion_2
+
 $Erdo ̋s,Ginzburg\ and\ Ziv\ Theorem$ (1961)<br>
-<p>Given $2n-1$ integers $\{a_1,a_2,\dots,a_n\}$,$\exists\ I\subseteq \{1,2,\dots,2n-1\}$ and $|I|=n,\ s.t.\ n|\sum_{i\in I}{a_i}$</p>
+
+Given $2n-1$ integers $\{a_1,a_2,\dots,a_n\}$,$\exists\ I\subseteq \{1,2,\dots,2n-1\}$ and $|I|=n,\ s.t.\ n|\sum_{i\in I}{a_i}$<br>
 (可使用反证法，取p-1次方，导出矛盾)<br>
 (其中 $2n-1$ 为最佳,可取 $n-1$ 个 $0,1$.)<br>
 
@@ -42,7 +44,7 @@ $\sigma(B):=\sum_{x\in B}x$, 约定 $\sigma(\emptyset)=0$ <br><br>
 
 #### Concerning_Problem
 考虑 $G$ 秩为 $2$ 且 $n=p$ 的情形,即<br>
-<p>$A=\{(a_1,b_1),(a_2,b_2),\dots,(a_m,b_m)\}\subset\mathbb{Z}^2$</p>
+$A=\{(a_1,b_1),(a_2,b_2),\dots,(a_m,b_m)\}\subset\mathbb{Z}^2$<br>
 (1) 当 $m$ 多大时, $\exists B \subseteq A$ and $|B|\ne 0,\ s.t.\ \sigma(B)\equiv (0,0)\ (mod\ p)$<br>
 (2) 当 $m$ 多大时, $\exists B \subseteq A$ and $|B|=p,\ s.t.\ \sigma(B)\equiv (0,0)\ (mod\ p)$<br><br>
 $Ans_1\ =\ 2p-1$ ($2p-2$ 反例: $p-1$ 个 $(0,1),(1,0)$ )<br>
@@ -51,119 +53,122 @@ $Ans_2\ =\ 4p-3$ ($4p-4$ 反例: $p-1$ 个 $(0,0),(0,1),(1,0),(1,1)$ )<br>
 (Problem_2 又被称为 $Kemnitz’\ Conjecture$ )<br>
 
 ### Solution_1-Generating_Function
-<p>可重集 $A=\{a_1,a_2,\dots,a_m\}$, $a_1,a_2,\dots,a_m \in \mathbb{Z}_{>0}$ </p>
-<p>\begin{align}(1+x^{a_1})(1+x^{a_2})\cdots(1+x^{a_m})=\sum_{B\subset A}x^{\sigma(B)}\end{align}</p>
+可重集 $A=\{a_1,a_2,\dots,a_m\}$, $a_1,a_2,\dots,a_m \in \mathbb{Z}_{>0}$ <br>
+$$(1+x^{a_1})(1+x^{a_2})\cdots(1+x^{a_m})=\sum_{B\subset A}x^{\sigma(B)}$$<br>
 利用:
-<p>\begin{align}(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}\end{align}</p>
+$$(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}$$<br>
 
 #### For_Con.1
 $n=p,\ a_1,a_2,\dots,a_m\in \mathbb{Z}_{>0}$<br>
-<p>$S_k:=\{B\subset A\ |\ \sigma(B)\equiv k\ (mod\ p)\},\ k=0,1,\dots,p-1$</p>
-<p>\begin{align}f(x):=(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})\in \mathbb{F}_p/(x^p-1) \end{align}</p>
-<p>\begin{align}f(x)=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}=\sum_{k=0}^{p-1}(\sum_{B\in S_k}(-1)^{|B|})x^k\ \ (\star)\end{align}</p>
+$S_k:=\{B\subset A\ |\ \sigma(B)\equiv k\ (mod\ p)\},\ k=0,1,\dots,p-1$<br>
+$$f(x):=(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})\in \mathbb{F}_p/(x^p-1) $$<br>
+$$f(x)=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}=\sum_{k=0}^{p-1}(\sum_{B\in S_k}(-1)^{|B|})x^k\ \ (\star)$$<br>
 上式可看作是余式，所以表示方式是唯一的.<br>
 另一方面,又有 $(1-x^{a_j})=(1-x)(\cdots)$ ,则
-<p>\begin{align}f(x)=(1-x)^pg(x)\end{align}</p>
-<p>\begin{align}(1-x)^p=1-\binom{p}{1}x+ \binom{p}{2}x^2+\cdots+(-1)^px^p \overset{mod\ p}{==}1-x^p\overset{mod\ x^p-1}{==}0\end{align}</p>
+$$f(x)=(1-x)^pg(x)$$<br>
+$$(1-x)^p=1-\binom{p}{1}x+ \binom{p}{2}x^2+\cdots+(-1)^px^p \overset{mod\ p}{==}1-x^p\overset{mod\ x^p-1}{==}0$$<br>
 $\Rightarrow\ f(x)=0$ 结合 $(\star)$ $\Rightarrow $
-<p>\begin{align}\forall\  0\le k\le p-1,\ \sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p) \end{align}</p>
+$$\forall\  0\le k\le p-1,\ \sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p) $$<br>
 特别的，$k=0$ 时，$\emptyset \in S_k$ 而 $\sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p)$<br>
 $\Rightarrow\ \exists\ B\in S_0$ and $|B|\ne 0,\ s.t.\ \sigma(B)\equiv 0\ (mod\ p)$.
 <p align="right">$\Box$</p>
 注意到这种方法给出了 比使用鸽巢原理更多的信息.
 
 #### For_Problem-1
-<p>$A=\{(a_i,b_i)\ |\ a_i,b_i\in\mathbb{Z}_{>0}\ ,i=1,2,\dots,2p-1\}$</p>
-<p>\begin{align}f(X_1,X_2):=\prod_{i=1}^{2p-1}(1-X_1^{a_i}X_2^{b_i})\in \mathbb{F}_p[X_1,X_2]/(X_1^p-1,X_2^p-1)\end{align}</p>
+$A=\{(a_i,b_i)\ |\ a_i,b_i\in\mathbb{Z}_{>0}\ ,i=1,2,\dots,2p-1\}$<br>
+$$f(X_1,X_2):=\prod_{i=1}^{2p-1}(1-X_1^{a_i}X_2^{b_i})\in \mathbb{F}_p[X_1,X_2]/(X_1^p-1,X_2^p-1)$$<br>
 记为向量形式: $X=(X_1,X_2),\ \alpha_i=(a_i,b_i),\ X^{\alpha_i}=X_1^{a_i}X_2^{b_i}$
-<p>$S_{\alpha}:=\{B\subset A\ |\ \sigma(B)\equiv \alpha\ (mod\ p)\},\ \alpha=\{0,1,\dots,p-1\}^2$</p>
-<p>\begin{align}f(X_1,X_2)=\prod_{i=1}^{2p-1}(1-X^{\alpha_i})=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}\end{align}</p>
-<p>\begin{align}f(X)=\sum_{\alpha\in\{0,1,\dots,p-1\}^2}(\sum_{B\in S_{\alpha}}(-1)^{|B|})X^{\alpha}\end{align}</p>
+$S_{\alpha}:=\{B\subset A\ |\ \sigma(B)\equiv \alpha\ (mod\ p)\},\ \alpha=\{0,1,\dots,p-1\}^2$<br>
+$$f(X_1,X_2)=\prod_{i=1}^{2p-1}(1-X^{\alpha_i})=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}$$<br>
+$$f(X)=\sum_{\alpha\in\{0,1,\dots,p-1\}^2}(\sum_{B\in S_{\alpha}}(-1)^{|B|})X^{\alpha}$$<br>
 $Lemma:$
-<p>\begin{align}(1-X_1^{a_i}X_2^{b_i})=(1-X_1)\cdot u_i(X_1,X_2)+(1-X_2)\cdot v_i(X_1,X_2)\end{align}</p>
+$$(1-X_1^{a_i}X_2^{b_i})=(1-X_1)\cdot u_i(X_1,X_2)+(1-X_2)\cdot v_i(X_1,X_2)$$<br>
 It's a simple task.
-<p>$A=\{f(X_1,X_2)\ |\ f(1,1)=0\},\ B=(X_1-1,X_2-1)$</p>
+$A=\{f(X_1,X_2)\ |\ f(1,1)=0\},\ B=(X_1-1,X_2-1)$<br>
 $\mathbb{F} _p[X_1,X_2]/A\ =\ \mathbb{F} _p[X_1,X_2]/B$ $\Rightarrow A=B$
 
-<p>\begin{align}f(X_1,X_2)=\prod_{i=1}^{2p-1}((1-X_1)\cdot u_i(X_1,X_2)+(1-X_2)\cdot v_i(X_1,X_2))=\sum(1-X_1)^s(1-X_2)^t(\cdots)\end{align}</p>
+$$f(X_1,X_2)=\prod_{i=1}^{2p-1}((1-X_1)\cdot u_i(X_1,X_2)+(1-X_2)\cdot v_i(X_1,X_2))=\sum(1-X_1)^s(1-X_2)^t(\cdots)$$<br>
 $s+t=2p-1\ \Rightarrow\ s\ge p\ or\ t\ge p$<br>
 $(1-X_1)^p=0$ and $(1-X_2)^p=0\ \Rightarrow\ f(X_1,X_2)=0\ \Rightarrow$<br>
-<p>\begin{align}\forall\  \alpha\in\{0,1,\dots,p-1\}^2,\ \sum_{B\in S_{\alpha}}(-1)^{|B|}\equiv 0\ (mod\ p)\end{align}</p>
+$$\forall\  \alpha\in\{0,1,\dots,p-1\}^2,\ \sum_{B\in S_{\alpha}}(-1)^{|B|}\equiv 0\ (mod\ p)$$<br>
 $\emptyset\in S_{(0,0)}\ \Rightarrow\ \exists\ |B|\ne 0,\ s.t.\ \sigma(B)\equiv 0\ (mod\ p)$
 <p align="right">$\Box$</p>
 
 ### Solution_2-Chevalley_Warning_Theorem
 $F_1,F_2,\dots,F_m\in\mathbb{F}_p[x_1,x_2,\dots,x_n]$<br>
-<p>$\mathcal{Z}(F_1,F_2,\dots,F_m)=\{x\in(\mathbb{F}_p)^n\ |\ F_1(x)=F_2(x)=\cdots=F_m(x)=0\}$</p>
-<p>$\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)\ \ \ if\ \ \ \sum_{i=1}^{n}deg(F_i)< n$</p>
+$\mathcal{Z}(F_1,F_2,\dots,F_m)=\{x\in(\mathbb{F}_p)^n\ |\ F_1(x)=F_2(x)=\cdots=F_m(x)=0\}$<br>
+$\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)\ \ \ if\ \ \ \sum_{i=1}^{n}deg(F_i)< n$<br>
 
 #### Theorem's_Proof
 $x=(x_1,x_2,\dots,x_n)\in \mathbb{F}_p^n $
-<p>According to Fermat's Little Theorem,</p>
+According to Fermat's Little Theorem,<br>
 $x\in \mathcal{Z}(F_1,F_2,\dots,F_m)\ \Leftrightarrow\ \prod_{j=1}^{m}(1-F_j(x)^{p-1})=1\in\mathbb{F}_p$
-<p>\begin{align}\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv \sum_{x\in\mathbb{F}_p}\prod_{j=1}^{m}(1-F_j(x)^{p-1})\ (mod\ p)\end{align}</p>
+$$\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv \sum_{x\in\mathbb{F}_p}\prod_{j=1}^{m}(1-F_j(x)^{p-1})\ (mod\ p)$$<br>
 约定 $x^0|_{x=0}=1.$<br>
 $Lemma:$<br>
 $\forall a\ge 0$
-<p>\begin{eqnarray}
+$$
+\begin{eqnarray}
 \sum_{x\in \mathbb{F}_p}x^a = \left\{
 \begin{aligned}
 &p-1 &p-1|a\ne 0\\
 &0 &others
 \end{aligned}
 \right.
-\end{eqnarray}</p>
+\end{eqnarray}$$<br>
 $deg\prod_{j=1}^{m}(1-F_j(x)^{p-1})\le (p-1)\sum degF_j<(p-1)n$
-<p>\begin{align}\#\mathcal{Z}=\sum_{\{a_k\}}\ \sum_{(x_1,x_2,\dots,x_n)\in \mathbb{F}_p ^n}x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}=\sum_{\{a_k\}}(\sum_{x_1\in \mathbb{F}_p}x_1^{a_1})(\cdots)(\cdots)\cdots(\cdots)\end{align}</p>
+$$\#\mathcal{Z}=\sum_{\{a_k\}}\ \sum_{(x_1,x_2,\dots,x_n)\in \mathbb{F}_p ^n}x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}=\sum_{\{a_k\}}(\sum_{x_1\in \mathbb{F}_p}x_1^{a_1})(\cdots)(\cdots)\cdots(\cdots)$$<br>
 又 $a_1+a_2+\cdots+a_n<(p-1)n\ \Rightarrow\ \exists \ a_j\le p-2.$<br>
-<p>故 $\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$</p>
+故 $\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv0\ (mod\ p)$<br>
 <p align="right">$\Box$</p>
 
 #### For_Con.1
-<p>$A=\{a_1,a_2,\dots,a_p\},a_1,a_2,\dots,a_p>0$</p>
-<p>\begin{align}F(x)=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_px_p^{p-1}\in \mathbb{F}_p[x]\end{align}</p>
+$A=\{a_1,a_2,\dots,a_p\},a_1,a_2,\dots,a_p>0$<br>
+$$F(x)=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_px_p^{p-1}\in \mathbb{F}_p[x]$$<br>
 $degF\le p-1< p$<br><br>
-<p>$x=(x_1,x_2,\dots,x_n)\in \mathbb{F} _p^n$</p>
-<p>$x\in \mathcal{Z}(F),\ x_{i_1},x_{i_2},\dots,x_{i_k}\ne 0,\ other\ x_i=0\ \Leftrightarrow\ a_{i_1}+a_{i_2}+\cdots+a_{i_k}\equiv 0\ (mod\ p)$</p><br>
-<p>$N_k:=\#\{B\subset A\ |\ |B|=k,\sigma(B)\equiv 0\ (mod\ p)\}\ 0\le k\le p$,即 $k$ 元 $Zero-sum-subset$</p>
-<p>\begin{align}\#\mathcal{Z}(F)=\sum_{k=0}^pN_k(p-1)^k\overset{C-W}{\equiv}0\ (mod\ p)\end{align}</p>
-<p>\begin{align}\#\mathcal{Z}(F)\equiv\sum_{k=0}^p(-1)^kN_k\equiv 0\ (mod\ p)\end{align}</p>
+$x=(x_1,x_2,\dots,x_n)\in \mathbb{F} _p^n$<br>
+$x\in \mathcal{Z}(F),\ x_{i_1},x_{i_2},\dots,x_{i_k}\ne 0,\ other\ x_i=0\ \Leftrightarrow\ a_{i_1}+a_{i_2}+\cdots+a_{i_k}\equiv 0\ (mod\ p)$<br><br>
+$N_k:=\#\{B\subset A\ |\ |B|=k,\sigma(B)\equiv 0\ (mod\ p)\}\ 0\le k\le p$,即 $k$ 元 $Zero-sum-subset$<br>
+$$\#\mathcal{Z}(F)=\sum_{k=0}^pN_k(p-1)^k\overset{C-W}{\equiv}0\ (mod\ p)$$<br>
+$$\#\mathcal{Z}(F)\equiv\sum_{k=0}^p(-1)^kN_k\equiv 0\ (mod\ p)$$<br>
 $ N_0=1\ (\emptyset)\ \Rightarrow\ \exists\ 0< k\le p,N_k\ne 0 $
 <p align="right">$\Box$</p>
 
 #### For_Con.2
 $Erdo ̋s,Ginzburg\ and\ Ziv\ Theorem$<br>
 $a_1,a_2,\dots,a_{2p-1}\in \mathbb{F}_p $
-<p>\begin{align}F_1=x_1^{p-1}+x_2^{p-1}+\cdots x_{2p-1}^{p-1}\end{align}</p>
-<p>\begin{align}F_2=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
+$$F_1=x_1^{p-1}+x_2^{p-1}+\cdots x_{2p-1}^{p-1}$$<br>
+$$F_2=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}$$<br>
 $degF_1+degF_2\le 2p-2< 2p-1$
-<p>\begin{align}\#\mathcal{Z}(F_1,F_2)=N_0+(p-1)^pN_p\equiv 0\ (mod\ p) \end{align}</p>
+$$\#\mathcal{Z}(F_1,F_2)=N_0+(p-1)^pN_p\equiv 0\ (mod\ p) $$<br>
 $\Rightarrow\ N_p\equiv N_0=1\ (mod\ p)$, obviously $N_p\ne 0$.
 <p align="right">$\Box$</p>
 
 #### For_Problem-1
 $(a_i,b_i)\subset \mathbb{Z}^2\ ,i=1,2,\dots,2p-1$
-<p>\begin{align}F_1=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
-<p>\begin{align}F_2=b_1x_1^{p-1}+b_2x_2^{p-1}+\cdots b_{2p-1}x_{2p-1}^{p-1}\end{align}</p>
-<p>$degF_1+degF_2\le 2p-2< 2p-1\ \Rightarrow\ \#\mathcal{Z}(F_1,F_2)\equiv 0\ (mod\ p)$</p>
-<p>$x=(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)\ \Rightarrow\ \exists\ x\ne(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)$</p>
+$$F_1=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}$$<br>
+$$F_2=b_1x_1^{p-1}+b_2x_2^{p-1}+\cdots b_{2p-1}x_{2p-1}^{p-1}$$<br>
+$degF_1+degF_2\le 2p-2< 2p-1\ \Rightarrow\ \#\mathcal{Z}(F_1,F_2)\equiv 0\ (mod\ p)$<br>
+$x=(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)\ \Rightarrow\ \exists\ x\ne(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)$<br>
 <p align="right">$\Box$</p>
 类似的，可以证明 $D((C_p)^r)=r(p-1)+1$.
 
 ### Kemnitz’_Conjecture's_Proof
 $C.\ Reiher\ \ 2007,(German),1999-2003\ IMO\ 4G1B$<br>
-<p>
+
+$$
 \begin{cases}
     F_1=x_1^{p-1}+x_2^{p-1}+\cdots x_{m}^{p-1}\\
     F_2=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{m}x_{m}^{p-1}\\
     F_3=b_1x_1^{p-1}+b_2x_2^{p-1}+\cdots b_{m}x_{m}^{p-1}
 \end{cases}
-</p>
-<p>$A=\{(a_i,b_i)\ |\ i=1,2,\dots,m\}$</p>
-<p>$N_k(A):=\{B\subset A\ |\ |B|=k,\sigma(B)\equiv(0,0)\ (mod\ p)\}$</p>
+$$<br>
+
+$A=\{(a_i,b_i)\ |\ i=1,2,\dots,m\}$<br>
+$N_k(A):=\{B\subset A\ |\ |B|=k,\sigma(B)\equiv(0,0)\ (mod\ p)\}$<br>
 使用 $C-W\ Theorem$ 前提: $m>3(p-1)$ 即 $m\ge 3p-2$
 
 后续技巧具体可见[Reference](#Reference)
 
 ### Reference
-[On Kemnitz’ conjecture concerning lattice-points in the plane](https://yhx1415926.github.io/quote_img/mathexploration-4/On_Kemnitz’_conjecture_concerning_lattice-points_in_the_plane.pdf)
+[On Kemnitz’ conjecture concerning lattice-points in the plane](https://blog.yhx1415926.top/scr/content/posts/reference/On_Kemnitz’_conjecture_concerning_lattice-points_in_the_plane.pdf)
