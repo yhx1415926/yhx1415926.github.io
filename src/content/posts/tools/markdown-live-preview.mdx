@@ -1,7 +1,7 @@
 ---
 title: Markdown 在线渲染
 published: 2026-04-12
-description: 站内在线渲染 Markdown，支持 KaTeX 数学公式与 Mermaid 图表。
+description: 站内在线渲染 Markdown，支持代码高亮、HTML/JS、GitHub 名片、KaTeX 与 Mermaid。
 tags: [工具, Markdown]
 category: 工具
 pinned: true
@@ -14,7 +14,7 @@ import MarkdownPlayground from "@/components/pages/MarkdownPlayground.svelte";
 
 > 使用方式：
 > 1. 直接粘贴内容到编辑区, 或点击“导入文件”上传本地 `.md` 文件;
-> 2. 选择是否渲染 $\LaTeX$ 数学公式与 Mermaid 画图模块;
-> 3. 点击“渲染”按钮后，下方将显示结果。
+> 2. 选择是否渲染 $\LaTeX$ 数学公式与 Mermaid 画图模块，并保留 HTML/脚本执行能力;
+> 3. 点击“渲染”按钮后，结果将作为正文直接显示（中间以横线分隔）。
 
 <MarkdownPlayground client:load />
