@@ -16,6 +16,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 		// 归档
 		LinkPreset.Archive,
+
 	];
 
 	// 自定义导航栏链接,并且支持多级菜单
