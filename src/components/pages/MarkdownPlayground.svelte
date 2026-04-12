@@ -1,8 +1,8 @@
 <script lang="ts">
-import { marked } from "marked";
 import katex from "katex";
+import { marked } from "marked";
 import "katex/dist/katex.min.css";
-import { onMount } from "svelte";
+import { onMount, tick } from "svelte";
 
 const demoMarkdown = `---
 title: Markdown 渲染测试
@@ -10,24 +10,33 @@ title: Markdown 渲染测试
 
 # 在线 Markdown 预览器
 
-支持 KaTeX、Mermaid 与普通 Markdown。
+支持 KaTeX、Mermaid、HTML、脚本执行与 GitHub 仓库名片。
 
-## 数学公式
+## 代码高亮
 
-行内公式：$E = mc^2$
+\`\`\`ts
+const add = (a: number, b: number) => a + b;
+console.log(add(1, 2));
+\`\`\`
 
-块级公式：
+## HTML + JS
 
-$$
-\\int_0^1 x^2 dx = \\frac{1}{3}
-$$
+<div id="js-demo" style="padding:8px;border:1px dashed #999;border-radius:8px;">等待脚本执行...</div>
+<script>
+  const el = document.getElementById('js-demo');
+  if (el) el.textContent = '脚本已执行 ✅';
+<${"/"}script>
+
+## GitHub 仓库名片
+
+::github{repo="microsoft/TypeScript"}
 
 ## Mermaid
 
 \`\`\`mermaid
 graph TD
 A[编辑 Markdown] --> B[点击渲染]
-B --> C[降低实时渲染卡顿]
+B --> C[统一渲染链路]
 \`\`\`
 `;
 
@@ -35,13 +44,46 @@ let markdownText = demoMarkdown;
 let renderedHtml = "";
 let uploadError = "";
 let mermaidApi: any = null;
+let highlightApi: any = null;
 let enableKatex = true;
-let enableMermaid = false;
+let enableMermaid = true;
 let fileInput: HTMLInputElement | null = null;
+let previewContainer: HTMLDivElement | null = null;
 
 const FENCED_CODE_TOKEN = "@@FENCED_CODE_";
 const INLINE_CODE_TOKEN = "@@INLINE_CODE_";
 const MATH_TOKEN = "@@MATH_";
+
+const buildGithubCard = (repo: string) => {
+	const trimmedRepo = repo.trim();
+	if (!trimmedRepo.includes("/")) {
+		return '<div class="hidden">Invalid repository. (repo must be in owner/repo format)</div>';
+	}
+	const [owner, name] = trimmedRepo.split("/");
+	const cardUuid = `GC${Math.random().toString(36).slice(-6)}`;
+
+	return `
+<a id="${cardUuid}-card" class="card-github fetch-waiting no-styling" href="https://github.com/${trimmedRepo}" target="_blank" repo="${trimmedRepo}">
+  <div class="gc-titlebar">
+    <div class="gc-titlebar-left">
+      <div class="gc-owner">
+        <div id="${cardUuid}-avatar" class="gc-avatar"></div>
+        <div class="gc-user">${owner}</div>
+      </div>
+      <div class="gc-divider">/</div>
+      <div class="gc-repo">${name}</div>
+    </div>
+    <div class="github-logo"></div>
+  </div>
+  <div id="${cardUuid}-description" class="gc-description">Waiting for api.github.com...</div>
+  <div class="gc-infobar">
+    <div id="${cardUuid}-stars" class="gc-stars">00K</div>
+    <div id="${cardUuid}-forks" class="gc-forks">0K</div>
+    <div id="${cardUuid}-license" class="gc-license">0K</div>
+    <span id="${cardUuid}-language" class="gc-language">Waiting...</span>
+  </div>
+</a>`;
+};
 
 const preprocessMarkdown = (input: string) => {
 	let md = input.replace(/^---\n[\s\S]*?\n---\n?/m, "");
@@ -59,6 +101,13 @@ const preprocessMarkdown = (input: string) => {
 		return `${INLINE_CODE_TOKEN}${index}@@`;
 	});
 
+	md = md.replace(
+		/::github\{\s*repo=["']([^"']+)["']\s*\}/g,
+		(_, repo: string) => {
+			return `\n${buildGithubCard(repo)}\n`;
+		},
+	);
+
 	if (enableKatex) {
 		md = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, formula: string) => {
 			try {
@@ -73,25 +122,34 @@ const preprocessMarkdown = (input: string) => {
 			}
 		});
 
-		md = md.replace(/(^|[^\\])\$(.+?)\$/g, (match, prefix: string, formula: string) => {
-			if (!formula.trim() || formula.includes("\n")) {
-				return match;
-			}
-			try {
-				const html = katex.renderToString(formula.trim(), {
-					throwOnError: false,
-					displayMode: false,
-				});
-				const index = mathFragments.push(html) - 1;
-				return `${prefix}${MATH_TOKEN}${index}@@`;
-			} catch {
-				return match;
-			}
-		});
+		md = md.replace(
+			/(^|[^\\])\$(.+?)\$/g,
+			(match, prefix: string, formula: string) => {
+				if (!formula.trim() || formula.includes("\n")) {
+					return match;
+				}
+				try {
+					const html = katex.renderToString(formula.trim(), {
+						throwOnError: false,
+						displayMode: false,
+					});
+					const index = mathFragments.push(html) - 1;
+					return `${prefix}${MATH_TOKEN}${index}@@`;
+				} catch {
+					return match;
+				}
+			},
+		);
 	}
 
-	md = md.replace(new RegExp(`${INLINE_CODE_TOKEN}(\\d+)@@`, "g"), (_, i) => inlineCodes[Number(i)]);
-	md = md.replace(new RegExp(`${FENCED_CODE_TOKEN}(\\d+)@@`, "g"), (_, i) => fencedCodes[Number(i)]);
+	md = md.replace(
+		new RegExp(`${INLINE_CODE_TOKEN}(\\d+)@@`, "g"),
+		(_, i) => inlineCodes[Number(i)],
+	);
+	md = md.replace(
+		new RegExp(`${FENCED_CODE_TOKEN}(\\d+)@@`, "g"),
+		(_, i) => fencedCodes[Number(i)],
+	);
 
 	return {
 		md,
@@ -141,6 +199,104 @@ const loadMermaid = async () => {
 	return (window as any).mermaid ?? null;
 };
 
+const loadHighlight = async () => {
+	if (typeof window === "undefined") {
+		return null;
+	}
+	if ((window as any).hljs) {
+		return (window as any).hljs;
+	}
+
+	await new Promise<void>((resolve, reject) => {
+		const script = document.createElement("script");
+		script.src =
+			"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js";
+		script.async = true;
+		script.onload = () => resolve();
+		script.onerror = () => reject(new Error("highlight.js 加载失败"));
+		document.head.appendChild(script);
+	});
+
+	return (window as any).hljs ?? null;
+};
+
+const runScripts = async () => {
+	if (!previewContainer) {
+		return;
+	}
+	const scripts = Array.from(previewContainer.querySelectorAll("script"));
+	for (const oldScript of scripts) {
+		const newScript = document.createElement("script");
+		for (const attr of oldScript.attributes) {
+			newScript.setAttribute(attr.name, attr.value);
+		}
+		newScript.textContent = oldScript.textContent;
+		oldScript.replaceWith(newScript);
+	}
+};
+
+const renderGithubCards = async () => {
+	if (!previewContainer) {
+		return;
+	}
+
+	const cards = Array.from(
+		previewContainer.querySelectorAll<HTMLAnchorElement>("a.card-github[repo]"),
+	);
+	await Promise.all(
+		cards.map(async (card) => {
+			const repo = card.getAttribute("repo");
+			if (!repo) return;
+			try {
+				const response = await fetch(`https://api.github.com/repos/${repo}`, {
+					referrerPolicy: "no-referrer",
+				});
+				const data = await response.json();
+				const cardId = card.id.replace(/-card$/, "");
+				const setText = (suffix: string, text: string) => {
+					const el = document.getElementById(`${cardId}-${suffix}`);
+					if (el) el.textContent = text;
+				};
+				setText(
+					"description",
+					data.description?.replace(/:[a-zA-Z0-9_]+:/g, "") ||
+						"Description not set",
+				);
+				setText("language", data.language || "Unknown");
+				setText(
+					"forks",
+					Intl.NumberFormat("en-us", {
+						notation: "compact",
+						maximumFractionDigits: 1,
+					})
+						.format(data.forks || 0)
+						.replaceAll("\u202f", ""),
+				);
+				setText(
+					"stars",
+					Intl.NumberFormat("en-us", {
+						notation: "compact",
+						maximumFractionDigits: 1,
+					})
+						.format(data.stargazers_count || 0)
+						.replaceAll("\u202f", ""),
+				);
+				setText("license", data.license?.spdx_id || "no-license");
+				const avatar = document.getElementById(
+					`${cardId}-avatar`,
+				) as HTMLDivElement | null;
+				if (avatar && data.owner?.avatar_url) {
+					avatar.style.backgroundImage = `url(${data.owner.avatar_url}&s=32)`;
+					avatar.style.backgroundColor = "transparent";
+				}
+				card.classList.remove("fetch-waiting");
+			} catch {
+				card.classList.add("fetch-error");
+			}
+		}),
+	);
+};
+
 const renderMermaid = async () => {
 	if (!enableMermaid) {
 		return;
@@ -161,16 +317,37 @@ const renderMermaid = async () => {
 			theme: isDark ? "dark" : "default",
 		});
 
-		const blocks = document.querySelectorAll<HTMLDivElement>(".md-preview .mermaid[data-mermaid-code]");
+		const blocks = document.querySelectorAll<HTMLDivElement>(
+			".md-preview .mermaid[data-mermaid-code]",
+		);
 		await Promise.all(
 			Array.from(blocks).map(async (el, index) => {
 				const code = el.dataset.mermaidCode ?? "";
-				const { svg } = await mermaidApi.render(`preview-mermaid-${Date.now()}-${index}`, code);
+				const { svg } = await mermaidApi.render(
+					`preview-mermaid-${Date.now()}-${index}`,
+					code,
+				);
 				el.innerHTML = svg;
 			}),
 		);
 	} catch (error) {
 		console.warn("Mermaid 渲染失败", error);
+	}
+};
+
+const renderCodeHighlight = async () => {
+	try {
+		if (!highlightApi) {
+			highlightApi = await loadHighlight();
+		}
+		if (!highlightApi || !previewContainer) {
+			return;
+		}
+		previewContainer.querySelectorAll("pre code").forEach((el) => {
+			highlightApi.highlightElement(el);
+		});
+	} catch (error) {
+		console.warn("代码高亮渲染失败", error);
 	}
 };
 
@@ -184,10 +361,17 @@ const renderMarkdown = async () => {
 
 	let html = transformMermaidBlocks(rawHtml);
 	if (enableKatex) {
-		html = html.replace(new RegExp(`${MATH_TOKEN}(\\d+)@@`, "g"), (_, i) => mathFragments[Number(i)] || "");
+		html = html.replace(
+			new RegExp(`${MATH_TOKEN}(\\d+)@@`, "g"),
+			(_, i) => mathFragments[Number(i)] || "",
+		);
 	}
 
 	renderedHtml = html;
+	await tick();
+	await runScripts();
+	await renderGithubCards();
+	await renderCodeHighlight();
 	await renderMermaid();
 };
 
@@ -223,7 +407,7 @@ onMount(() => {
 	<div class="border-b border-black/8 dark:border-white/8 px-4 py-3 flex flex-wrap items-center gap-4 justify-between">
 		<div>
 			<h1 class="text-xl font-semibold text-90">Markdown / MDX 渲染器</h1>
-			<p class="text-sm text-50 mt-1">点击“渲染”后更新结果，减少页面卡顿。</p>
+			<p class="text-sm text-50 mt-1">点击“渲染”后更新结果，输出直接作为正文展示。</p>
 		</div>
 
 		<div class="flex flex-wrap items-center gap-4 text-sm">
@@ -254,16 +438,15 @@ onMount(() => {
 		></textarea>
 	</section>
 
-	<section class="pane border-t border-black/8 dark:border-white/8">
-		<div class="pane-title">渲染结果</div>
-		<div class="md-preview prose dark:prose-invert max-w-none">
-			{@html renderedHtml}
-		</div>
-	</section>
-
 	{#if uploadError}
 		<div class="px-4 py-3 text-sm text-red-500 border-t border-black/8 dark:border-white/8">{uploadError}</div>
 	{/if}
+</div>
+
+<hr class="preview-divider" />
+
+<div bind:this={previewContainer} class="md-preview prose dark:prose-invert max-w-none custom-md">
+	{@html renderedHtml}
 </div>
 
 <style>
@@ -303,7 +486,12 @@ onMount(() => {
 	}
 
 	.md-preview {
-		padding: 1rem 1.2rem 2rem;
+		padding: 0.2rem 0 2rem;
+	}
+
+	.preview-divider {
+		margin: 1.25rem 0;
+		border-top: 1px dashed var(--line-divider);
 	}
 
 	.import-btn {
