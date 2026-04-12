@@ -25,9 +25,17 @@ export async function GET(context: APIContext) {
 	const container = await AstroContainer.create({ renderers });
 	const feedItems: RSSFeedItem[] = [];
 	for (const post of blog) {
-		const { Content } = await render(post);
-		const rawContent = await container.renderToString(Content);
-		const cleanedContent = stripInvalidXmlChars(rawContent);
+		let cleanedContent = "";
+
+		try {
+			const { Content } = await render(post);
+			const rawContent = await container.renderToString(Content);
+			cleanedContent = stripInvalidXmlChars(rawContent);
+		} catch (error) {
+			console.warn(`RSS content render failed for post: ${post.id}`, error);
+			cleanedContent = stripInvalidXmlChars(`<p>${post.data.description || post.data.title}</p>`);
+		}
+
 		feedItems.push({
 			title: post.data.title,
 			pubDate: post.data.published,

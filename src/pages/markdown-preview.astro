@@ -1,0 +1,8 @@
+---
+import MarkdownPlayground from "@/components/pages/MarkdownPlayground.svelte";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+---
+
+<MainGridLayout title="Markdown 在线预览" description="实时渲染 md/mdx，支持 KaTeX 与 Mermaid 图表。">
+	<MarkdownPlayground client:load />
+</MainGridLayout>
