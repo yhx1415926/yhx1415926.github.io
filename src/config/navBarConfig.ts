@@ -17,12 +17,6 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		// 归档
 		LinkPreset.Archive,
 
-		// Markdown 在线预览工具（与普通文章页一致的站内打开）
-		{
-			name: "Markdown 预览",
-			url: "/posts/tools/markdown-live-preview/",
-			icon: "material-symbols:edit-document",
-		},
 	];
 
 	// 自定义导航栏链接,并且支持多级菜单
