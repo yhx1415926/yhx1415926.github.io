@@ -47,6 +47,7 @@ let mermaidApi: any = null;
 let highlightApi: any = null;
 let enableKatex = true;
 let enableMermaid = true;
+let isRendering = false;
 let fileInput: HTMLInputElement | null = null;
 let previewContainer: HTMLDivElement | null = null;
 
@@ -352,27 +353,35 @@ const renderCodeHighlight = async () => {
 };
 
 const renderMarkdown = async () => {
-	uploadError = "";
-	const { md, mathFragments } = preprocessMarkdown(markdownText);
-	const rawHtml = marked.parse(md, {
-		gfm: true,
-		breaks: true,
-	}) as string;
-
-	let html = transformMermaidBlocks(rawHtml);
-	if (enableKatex) {
-		html = html.replace(
-			new RegExp(`${MATH_TOKEN}(\\d+)@@`, "g"),
-			(_, i) => mathFragments[Number(i)] || "",
-		);
+	if (isRendering) {
+		return;
 	}
+	isRendering = true;
+	uploadError = "";
+	try {
+		const { md, mathFragments } = preprocessMarkdown(markdownText);
+		const rawHtml = marked.parse(md, {
+			gfm: true,
+			breaks: true,
+		}) as string;
 
-	renderedHtml = html;
-	await tick();
-	await runScripts();
-	await renderGithubCards();
-	await renderCodeHighlight();
-	await renderMermaid();
+		let html = transformMermaidBlocks(rawHtml);
+		if (enableKatex) {
+			html = html.replace(
+				new RegExp(`${MATH_TOKEN}(\\d+)@@`, "g"),
+				(_, i) => mathFragments[Number(i)] || "",
+			);
+		}
+
+		renderedHtml = html;
+		await tick();
+		await runScripts();
+		await renderGithubCards();
+		await renderCodeHighlight();
+		await renderMermaid();
+	} finally {
+		isRendering = false;
+	}
 };
 
 const triggerFilePicker = () => {
@@ -411,20 +420,22 @@ onMount(() => {
 		</div>
 
 		<div class="flex flex-wrap items-center gap-4 text-sm">
-			<button type="button" class="import-btn" on:click={triggerFilePicker}>导入文件</button>
+			<button type="button" class="control-btn import-btn" on:click={triggerFilePicker}>导入文件</button>
 			<input bind:this={fileInput} type="file" accept=".md,.mdx,text/markdown,text/plain" on:change={handleFileChange} class="sr-only" />
 
-			<label class="toggle-item">
+			<label class="toggle-item control-btn">
 				<span>KaTeX</span>
 				<input type="checkbox" bind:checked={enableKatex}>
 			</label>
 
-			<label class="toggle-item">
+			<label class="toggle-item control-btn">
 				<span>Mermaid</span>
 				<input type="checkbox" bind:checked={enableMermaid}>
 			</label>
 
-			<button type="button" class="render-btn" on:click={renderMarkdown}>渲染</button>
+			<button type="button" class="render-btn control-btn" on:click={renderMarkdown} disabled={isRendering}>
+				{isRendering ? "渲染中..." : "渲染"}
+			</button>
 		</div>
 	</div>
 
@@ -495,16 +506,15 @@ onMount(() => {
 	}
 
 	.import-btn {
-		padding-bottom: 0.1rem;
-		border-bottom: 1px solid transparent;
+		padding: 0.3rem 0.65rem;
+		border-radius: 0.5rem;
 		color: rgb(0 0 0 / 0.72);
-		transition: all 0.2s ease;
+		transition: all 0.18s ease;
 	}
 
 	.import-btn:hover {
-		border-bottom-color: var(--primary);
+		background: var(--btn-regular-bg-hover);
 		color: var(--primary);
-		text-shadow: 0 0 10px rgb(0 0 0 / 0.12);
 	}
 
 	:global(.dark) .import-btn {
@@ -520,6 +530,17 @@ onMount(() => {
 		align-items: center;
 		gap: 0.4rem;
 		color: rgb(0 0 0 / 0.72);
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.5rem;
+		transition: background 0.18s ease;
+	}
+
+	.toggle-item:hover {
+		background: var(--btn-regular-bg-hover);
+	}
+
+	.toggle-item input {
+		cursor: pointer;
 	}
 
 	:global(.dark) .toggle-item {
@@ -532,10 +553,41 @@ onMount(() => {
 		background: var(--primary);
 		color: #fff;
 		font-weight: 600;
-		transition: opacity 0.2s ease;
+		transition: all 0.18s ease;
 	}
 
 	.render-btn:hover {
 		opacity: 0.88;
+	}
+
+	.control-btn {
+		cursor: pointer;
+	}
+
+	.control-btn:active {
+		transform: translateY(1px);
+		box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.2);
+	}
+
+	.render-btn:disabled {
+		cursor: not-allowed;
+		opacity: 0.55;
+		box-shadow: none;
+		transform: none;
+	}
+
+	:global(.md-preview pre) {
+		background: var(--codeblock-bg);
+		border-radius: 0.85rem;
+		padding: 1rem 1.1rem;
+		overflow-x: auto;
+	}
+
+	:global(.md-preview pre code) {
+		background: transparent;
+		color: inherit;
+		padding: 0;
+		border-radius: 0;
+		display: block;
 	}
 </style>
