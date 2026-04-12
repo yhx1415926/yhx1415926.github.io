@@ -1,8 +1,8 @@
 ---
-title: Markdown 在线预览
+title: Markdown 在线渲染
 published: 2026-04-12
-description: 站内手动渲染 md/mdx，支持 KaTeX 数学公式与 Mermaid 图表。
-tags: [工具, Markdown, MDX]
+description: 站内在线渲染 Markdown，支持 KaTeX 数学公式与 Mermaid 图表。
+tags: [工具, Markdown]
 category: 工具
 pinned: true
 comment: false
@@ -10,11 +10,11 @@ comment: false
 
 import MarkdownPlayground from "@/components/pages/MarkdownPlayground.svelte";
 
-这个页面会保持和普通文章页一致的外层布局（背景图、侧边栏、音乐等都保留），你可以直接在这里调试未发布的 `md/mdx` 文件。
+这个页面会与普通文章页保持一致的外层布局, 你可以直接在这里调试未发布的 `Markdown` 文件。
 
 > 使用方式：
-> 1. 直接粘贴 `src/content/posts` 里的内容到上方编辑区；
-> 2. 或点击“导入文件”上传本地 `.md/.mdx`；
-> 3. 点击“渲染”按钮后，下方显示最新结果。
+> 1. 直接粘贴内容到编辑区, 或点击“导入文件”上传本地 `.md` 文件;
+> 2. 选择是否渲染 $\LaTeX$ 数学公式与 Mermaid 画图模块;
+> 3. 点击“渲染”按钮后，下方将显示结果。
 
 <MarkdownPlayground client:load />
