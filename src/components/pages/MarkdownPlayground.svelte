@@ -139,7 +139,9 @@ const parseCodeMeta = (infoRaw: string): CodeMeta => {
 	const metaText = rest.join(" ");
 	const attrs = new Map<string, string>();
 	const markLinesFromBrace = metaText.match(/\{([^}]+)\}/)?.[1];
-	for (const m of metaText.matchAll(/(\w+)=("[^"]*"|'[^']*'|\{[^}]*\}|\/((?:\\/|[^/])+?)\/[gimsuyd]*|[^\s]+)/g)) {
+	// Pattern: key="double quoted" | key='single quoted' | key={braces} | key=/regex/flags | key=plain
+	const attrPattern = new RegExp(String.raw`(\w+)=(("[^"]*")|('[^']*')|(\{[^}]*\})|(\/((?:\\\/|[^/])+?)\/[gimsuyd]*)|([^\s]+))`, 'g');
+	for (const m of metaText.matchAll(attrPattern)) {
 		attrs.set(m[1], m[2]);
 	}
 	for (const flag of ["wrap", "collapse"]) {
