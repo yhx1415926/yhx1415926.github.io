@@ -194,6 +194,10 @@ const renderWithBlogPipeline = async (input: string) => {
 	}
 	processor.use(remarkRehype, { allowDangerousHtml: true }).use(rehypeRaw);
 	for (const plugin of rehypePlugins) {
+		if (Array.isArray(plugin)) {
+			processor.use(plugin[0], plugin[1]);
+			continue;
+		}
 		processor.use(plugin);
 	}
 	const file = await processor
