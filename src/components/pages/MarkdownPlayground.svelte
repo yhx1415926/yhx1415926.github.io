@@ -20,7 +20,6 @@ import rehypeCallouts from "rehype-callouts";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components";
-import matter from "gray-matter";
 import "katex/dist/katex.min.css";
 import { siteConfig } from "@/config";
 import { parseDirectiveNode } from "@/plugins/remark-directive-rehype";
@@ -130,8 +129,11 @@ const runScripts = async () => {
 	}
 };
 
+const stripFrontmatter = (input: string) =>
+	input.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "");
+
 const renderWithBlogPipeline = async (input: string) => {
-	const strippedContent = matter(input).content;
+	const strippedContent = stripFrontmatter(input);
 	const remarkPlugins: any[] = [
 		remarkParse,
 		remarkMdx,
@@ -186,11 +188,15 @@ const renderWithBlogPipeline = async (input: string) => {
 		],
 	);
 
-	const file = await unified()
-		.use(remarkPlugins)
-		.use(remarkRehype, { allowDangerousHtml: true })
-		.use(rehypeRaw)
-		.use(rehypePlugins)
+	const processor = unified();
+	for (const plugin of remarkPlugins) {
+		processor.use(plugin);
+	}
+	processor.use(remarkRehype, { allowDangerousHtml: true }).use(rehypeRaw);
+	for (const plugin of rehypePlugins) {
+		processor.use(plugin);
+	}
+	const file = await processor
 		.use(rehypeStringify, { allowDangerousHtml: true })
 		.process(strippedContent);
 
@@ -239,6 +245,9 @@ const renderMarkdown = async () => {
 		await tick();
 		await runScripts();
 		await renderCodeHighlight();
+	} catch (error) {
+		renderedHtml = "";
+		uploadError = `渲染失败：${error instanceof Error ? error.message : "未知错误"}`;
 	} finally {
 		isRendering = false;
 	}
