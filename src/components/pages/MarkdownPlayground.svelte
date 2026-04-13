@@ -92,6 +92,7 @@ let previewContainer: HTMLDivElement | null = null;
 const FENCED_CODE_TOKEN = "@@FENCED_CODE_";
 const INLINE_CODE_TOKEN = "@@INLINE_CODE_";
 const MATH_TOKEN = "@@MATH_";
+const REGEX_LITERAL_PATTERN = new RegExp(String.raw`^\/((?:\\\/|[^\/])+?)\/([gimsuyd]*)$`);
 
 const escapeHtml = (input: string) =>
 	input
@@ -115,14 +116,28 @@ const parseLineRange = (value: string) => {
 };
 
 const parseRegexLiteral = (raw: string) => {
-	const match = raw.match(/^\/((?:\\/|[^/])+?)\/([gimsuyd]*)$/);
+	const match = raw.match(REGEX_LITERAL_PATTERN);
 	if (!match) return null;
 	try {
-		return new RegExp(match[1].replaceAll("\\/", "/"), match[2]);
+		return new RegExp(match[1].replaceAll("\\/", "/"), match[2] || "");
 	} catch {
 		return null;
 	}
 };
+
+const normalizeKatexFormula = (formula: string) =>
+	formula
+		.replaceAll("’", "'")
+		.replaceAll("‘", "'")
+		.replaceAll("“", '"')
+		.replaceAll("”", '"');
+
+const renderKatexFragment = (formula: string, displayMode: boolean) =>
+	katex.renderToString(normalizeKatexFormula(formula).trim(), {
+		throwOnError: false,
+		strict: "ignore",
+		displayMode,
+	});
 
 const parseCodeMeta = (infoRaw: string): CodeMeta => {
 	const info = infoRaw.trim();
@@ -258,7 +273,7 @@ const preprocessMarkdown = (input: string) => {
 	if (enableKatex) {
 		md = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, formula: string) => {
 			try {
-				const html = katex.renderToString(formula.trim(), { throwOnError: false, displayMode: true });
+				const html = renderKatexFragment(formula, true);
 				const index = mathFragments.push(html) - 1;
 				return `${MATH_TOKEN}${index}@@`;
 			} catch {
@@ -268,7 +283,7 @@ const preprocessMarkdown = (input: string) => {
 		md = md.replace(/(^|[^\\])\$(.+?)\$/g, (match, prefix: string, formula: string) => {
 			if (!formula.trim() || formula.includes("\n")) return match;
 			try {
-				const html = katex.renderToString(formula.trim(), { throwOnError: false, displayMode: false });
+				const html = renderKatexFragment(formula, false);
 				const index = mathFragments.push(html) - 1;
 				return `${prefix}${MATH_TOKEN}${index}@@`;
 			} catch {
