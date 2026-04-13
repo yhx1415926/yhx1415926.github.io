@@ -2,6 +2,7 @@
 import katex from "katex";
 import { marked } from "marked";
 import "katex/dist/katex.min.css";
+import hljs from "highlight.js";
 import { onMount, tick } from "svelte";
 
 const demoMarkdown = `---
@@ -44,7 +45,6 @@ let markdownText = demoMarkdown;
 let renderedHtml = "";
 let uploadError = "";
 let mermaidApi: any = null;
-let highlightApi: any = null;
 let enableKatex = true;
 let enableMermaid = true;
 let isRendering = false;
@@ -200,27 +200,6 @@ const loadMermaid = async () => {
 	return (window as any).mermaid ?? null;
 };
 
-const loadHighlight = async () => {
-	if (typeof window === "undefined") {
-		return null;
-	}
-	if ((window as any).hljs) {
-		return (window as any).hljs;
-	}
-
-	await new Promise<void>((resolve, reject) => {
-		const script = document.createElement("script");
-		script.src =
-			"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js";
-		script.async = true;
-		script.onload = () => resolve();
-		script.onerror = () => reject(new Error("highlight.js 加载失败"));
-		document.head.appendChild(script);
-	});
-
-	return (window as any).hljs ?? null;
-};
-
 const runScripts = async () => {
 	if (!previewContainer) {
 		return;
@@ -336,16 +315,13 @@ const renderMermaid = async () => {
 	}
 };
 
-const renderCodeHighlight = async () => {
+const renderCodeHighlight = () => {
 	try {
-		if (!highlightApi) {
-			highlightApi = await loadHighlight();
-		}
-		if (!highlightApi || !previewContainer) {
+		if (!previewContainer) {
 			return;
 		}
 		previewContainer.querySelectorAll("pre code").forEach((el) => {
-			highlightApi.highlightElement(el);
+			hljs.highlightElement(el);
 		});
 	} catch (error) {
 		console.warn("代码高亮渲染失败", error);
@@ -377,7 +353,7 @@ const renderMarkdown = async () => {
 		await tick();
 		await runScripts();
 		await renderGithubCards();
-		await renderCodeHighlight();
+		renderCodeHighlight();
 		await renderMermaid();
 	} finally {
 		isRendering = false;
