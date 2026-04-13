@@ -432,6 +432,10 @@ const renderCodeHighlight = async () => {
 			});
 			preElement.outerHTML = toHtml(renderResult.renderedGroupAst);
 		}
+	} catch (error) {
+		console.warn("代码高亮渲染失败", error);
+	}
+};
 
 const renderMarkdown = async () => {
 	if (isRendering) {
