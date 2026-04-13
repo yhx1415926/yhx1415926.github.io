@@ -2,6 +2,12 @@
 import katex from "katex";
 import { marked } from "marked";
 import "katex/dist/katex.min.css";
+import { toHtml } from "@expressive-code/core/hast";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+import { ExpressiveCodeEngine, pluginShiki } from "astro-expressive-code";
+import { pluginCollapsible } from "expressive-code-collapsible";
+import { pluginLanguageBadge } from "expressive-code-language-badge";
 import { onMount, tick } from "svelte";
 
 const demoMarkdown = `---
@@ -21,6 +27,15 @@ title: Markdown 渲染测试
 $$
 \\int_0^1 x^2 dx = \\frac{1}{3}
 $$
+
+## Tips
+
+> [!TIP] TIP
+> 这是提示内容，Elaina与你同在。
+
+> [!WARNING] WARNING
+> 这是警告内容，可用于强调风险。
+
 
 ## 代码高亮
 
@@ -54,6 +69,8 @@ let markdownText = demoMarkdown;
 let renderedHtml = "";
 let uploadError = "";
 let mermaidApi: any = null;
+let expressiveCodeEngine: ExpressiveCodeEngine | null = null;
+let expressiveCodeStylesInjected = false;
 let highlightApi: any = null;
 let enableKatex = true;
 let enableMermaid = true;
@@ -189,6 +206,38 @@ const transformMermaidBlocks = (html: string) => {
 	return doc.body.innerHTML;
 };
 
+const transformCallouts = (html: string) => {
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(html, "text/html");
+	const defaultTitles: Record<string, string> = {
+		note: "NOTE",
+		tip: "TIP",
+		important: "IMPORTANT",
+		warning: "WARNING",
+		caution: "CAUTION",
+	};
+
+	const blockquotes = doc.querySelectorAll("blockquote");
+	for (const blockquote of blockquotes) {
+		const firstParagraph = blockquote.querySelector(":scope > p");
+		if (!firstParagraph) continue;
+
+		const firstText = firstParagraph.textContent?.trim() ?? "";
+		const matched = firstText.match(
+			/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\](.*)$/i,
+		);
+		if (!matched) continue;
+
+		const type = matched[1].toLowerCase();
+		const customTitle = matched[2]?.trim();
+		blockquote.classList.add("admonition", `bdm-${type}`);
+		firstParagraph.className = "bdm-title";
+		firstParagraph.textContent = customTitle || defaultTitles[type] || "NOTE";
+	}
+
+	return doc.body.innerHTML;
+};
+
 const loadMermaid = async () => {
 	if (typeof window === "undefined") {
 		return null;
@@ -211,25 +260,37 @@ const loadMermaid = async () => {
 };
 
 const loadHighlight = async () => {
-	if (typeof window === "undefined") {
-		return null;
-	}
-	if ((window as any).hljs) {
-		return (window as any).hljs;
+	if (expressiveCodeEngine) {
+		return expressiveCodeEngine;
 	}
 
-	await new Promise<void>((resolve, reject) => {
-		const script = document.createElement("script");
-		script.src =
-			"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js";
-		script.async = true;
-		script.onload = () => resolve();
-		script.onerror = () => reject(new Error("highlight.js 加载失败"));
-		document.head.appendChild(script);
+	expressiveCodeEngine = new ExpressiveCodeEngine({
+		plugins: [
+			pluginShiki(),
+			pluginLanguageBadge(),
+			pluginCollapsibleSections(),
+			pluginLineNumbers(),
+			pluginCollapsible(),
+		],
 	});
 
-	return (window as any).hljs ?? null;
+	return expressiveCodeEngine;
 };
+
+const ensureExpressiveCodeStyles = async (engine: ExpressiveCodeEngine) => {
+	if (expressiveCodeStylesInjected || typeof document === "undefined") {
+		return;
+	}
+
+	const baseStyles = await engine.getBaseStyles();
+	const themeStyles = await engine.getThemeStyles();
+	const styleTag = document.createElement("style");
+	styleTag.id = "markdown-playground-ec-styles";
+	styleTag.textContent = `${baseStyles}\n${themeStyles}`;
+	document.head.appendChild(styleTag);
+	expressiveCodeStylesInjected = true;
+};
+
 
 const runScripts = async () => {
 	if (!previewContainer) {
@@ -348,19 +409,29 @@ const renderMermaid = async () => {
 
 const renderCodeHighlight = async () => {
 	try {
-		if (!highlightApi) {
-			highlightApi = await loadHighlight();
-		}
-		if (!highlightApi || !previewContainer) {
+		if (!previewContainer) {
 			return;
 		}
-		previewContainer.querySelectorAll("pre code").forEach((el) => {
-			highlightApi.highlightElement(el);
-		});
-	} catch (error) {
-		console.warn("代码高亮渲染失败", error);
-	}
-};
+		const engine = await loadHighlight();
+		if (!engine) {
+			return;
+		}
+		await ensureExpressiveCodeStyles(engine);
+
+		const blocks = Array.from(previewContainer.querySelectorAll("pre > code"));
+		for (const codeElement of blocks) {
+			const preElement = codeElement.parentElement;
+			if (!preElement) continue;
+			const className = codeElement.className || "";
+			const language =
+				className.match(/language-([a-z0-9+-]+)/i)?.[1] ?? "text";
+			const renderResult = await engine.render({
+				code: codeElement.textContent ?? "",
+				language,
+				meta: "",
+			});
+			preElement.outerHTML = toHtml(renderResult.renderedGroupAst);
+		}
 
 const renderMarkdown = async () => {
 	if (isRendering) {
@@ -376,6 +447,7 @@ const renderMarkdown = async () => {
 		}) as string;
 
 		let html = transformMermaidBlocks(rawHtml);
+		html = transformCallouts(html);
 		if (enableKatex) {
 			html = html.replace(
 				new RegExp(`${MATH_TOKEN}(\\d+)@@`, "g"),
