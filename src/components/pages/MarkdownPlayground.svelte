@@ -1,33 +1,8 @@
 <script lang="ts">
-import { toHtml } from "@expressive-code/core/hast";
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
-import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
-import { ExpressiveCodeEngine, pluginShiki } from "astro-expressive-code";
-import { pluginCollapsible } from "expressive-code-collapsible";
-import { pluginLanguageBadge } from "expressive-code-language-badge";
-import { onMount, tick } from "svelte";
-import { unified } from "../../../node_modules/.pnpm/unified@11.0.5/node_modules/unified/index.js";
-import remarkParse from "../../../node_modules/.pnpm/remark-parse@11.0.0/node_modules/remark-parse/index.js";
-import remarkMdx from "../../../node_modules/.pnpm/remark-mdx@3.1.1/node_modules/remark-mdx/index.js";
-import remarkMath from "remark-math";
-import remarkDirective from "remark-directive";
-import remarkSectionize from "remark-sectionize";
-import remarkRehype from "../../../node_modules/.pnpm/remark-rehype@11.1.2/node_modules/remark-rehype/index.js";
-import rehypeRaw from "../../../node_modules/.pnpm/rehype-raw@7.0.0/node_modules/rehype-raw/index.js";
-import rehypeStringify from "../../../node_modules/.pnpm/rehype-stringify@10.0.1/node_modules/rehype-stringify/index.js";
-import rehypeKatex from "rehype-katex";
-import rehypeCallouts from "rehype-callouts";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeComponents from "rehype-components";
+import katex from "katex";
+import { marked } from "marked";
 import "katex/dist/katex.min.css";
-import { siteConfig } from "@/config";
-import { parseDirectiveNode } from "@/plugins/remark-directive-rehype";
-import { remarkMermaid } from "@/plugins/remark-mermaid";
-import { rehypeMermaid } from "@/plugins/rehype-mermaid";
-import rehypeFigure from "@/plugins/rehype-figure.mjs";
-import rehypeEmailProtection from "@/plugins/rehype-email-protection.mjs";
-import { GithubCardComponent } from "@/plugins/rehype-component-github-card.mjs";
+import { onMount, tick } from "svelte";
 
 const demoMarkdown = `---
 title: Markdown 渲染测试
@@ -43,12 +18,6 @@ title: Markdown 渲染测试
 const add = (a: number, b: number) => a + b;
 console.log(add(1, 2));
 \`\`\`
-
-> [!TIP] TIP
-> 这是提示内容，和博客文章的 callout 样式一致。
-
-> [!WARNING] WARNING
-> 这是警告内容，可用于强调风险。
 
 ## HTML + JS
 
@@ -74,44 +43,182 @@ B --> C[统一渲染链路]
 let markdownText = demoMarkdown;
 let renderedHtml = "";
 let uploadError = "";
-let expressiveCodeEngine: ExpressiveCodeEngine | null = null;
-let expressiveCodeStylesInjected = false;
+let mermaidApi: any = null;
+let highlightApi: any = null;
 let enableKatex = true;
 let enableMermaid = true;
 let isRendering = false;
 let fileInput: HTMLInputElement | null = null;
 let previewContainer: HTMLDivElement | null = null;
 
-const loadHighlight = async () => {
-	if (expressiveCodeEngine) {
-		return expressiveCodeEngine;
+const FENCED_CODE_TOKEN = "@@FENCED_CODE_";
+const INLINE_CODE_TOKEN = "@@INLINE_CODE_";
+const MATH_TOKEN = "@@MATH_";
+
+const buildGithubCard = (repo: string) => {
+	const trimmedRepo = repo.trim();
+	if (!trimmedRepo.includes("/")) {
+		return '<div class="hidden">Invalid repository. (repo must be in owner/repo format)</div>';
 	}
+	const [owner, name] = trimmedRepo.split("/");
+	const cardUuid = `GC${Math.random().toString(36).slice(-6)}`;
 
-	expressiveCodeEngine = new ExpressiveCodeEngine({
-		plugins: [
-			pluginShiki(),
-			pluginLanguageBadge(),
-			pluginCollapsibleSections(),
-			pluginLineNumbers(),
-			pluginCollapsible(),
-		],
-	});
-
-	return expressiveCodeEngine;
+	return `
+<a id="${cardUuid}-card" class="card-github fetch-waiting no-styling" href="https://github.com/${trimmedRepo}" target="_blank" repo="${trimmedRepo}">
+  <div class="gc-titlebar">
+    <div class="gc-titlebar-left">
+      <div class="gc-owner">
+        <div id="${cardUuid}-avatar" class="gc-avatar"></div>
+        <div class="gc-user">${owner}</div>
+      </div>
+      <div class="gc-divider">/</div>
+      <div class="gc-repo">${name}</div>
+    </div>
+    <div class="github-logo"></div>
+  </div>
+  <div id="${cardUuid}-description" class="gc-description">Waiting for api.github.com...</div>
+  <div class="gc-infobar">
+    <div id="${cardUuid}-stars" class="gc-stars">00K</div>
+    <div id="${cardUuid}-forks" class="gc-forks">0K</div>
+    <div id="${cardUuid}-license" class="gc-license">0K</div>
+    <span id="${cardUuid}-language" class="gc-language">Waiting...</span>
+  </div>
+</a>`;
 };
 
-const ensureExpressiveCodeStyles = async (engine: ExpressiveCodeEngine) => {
-	if (expressiveCodeStylesInjected || typeof document === "undefined") {
-		return;
+const preprocessMarkdown = (input: string) => {
+	let md = input.replace(/^---\n[\s\S]*?\n---\n?/m, "");
+	const fencedCodes: string[] = [];
+	const inlineCodes: string[] = [];
+	const mathFragments: string[] = [];
+
+	md = md.replace(/```[\s\S]*?```/g, (block) => {
+		const index = fencedCodes.push(block) - 1;
+		return `${FENCED_CODE_TOKEN}${index}@@`;
+	});
+
+	md = md.replace(/`[^`\n]+`/g, (inlineCode) => {
+		const index = inlineCodes.push(inlineCode) - 1;
+		return `${INLINE_CODE_TOKEN}${index}@@`;
+	});
+
+	md = md.replace(
+		/::github\{\s*repo=["']([^"']+)["']\s*\}/g,
+		(_, repo: string) => {
+			return `\n${buildGithubCard(repo)}\n`;
+		},
+	);
+
+	if (enableKatex) {
+		md = md.replace(/\$\$([\s\S]+?)\$\$/g, (_, formula: string) => {
+			try {
+				const html = katex.renderToString(formula.trim(), {
+					throwOnError: false,
+					displayMode: true,
+				});
+				const index = mathFragments.push(html) - 1;
+				return `${MATH_TOKEN}${index}@@`;
+			} catch {
+				return `$$${formula}$$`;
+			}
+		});
+
+		md = md.replace(
+			/(^|[^\\])\$(.+?)\$/g,
+			(match, prefix: string, formula: string) => {
+				if (!formula.trim() || formula.includes("\n")) {
+					return match;
+				}
+				try {
+					const html = katex.renderToString(formula.trim(), {
+						throwOnError: false,
+						displayMode: false,
+					});
+					const index = mathFragments.push(html) - 1;
+					return `${prefix}${MATH_TOKEN}${index}@@`;
+				} catch {
+					return match;
+				}
+			},
+		);
 	}
 
-	const baseStyles = await engine.getBaseStyles();
-	const themeStyles = await engine.getThemeStyles();
-	const styleTag = document.createElement("style");
-	styleTag.id = "markdown-playground-ec-styles";
-	styleTag.textContent = `${baseStyles}\n${themeStyles}`;
-	document.head.appendChild(styleTag);
-	expressiveCodeStylesInjected = true;
+	md = md.replace(
+		new RegExp(`${INLINE_CODE_TOKEN}(\\d+)@@`, "g"),
+		(_, i) => inlineCodes[Number(i)],
+	);
+	md = md.replace(
+		new RegExp(`${FENCED_CODE_TOKEN}(\\d+)@@`, "g"),
+		(_, i) => fencedCodes[Number(i)],
+	);
+
+	return {
+		md,
+		mathFragments,
+	};
+};
+
+const transformMermaidBlocks = (html: string) => {
+	if (!enableMermaid) {
+		return html;
+	}
+
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(html, "text/html");
+	const blocks = doc.querySelectorAll("pre > code.language-mermaid");
+
+	for (const block of blocks) {
+		const pre = block.parentElement;
+		const container = doc.createElement("div");
+		container.className = "mermaid";
+		container.setAttribute("data-mermaid-code", block.textContent ?? "");
+		container.textContent = block.textContent ?? "";
+		pre?.replaceWith(container);
+	}
+
+	return doc.body.innerHTML;
+};
+
+const loadMermaid = async () => {
+	if (typeof window === "undefined") {
+		return null;
+	}
+
+	if ((window as any).mermaid) {
+		return (window as any).mermaid;
+	}
+
+	await new Promise<void>((resolve, reject) => {
+		const script = document.createElement("script");
+		script.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+		script.async = true;
+		script.onload = () => resolve();
+		script.onerror = () => reject(new Error("Mermaid 加载失败"));
+		document.head.appendChild(script);
+	});
+
+	return (window as any).mermaid ?? null;
+};
+
+const loadHighlight = async () => {
+	if (typeof window === "undefined") {
+		return null;
+	}
+	if ((window as any).hljs) {
+		return (window as any).hljs;
+	}
+
+	await new Promise<void>((resolve, reject) => {
+		const script = document.createElement("script");
+		script.src =
+			"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js";
+		script.async = true;
+		script.onload = () => resolve();
+		script.onerror = () => reject(new Error("highlight.js 加载失败"));
+		document.head.appendChild(script);
+	});
+
+	return (window as any).hljs ?? null;
 };
 
 const runScripts = async () => {
@@ -129,110 +236,117 @@ const runScripts = async () => {
 	}
 };
 
-const stripFrontmatter = (input: string) =>
-	input.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "");
-
-const renderWithBlogPipeline = async (input: string) => {
-	const strippedContent = stripFrontmatter(input);
-	const remarkPlugins: any[] = [
-		remarkParse,
-		remarkMdx,
-		remarkMath,
-		remarkDirective,
-		remarkSectionize,
-		parseDirectiveNode,
-	];
-	if (enableMermaid) {
-		remarkPlugins.push(remarkMermaid);
+const renderGithubCards = async () => {
+	if (!previewContainer) {
+		return;
 	}
 
-	const rehypePlugins: any[] = [];
-	if (enableKatex) {
-		rehypePlugins.push(rehypeKatex);
-	}
-	rehypePlugins.push(
-		[rehypeCallouts, { theme: siteConfig.rehypeCallouts.theme }],
-		rehypeSlug,
+	const cards = Array.from(
+		previewContainer.querySelectorAll<HTMLAnchorElement>("a.card-github[repo]"),
 	);
-	if (enableMermaid) {
-		rehypePlugins.push(rehypeMermaid);
-	}
-	rehypePlugins.push(
-		rehypeFigure,
-		[rehypeEmailProtection, { method: "base64" }],
-		[
-			rehypeComponents,
-			{
-				components: {
-					github: GithubCardComponent,
-				},
-			},
-		],
-		[
-			rehypeAutolinkHeadings,
-			{
-				behavior: "append",
-				properties: {
-					className: ["anchor"],
-				},
-				content: {
-					type: "element",
-					tagName: "span",
-					properties: {
-						className: ["anchor-icon"],
-						"data-pagefind-ignore": true,
-					},
-					children: [{ type: "text", value: "#" }],
-				},
-			},
-		],
+	await Promise.all(
+		cards.map(async (card) => {
+			const repo = card.getAttribute("repo");
+			if (!repo) return;
+			try {
+				const response = await fetch(`https://api.github.com/repos/${repo}`, {
+					referrerPolicy: "no-referrer",
+				});
+				const data = await response.json();
+				const cardId = card.id.replace(/-card$/, "");
+				const setText = (suffix: string, text: string) => {
+					const el = document.getElementById(`${cardId}-${suffix}`);
+					if (el) el.textContent = text;
+				};
+				setText(
+					"description",
+					data.description?.replace(/:[a-zA-Z0-9_]+:/g, "") ||
+						"Description not set",
+				);
+				setText("language", data.language || "Unknown");
+				setText(
+					"forks",
+					Intl.NumberFormat("en-us", {
+						notation: "compact",
+						maximumFractionDigits: 1,
+					})
+						.format(data.forks || 0)
+						.replaceAll("\u202f", ""),
+				);
+				setText(
+					"stars",
+					Intl.NumberFormat("en-us", {
+						notation: "compact",
+						maximumFractionDigits: 1,
+					})
+						.format(data.stargazers_count || 0)
+						.replaceAll("\u202f", ""),
+				);
+				setText("license", data.license?.spdx_id || "no-license");
+				const avatar = document.getElementById(
+					`${cardId}-avatar`,
+				) as HTMLDivElement | null;
+				if (avatar && data.owner?.avatar_url) {
+					avatar.style.backgroundImage = `url(${data.owner.avatar_url}&s=32)`;
+					avatar.style.backgroundColor = "transparent";
+				}
+				card.classList.remove("fetch-waiting");
+			} catch {
+				card.classList.add("fetch-error");
+			}
+		}),
 	);
+};
 
-	const processor = unified();
-	for (const plugin of remarkPlugins) {
-		processor.use(plugin);
+const renderMermaid = async () => {
+	if (!enableMermaid) {
+		return;
 	}
-	processor.use(remarkRehype, { allowDangerousHtml: true }).use(rehypeRaw);
-	for (const plugin of rehypePlugins) {
-		if (Array.isArray(plugin)) {
-			processor.use(plugin[0], plugin[1]);
-			continue;
+
+	try {
+		if (!mermaidApi) {
+			mermaidApi = await loadMermaid();
 		}
-		processor.use(plugin);
-	}
-	const file = await processor
-		.use(rehypeStringify, { allowDangerousHtml: true })
-		.process(strippedContent);
+		if (!mermaidApi) {
+			return;
+		}
 
-	return String(file);
+		const isDark = document.documentElement.classList.contains("dark");
+		mermaidApi.initialize({
+			startOnLoad: false,
+			securityLevel: "loose",
+			theme: isDark ? "dark" : "default",
+		});
+
+		const blocks = document.querySelectorAll<HTMLDivElement>(
+			".md-preview .mermaid[data-mermaid-code]",
+		);
+		await Promise.all(
+			Array.from(blocks).map(async (el, index) => {
+				const code = el.dataset.mermaidCode ?? "";
+				const { svg } = await mermaidApi.render(
+					`preview-mermaid-${Date.now()}-${index}`,
+					code,
+				);
+				el.innerHTML = svg;
+			}),
+		);
+	} catch (error) {
+		console.warn("Mermaid 渲染失败", error);
+	}
 };
 
 const renderCodeHighlight = async () => {
 	try {
-		if (!previewContainer) {
+		if (!highlightApi) {
+			highlightApi = await loadHighlight();
+		}
+		if (!highlightApi || !previewContainer) {
 			return;
 		}
-
-		const engine = await loadHighlight();
-		if (!engine) {
-			return;
-		}
-		await ensureExpressiveCodeStyles(engine);
-
-		const blocks = Array.from(previewContainer.querySelectorAll("pre > code"));
-		for (const codeElement of blocks) {
-			const preElement = codeElement.parentElement;
-			if (!preElement) continue;
-			const className = codeElement.className || "";
-			const language =
-				className.match(/language-([a-z0-9+-]+)/i)?.[1] ?? "text";
-			const renderResult = await engine.render({
-				code: codeElement.textContent ?? "",
-				language,
-				meta: "",
-			});
-			preElement.outerHTML = toHtml(renderResult.renderedGroupAst);
-		}
+		previewContainer.querySelectorAll("pre code").forEach((el) => {
+			highlightApi.highlightElement(el);
+		});
 	} catch (error) {
 		console.warn("代码高亮渲染失败", error);
 	}
@@ -245,13 +359,26 @@ const renderMarkdown = async () => {
 	isRendering = true;
 	uploadError = "";
 	try {
-		renderedHtml = await renderWithBlogPipeline(markdownText);
+		const { md, mathFragments } = preprocessMarkdown(markdownText);
+		const rawHtml = marked.parse(md, {
+			gfm: true,
+			breaks: true,
+		}) as string;
+
+		let html = transformMermaidBlocks(rawHtml);
+		if (enableKatex) {
+			html = html.replace(
+				new RegExp(`${MATH_TOKEN}(\\d+)@@`, "g"),
+				(_, i) => mathFragments[Number(i)] || "",
+			);
+		}
+
+		renderedHtml = html;
 		await tick();
 		await runScripts();
+		await renderGithubCards();
 		await renderCodeHighlight();
-	} catch (error) {
-		renderedHtml = "";
-		uploadError = `渲染失败：${error instanceof Error ? error.message : "未知错误"}`;
+		await renderMermaid();
 	} finally {
 		isRendering = false;
 	}
