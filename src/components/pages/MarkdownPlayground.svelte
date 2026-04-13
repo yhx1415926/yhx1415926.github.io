@@ -125,15 +125,8 @@ const parseRegexLiteral = (raw: string) => {
 	}
 };
 
-const normalizeKatexFormula = (formula: string) =>
-	formula
-		.replaceAll("’", "'")
-		.replaceAll("‘", "'")
-		.replaceAll("“", '"')
-		.replaceAll("”", '"');
-
 const renderKatexFragment = (formula: string, displayMode: boolean) =>
-	katex.renderToString(normalizeKatexFormula(formula).trim(), {
+	katex.renderToString(formula.trim(), {
 		throwOnError: false,
 		strict: "ignore",
 		displayMode,
