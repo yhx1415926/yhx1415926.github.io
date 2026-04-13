@@ -2,7 +2,12 @@
 import katex from "katex";
 import { marked } from "marked";
 import "katex/dist/katex.min.css";
-import hljs from "highlight.js";
+import { toHtml } from "@expressive-code/core/hast";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+import { ExpressiveCodeEngine, pluginShiki } from "astro-expressive-code";
+import { pluginCollapsible } from "expressive-code-collapsible";
+import { pluginLanguageBadge } from "expressive-code-language-badge";
 import { onMount, tick } from "svelte";
 
 const demoMarkdown = `---
@@ -19,6 +24,12 @@ title: Markdown 渲染测试
 const add = (a: number, b: number) => a + b;
 console.log(add(1, 2));
 \`\`\`
+
+> [!TIP] TIP
+> 这是提示内容，和博客文章的 callout 样式一致。
+
+> [!WARNING] WARNING
+> 这是警告内容，可用于强调风险。
 
 ## HTML + JS
 
@@ -45,6 +56,8 @@ let markdownText = demoMarkdown;
 let renderedHtml = "";
 let uploadError = "";
 let mermaidApi: any = null;
+let expressiveCodeEngine: ExpressiveCodeEngine | null = null;
+let expressiveCodeStylesInjected = false;
 let enableKatex = true;
 let enableMermaid = true;
 let isRendering = false;
@@ -179,6 +192,38 @@ const transformMermaidBlocks = (html: string) => {
 	return doc.body.innerHTML;
 };
 
+const transformCallouts = (html: string) => {
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(html, "text/html");
+	const defaultTitles: Record<string, string> = {
+		note: "NOTE",
+		tip: "TIP",
+		important: "IMPORTANT",
+		warning: "WARNING",
+		caution: "CAUTION",
+	};
+
+	const blockquotes = doc.querySelectorAll("blockquote");
+	for (const blockquote of blockquotes) {
+		const firstParagraph = blockquote.querySelector(":scope > p");
+		if (!firstParagraph) continue;
+
+		const firstText = firstParagraph.textContent?.trim() ?? "";
+		const matched = firstText.match(
+			/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\](.*)$/i,
+		);
+		if (!matched) continue;
+
+		const type = matched[1].toLowerCase();
+		const customTitle = matched[2]?.trim();
+		blockquote.classList.add("admonition", `bdm-${type}`);
+		firstParagraph.className = "bdm-title";
+		firstParagraph.textContent = customTitle || defaultTitles[type] || "NOTE";
+	}
+
+	return doc.body.innerHTML;
+};
+
 const loadMermaid = async () => {
 	if (typeof window === "undefined") {
 		return null;
@@ -198,6 +243,38 @@ const loadMermaid = async () => {
 	});
 
 	return (window as any).mermaid ?? null;
+};
+
+const loadHighlight = async () => {
+	if (expressiveCodeEngine) {
+		return expressiveCodeEngine;
+	}
+
+	expressiveCodeEngine = new ExpressiveCodeEngine({
+		plugins: [
+			pluginShiki(),
+			pluginLanguageBadge(),
+			pluginCollapsibleSections(),
+			pluginLineNumbers(),
+			pluginCollapsible(),
+		],
+	});
+
+	return expressiveCodeEngine;
+};
+
+const ensureExpressiveCodeStyles = async (engine: ExpressiveCodeEngine) => {
+	if (expressiveCodeStylesInjected || typeof document === "undefined") {
+		return;
+	}
+
+	const baseStyles = await engine.getBaseStyles();
+	const themeStyles = await engine.getThemeStyles();
+	const styleTag = document.createElement("style");
+	styleTag.id = "markdown-playground-ec-styles";
+	styleTag.textContent = `${baseStyles}\n${themeStyles}`;
+	document.head.appendChild(styleTag);
+	expressiveCodeStylesInjected = true;
 };
 
 const runScripts = async () => {
@@ -315,14 +392,32 @@ const renderMermaid = async () => {
 	}
 };
 
-const renderCodeHighlight = () => {
+const renderCodeHighlight = async () => {
 	try {
 		if (!previewContainer) {
 			return;
 		}
-		previewContainer.querySelectorAll("pre code").forEach((el) => {
-			hljs.highlightElement(el);
-		});
+
+		const engine = await loadHighlight();
+		if (!engine) {
+			return;
+		}
+		await ensureExpressiveCodeStyles(engine);
+
+		const blocks = Array.from(previewContainer.querySelectorAll("pre > code"));
+		for (const codeElement of blocks) {
+			const preElement = codeElement.parentElement;
+			if (!preElement) continue;
+			const className = codeElement.className || "";
+			const language =
+				className.match(/language-([a-z0-9+-]+)/i)?.[1] ?? "text";
+			const renderResult = await engine.render({
+				code: codeElement.textContent ?? "",
+				language,
+				meta: "",
+			});
+			preElement.outerHTML = toHtml(renderResult.renderedGroupAst);
+		}
 	} catch (error) {
 		console.warn("代码高亮渲染失败", error);
 	}
@@ -342,6 +437,7 @@ const renderMarkdown = async () => {
 		}) as string;
 
 		let html = transformMermaidBlocks(rawHtml);
+		html = transformCallouts(html);
 		if (enableKatex) {
 			html = html.replace(
 				new RegExp(`${MATH_TOKEN}(\\d+)@@`, "g"),
@@ -353,7 +449,7 @@ const renderMarkdown = async () => {
 		await tick();
 		await runScripts();
 		await renderGithubCards();
-		renderCodeHighlight();
+		await renderCodeHighlight();
 		await renderMermaid();
 	} finally {
 		isRendering = false;

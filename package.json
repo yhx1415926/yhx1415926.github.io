@@ -44,7 +44,6 @@
     "glob": "^11.1.0",
     "gray-matter": "^4.0.3",
     "hastscript": "^9.0.1",
-    "highlight.js": "^11.9.0",
     "katex": "^0.16.28",
     "marked": "^16.4.2",
     "mdast-util-to-string": "^4.0.0",
