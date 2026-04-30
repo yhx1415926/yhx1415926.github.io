@@ -6,14 +6,28 @@ interface Props {
 const { analyticsId } = Astro.props;
 ---
 
-<!-- Google tag (gtag.js) -->
-<script is:inline data-swup-ignore-script async src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}></script>
-<script is:inline data-swup-ignore-script define:vars={{analyticsId}}>window.dataLayer = window.dataLayer || [];
+<script is:inline data-swup-ignore-script define:vars={{ analyticsId }}>
+function loadGoogleAnalytics() {
+    if (window.__googleAnalyticsLoaded) return;
+    window.__googleAnalyticsLoaded = true;
 
-function gtag() {
-    dataLayer.push(arguments);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+        dataLayer.push(arguments);
+    };
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
+    document.head.appendChild(script);
+
+    window.gtag("js", new Date());
+    window.gtag("config", analyticsId);
 }
 
-gtag('js', new Date());
-gtag('config', analyticsId);
+if ("requestIdleCallback" in window) {
+    requestIdleCallback(loadGoogleAnalytics, { timeout: 3000 });
+} else {
+    window.addEventListener("load", () => setTimeout(loadGoogleAnalytics, 1200), { once: true });
+}
 </script>

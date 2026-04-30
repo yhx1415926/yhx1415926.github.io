@@ -14,6 +14,9 @@ let result: SearchResult[] = [];
 let isSearching = false;
 let initialized = false;
 let debounceTimer: NodeJS.Timeout;
+let pagefindPromise: Promise<boolean> | null = null;
+
+const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
 
 // --- Mocks for Dev Mode ---
 const fakeResult: SearchResult[] = [
@@ -32,12 +35,14 @@ const fakeResult: SearchResult[] = [
 
 // --- UI Logic ---
 const togglePanel = () => {
+	if (!isBrowser) return;
 	document
 		.getElementById("search-panel")
 		?.classList.toggle("float-panel-closed");
 };
 
 const setPanelVisibility = (show: boolean, isDesktop: boolean): void => {
+	if (!isBrowser) return;
 	const panel = document.getElementById("search-panel");
 	if (
 		!panel ||
@@ -51,13 +56,48 @@ const setPanelVisibility = (show: boolean, isDesktop: boolean): void => {
 };
 
 const closeSearchPanel = (): void => {
+	if (!isBrowser) return;
 	document.getElementById("search-panel")?.classList.add("float-panel-closed");
 	keywordDesktop = "";
 	keywordMobile = "";
 	result = [];
 };
 
+const loadPagefind = async (): Promise<boolean> => {
+	if (!isBrowser) return false;
+	if (import.meta.env.DEV) {
+		initialized = true;
+		return true;
+	}
+	if (window.pagefind) {
+		initialized = true;
+		return true;
+	}
+	if (!pagefindPromise) {
+		pagefindPromise = (async () => {
+			try {
+				const scriptUrl = formatUrl("/pagefind/pagefind.js");
+				const pagefind = await import(/* @vite-ignore */ scriptUrl);
+				await pagefind.options({ excerptLength: 20 });
+				window.pagefind = pagefind;
+				initialized = true;
+				return true;
+			} catch (error) {
+				console.error("Failed to load Pagefind:", error);
+				window.pagefind = {
+					search: () => Promise.resolve({ results: [] }),
+					options: () => Promise.resolve(),
+				};
+				initialized = true;
+				return false;
+			}
+		})();
+	}
+	return pagefindPromise;
+};
+
 const handleResultClick = (event: Event, url: string): void => {
+	if (!isBrowser) return;
 	event.preventDefault();
 	closeSearchPanel();
 	navigateToPage(url);
@@ -65,18 +105,19 @@ const handleResultClick = (event: Event, url: string): void => {
 
 // --- Core Search Logic ---
 const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
+	if (!isBrowser) return;
 	if (!keyword) {
 		setPanelVisibility(false, isDesktop);
 		result = [];
 		return;
 	}
-	if (!initialized) return;
 
 	isSearching = true;
 
 	clearTimeout(debounceTimer);
 	debounceTimer = setTimeout(async () => {
 		try {
+			await loadPagefind();
 			let searchResults: SearchResult[] = [];
 
 			if (import.meta.env.PROD && window.pagefind) {
@@ -100,31 +141,8 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 	}, 300); // 300ms debounce
 };
 
-// --- Initialization onMount ---
 onMount(() => {
-	const initializePagefind = () => {
-		initialized = true;
-		if (keywordDesktop) search(keywordDesktop, true);
-		if (keywordMobile) search(keywordMobile, false);
-	};
-
-	if (import.meta.env.DEV) {
-		console.log("Pagefind mock enabled in development mode.");
-		initializePagefind();
-	} else {
-		if (window.pagefind) {
-			// If script already loaded
-			initializePagefind();
-		} else {
-			// Listen for the event
-			document.addEventListener("pagefindready", initializePagefind, {
-				once: true,
-			});
-			document.addEventListener("pagefindloaderror", initializePagefind, {
-				once: true,
-			});
-		}
-	}
+	initialized = true;
 });
 
 // --- Reactive Statements ---
@@ -144,7 +162,7 @@ $: if (initialized && (keywordMobile || keywordMobile === "")) {
     <Icon icon="material-symbols:search"
           class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
     <input placeholder="{i18n(I18nKey.search)}" bind:value={keywordDesktop}
-           on:focus={() => search(keywordDesktop, true)}
+           on:focus={() => keywordDesktop && search(keywordDesktop, true)}
            class="transition-all pl-10 text-sm bg-transparent outline-0
          h-full w-40 active:w-60 focus:w-60 text-black/50 dark:text-white/50"
     >
@@ -168,6 +186,7 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
         <Icon icon="material-symbols:search"
               class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
         <input placeholder={i18n(I18nKey.search)} bind:value={keywordMobile}
+               on:focus={() => keywordMobile && search(keywordMobile, false)}
                class="pl-10 absolute inset-0 text-sm bg-transparent outline-0
                focus:w-60 text-black/50 dark:text-white/50"
         >
@@ -243,4 +262,3 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
         overflow-y: auto;
     }
 </style>
-

@@ -50,7 +50,7 @@ $A=\{(a_1,b_1),(a_2,b_2),\dots,(a_m,b_m)\}\subset\mathbb{Z}^2$<br>
 $Ans_1\ =\ 2p-1$ ($2p-2$ 反例: $p-1$ 个 $(0,1),(1,0)$ )<br>
 $Ans_2\ =\ 4p-3$ ($4p-4$ 反例: $p-1$ 个 $(0,0),(0,1),(1,0),(1,1)$ )<br>
 (注意到解决Con.1的鸽巢原理无法应用于此处)<br>
-(Problem_2 又被称为 $Kemnitz’\ Conjecture$ )<br>
+(Problem_2 又被称为 $Kemnitz'\ Conjecture$ )<br>
 
 ### Solution_1-Generating_Function
 可重集 $A=\{a_1,a_2,\dots,a_m\}$, $a_1,a_2,\dots,a_m \in \mathbb{Z}_{>0}$ <br>

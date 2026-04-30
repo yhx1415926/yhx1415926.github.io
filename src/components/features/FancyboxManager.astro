@@ -1,11 +1,20 @@
 ---
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
-import "@/styles/fancybox-custom.css";
 // Fancybox 管理器组件
 ---
 
 <script>
+  import fancyboxCssUrl from "@fancyapps/ui/dist/fancybox/fancybox.css?url";
+  import customFancyboxCssUrl from "@/styles/fancybox-custom.css?url";
+
   let Fancybox: any;
+
+  function loadStylesheet(href: string) {
+    if (document.querySelector(`link[href="${href}"]`)) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  }
 
   async function setup() {
     const selectors = [
@@ -19,8 +28,10 @@ import "@/styles/fancybox-custom.css";
 
     if (!hasElements) return;
 
-    // 动态导入资源
+    // 动态导入资源，避免 Fancybox CSS/JS 进入无图片页面的首屏资源
     if (!Fancybox) {
+      loadStylesheet(fancyboxCssUrl);
+      loadStylesheet(customFancyboxCssUrl);
       const mod = await import("@fancyapps/ui");
       Fancybox = mod.Fancybox;
     }

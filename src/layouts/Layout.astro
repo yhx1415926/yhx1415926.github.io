@@ -435,8 +435,8 @@ const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
     <!-- Sakura Effect -->
     <SakuraEffect />
 
-    <!-- Fancybox Manager -->
-    <FancyboxManager />
+    <!-- Fancybox is only needed on article pages with markdown images. -->
+    {(postSlug || setOGTypeArticle) && <FancyboxManager />}
   </body>
 </html>
 

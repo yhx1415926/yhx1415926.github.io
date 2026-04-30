@@ -68,7 +68,7 @@ export const siteConfig: SiteConfig = {
 		// 3. 网络图片: { type: "url", value: "https://example.com/logo.png", alt: "Firefly Logo" }
 		logo: {
 			type: "image",
-			value: "/assets/images/Elaina.jpeg",
+			value: "/assets/images/Elaina.webp",
 			alt: "Elaina",
 		},
 		// 导航栏标题

@@ -43,6 +43,25 @@ interface Props {
 }
 
 const backgroundImages = getBackgroundImages();
+const desktopBackgroundSrc =
+	typeof backgroundImages.desktop === "string"
+		? backgroundImages.desktop
+		: typeof backgroundImages.mobile === "string"
+			? backgroundImages.mobile
+			: "";
+const mobileBackgroundSrc =
+	typeof backgroundImages.mobile === "string"
+		? backgroundImages.mobile
+		: desktopBackgroundSrc;
+const desktopBannerSrcSet =
+	desktopBackgroundSrc === "/assets/images/d2-1920.webp" ||
+	desktopBackgroundSrc === "/assets/images/d2.webp"
+		? [
+				"/assets/images/d2-1920.webp 1920w",
+				"/assets/images/d2.webp 4608w",
+			].join(", ")
+		: undefined;
+const desktopBannerSizes = desktopBannerSrcSet ? "100vw" : undefined;
 
 const {
 	title,
@@ -180,13 +199,26 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
 
+{isBannerMode && desktopBannerSrcSet && (
+	<Fragment slot="head">
+		<link
+			rel="preload"
+			as="image"
+			href={desktopBackgroundSrc}
+			imagesrcset={desktopBannerSrcSet}
+			imagesizes="100vw"
+			media="(min-width: 1024px)"
+			fetchpriority="high"
+		/>
+	</Fragment>
+)}
 
 <!-- 全屏透明覆盖壁纸 - 如果允许切换则始终渲染，否则只渲染当前模式 -->
 {(isWallpaperSwitchable || isOverlayMode) && (
 	<OverlayWallpaper config={{
 		src: {
-			desktop: typeof backgroundImages.desktop === 'string' ? backgroundImages.desktop : '',
-			mobile: typeof backgroundImages.mobile === 'string' ? backgroundImages.mobile : ''
+			desktop: desktopBackgroundSrc,
+			mobile: mobileBackgroundSrc
 		},
 		zIndex: backgroundWallpaper.overlay?.zIndex,
 		opacity: backgroundWallpaper.overlay?.opacity,
@@ -219,16 +251,22 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
         <ImageWrapper 
             alt="Mobile background image of the blog" 
             class:list={["block lg:hidden object-cover h-full w-full transition duration-700 opacity-100"]}
-            src={typeof backgroundImages.mobile === 'string' ? backgroundImages.mobile : (typeof backgroundImages.desktop === 'string' ? backgroundImages.desktop : '')} 
+            src={mobileBackgroundSrc} 
             position={backgroundWallpaper.banner?.position}
+            loading={isBannerMode ? "eager" : "lazy"}
+            fetchpriority={isBannerMode ? "high" : "auto"}
         />
         <!-- Desktop: use desktop-specific image -->
         <ImageWrapper 
             id="banner" 
             alt="Desktop background image of the blog" 
             class:list={["hidden lg:block object-cover h-full transition duration-700 opacity-100"]}
-            src={typeof backgroundImages.desktop === 'string' ? backgroundImages.desktop : (typeof backgroundImages.mobile === 'string' ? backgroundImages.mobile : '')} 
+            src={desktopBackgroundSrc} 
+            srcset={desktopBannerSrcSet}
+            sizes={desktopBannerSizes}
             position={backgroundWallpaper.banner?.position}
+            loading={isBannerMode ? "eager" : "lazy"}
+            fetchpriority={isBannerMode ? "high" : "auto"}
         />
     </div>
     
@@ -492,4 +530,3 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
     text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
   }
 </style>
-
