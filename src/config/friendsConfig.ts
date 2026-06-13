@@ -20,7 +20,7 @@ export const friendsConfig: FriendLink[] = [
 		enabled: true, // 是否启用
 	},
 	{
-    	"title": "THW’s Blog",
+    	"title": "THW's Blog",
     	"imgurl": "https://image.tianhw.top/avatar.webp",
     	"desc": "前途似海，来日方长",
     	"siteurl": "https://blog.tianhw.top",
@@ -30,7 +30,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "晓空blog",
-		imgurl: "https://cn.cravatar.com/avatar/7cbc71db79d1e7e0ce6f640851c86ade3d7fbcce4d42ac759dd617e13cf62533?s=192&d=mm&r=g",
+		imgurl: "https://blog.moeworld.tech/wp-content/uploads/2019/07/10_avatar_big_waifu2x_art_noise1_scale_tta_1.png",
 		desc: "来和我们一起来让世界变得更萌一些吧~",
 		siteurl: "https://blog.moeworld.tech/",
 		tags: ["Blog"],
