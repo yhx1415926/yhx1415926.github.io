@@ -95,7 +95,7 @@ export const friendsConfig: FriendLink[] = [
 		title: "TT清沫ukの博客",
 		imgurl: "https://blog.yhx1415926.top/assets/images/friends/TT_qingmo_uk.webp",
 		desc: "记录生活，研究技术~",
-		siteurl: "https://ttquk.github.io/",
+		siteurl: "https://ttquk.netlify.app/",
 		tags: ["Blog"],
 		weight: 65,
 		enabled: true,

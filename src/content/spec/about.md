@@ -31,7 +31,7 @@
 如果你想和我交流技术问题，分享有趣的想法，或者只是想打个招呼，欢迎通过以下方式联系我：
 
 - 💻 **GitHub**: [yhx1415926](https://github.com/yhx1415926)
-- ✉️ **Email**: [yao1415926@outlook.com](mailto:yao1415926@outlook.com)
+- ✉️ **Email**: [yao196883@gmail.com](mailto:yao196883@gmail.com)
 
 ---
 
