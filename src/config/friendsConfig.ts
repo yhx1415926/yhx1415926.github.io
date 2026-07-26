@@ -12,7 +12,7 @@ export const friendsPageConfig: FriendsPageConfig = {
 export const friendsConfig: FriendLink[] = [
 	{
 		title: "夏夜流萤",
-		imgurl: "https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/summernight.webp",
 		desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
 		siteurl: "https://blog.cuteleaf.cn",
 		tags: ["Blog"],
@@ -21,7 +21,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
     	"title": "THW's Blog",
-    	"imgurl": "https://image.tianhw.top/avatar.webp",
+    	"imgurl": "https://blog.yhx1415926.top/public/images/friends/THW.webp",
     	"desc": "前途似海，来日方长",
     	"siteurl": "https://blog.tianhw.top",
     	"tags": ["Blog"],
@@ -30,7 +30,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "晓空blog",
-		imgurl: "https://blog.moeworld.tech/wp-content/uploads/2019/07/10_avatar_big_waifu2x_art_noise1_scale_tta_1.png",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/xiaokong.jpg",
 		desc: "来和我们一起来让世界变得更萌一些吧~",
 		siteurl: "https://blog.moeworld.tech/",
 		tags: ["Blog"],
@@ -39,7 +39,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "memset0's Blog",
-		imgurl: "https://mem.ac/static/a6cef06ac3267a5705afaaf9092d0c47/83805/avatar-8x.webp",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/memset0.webp",
 		desc: "在海月的虚空中，纵身飞过秋凉的时鸟。",
 		siteurl: "https://mem.ac/",
 		tags: ["Blog"],
@@ -48,7 +48,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "x7aNote",
-		imgurl: "https://xeonzilla.top/favicon.svg",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/x7anote.svg",
 		desc: "Yuri is life.",
 		siteurl: "https://xeonzilla.top/",
 		tags: ["Blog"],
@@ -57,7 +57,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Codfish's Blog",
-		imgurl: "https://codfish.top/favicon.ico",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/Codfish.ico",
 		desc: "🐟🐟🐟",
 		siteurl: "https://codfish.top/",
 		tags: ["Blog"],
@@ -66,7 +66,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Elykia",
-		imgurl: "https://bu.dusays.com/2024/10/25/671b2438203a6.gif",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/Elykia.gif",
 		desc: "致以无瑕之人",
 		siteurl: "https://blog.elykia.cn/",
 		tags: ["Blog"],
@@ -75,7 +75,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Zero - 浮生",
-		imgurl: "https://vtdd.vip/_astro/lx.U15Ju0Ce_1mLhMp.webp",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/Zero.webp",
 		desc: "浮生一刹万般皆舍",
 		siteurl: "https://vtdd.vip/",
 		tags: ["Blog"],
@@ -84,7 +84,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "周子衡's 洛谷专栏",
-		imgurl: "https://cdn.luogu.com.cn/upload/usericon/112794.png",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/zhouziheng.webp",
 		desc: "Shadow is the light!",
 		siteurl: "https://www.luogu.com.cn/user/112794/article",
 		tags: ["Blog"],
@@ -93,7 +93,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "TT清沫ukの博客",
-		imgurl: "https://ts1.tc.mm.bing.net/th/id/OIP-C.6WsD9caLSNQFhJOi77soRAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/TT_qingmo_uk.webp",
 		desc: "记录生活，研究技术~",
 		siteurl: "https://ttquk.github.io/",
 		tags: ["Blog"],
@@ -102,7 +102,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Firefly Docs",
-		imgurl: "https://docs-firefly.cuteleaf.cn/logo.png",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/firefly.png",
 		desc: "Firefly主题模板文档",
 		siteurl: "https://docs-firefly.cuteleaf.cn",
 		tags: ["Docs"],
@@ -111,7 +111,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Astro",
-		imgurl: "https://avatars.githubusercontent.com/u/44914786?v=4&s=640",
+		imgurl: "https://blog.yhx1415926.top/public/images/friends/astro.png",
 		desc: "The web framework for content-driven websites. ⭐️ Star to support our work!",
 		siteurl: "https://github.com/withastro/astro",
 		tags: ["Framework"],
