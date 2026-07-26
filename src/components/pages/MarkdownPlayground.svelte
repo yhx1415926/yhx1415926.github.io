@@ -2,12 +2,7 @@
 import katex from "katex";
 import { marked } from "marked";
 import "katex/dist/katex.min.css";
-import { toHtml } from "@expressive-code/core/hast";
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
-import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
-import { ExpressiveCodeEngine, pluginShiki } from "astro-expressive-code";
-import { pluginCollapsible } from "expressive-code-collapsible";
-import { pluginLanguageBadge } from "expressive-code-language-badge";
+import type { ExpressiveCodeEngine } from "astro-expressive-code";
 import { onMount, tick } from "svelte";
 
 const demoMarkdown = `---
@@ -71,7 +66,7 @@ let uploadError = "";
 let mermaidApi: any = null;
 let expressiveCodeEngine: ExpressiveCodeEngine | null = null;
 let expressiveCodeStylesInjected = false;
-let highlightApi: any = null;
+let expressiveCodeToHtml: ((node: any) => string) | null = null;
 let enableKatex = true;
 let enableMermaid = true;
 let isRendering = false;
@@ -264,6 +259,23 @@ const loadHighlight = async () => {
 		return expressiveCodeEngine;
 	}
 
+	const [
+		{ toHtml },
+		{ pluginCollapsibleSections },
+		{ pluginLineNumbers },
+		{ ExpressiveCodeEngine, pluginShiki },
+		{ pluginCollapsible },
+		{ pluginLanguageBadge },
+	] = await Promise.all([
+		import("@expressive-code/core/hast"),
+		import("@expressive-code/plugin-collapsible-sections"),
+		import("@expressive-code/plugin-line-numbers"),
+		import("astro-expressive-code"),
+		import("expressive-code-collapsible"),
+		import("expressive-code-language-badge"),
+	]);
+
+	expressiveCodeToHtml = toHtml;
 	expressiveCodeEngine = new ExpressiveCodeEngine({
 		plugins: [
 			pluginShiki(),
@@ -417,6 +429,9 @@ const renderCodeHighlight = async () => {
 			return;
 		}
 		await ensureExpressiveCodeStyles(engine);
+		if (!expressiveCodeToHtml) {
+			return;
+		}
 
 		const blocks = Array.from(previewContainer.querySelectorAll("pre > code"));
 		for (const codeElement of blocks) {
@@ -430,7 +445,7 @@ const renderCodeHighlight = async () => {
 				language,
 				meta: "",
 			});
-			preElement.outerHTML = toHtml(renderResult.renderedGroupAst);
+			preElement.outerHTML = expressiveCodeToHtml(renderResult.renderedGroupAst);
 		}
 	} catch (error) {
 		console.warn("代码高亮渲染失败", error);

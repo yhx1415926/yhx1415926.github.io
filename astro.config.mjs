@@ -241,6 +241,8 @@ export default defineConfig({
 			cssMinify: true,
 			// 资源大小限制 - 减少内联资源
 			assetsInlineLimit: 4096,
+			// Markdown 预览页会按需加载 Shiki 语言包，部分语言包体积天然较大
+			chunkSizeWarningLimit: 800,
 			// 减少源映射大小（可选，生产环境改为false）
 			sourcemap: false,
 			// 并行处理构建
