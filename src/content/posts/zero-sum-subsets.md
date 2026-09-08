@@ -1,9 +1,10 @@
 ---
 title: "Zero Sum Subsets"
 published: 2024-07-21
+updated: 2026-09-08
 category: Blog
 tags: [Mathematics,Combinatorics]
-pin: true
+pinned: true
 math: true
 licenseName: "CC BY 4.0"
 author: yao1415926
@@ -24,9 +25,9 @@ Given $n$ integers $\{a_1,a_2,\dots,a_n\}$ , $\exists\ I\subseteq \{1,2,\dots,n\
 
 #### Conclusion_2
 
-$Erdo ̋s,Ginzburg\ and\ Ziv\ Theorem$ (1961)<br>
+$Erdos,Ginzburg\ and\ Ziv\ Theorem$ (1961)<br>
+Given $2n-1$ integers $\{a_1,a_2,\dots,a_n\}$,$\exists\ I\subseteq \{1,2,\dots,2n-1\}$ and $|I|=n,\ s.t.\ n|\sum_{i\in I}{a_i}$
 
-Given $2n-1$ integers $\{a_1,a_2,\dots,a_n\}$,$\exists\ I\subseteq \{1,2,\dots,2n-1\}$ and $|I|=n,\ s.t.\ n|\sum_{i\in I}{a_i}$<br>
 (可使用反证法，取p-1次方，导出矛盾)<br>
 (其中 $2n-1$ 为最佳,可取 $n-1$ 个 $0,1$.)<br>
 
@@ -62,16 +63,18 @@ $$(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B
 $n=p,\ a_1,a_2,\dots,a_m\in \mathbb{Z}_{>0}$<br>
 $S_k:=\{B\subset A\ |\ \sigma(B)\equiv k\ (mod\ p)\},\ k=0,1,\dots,p-1$<br>
 $$f(x):=(1-x^{a_1})(1-x^{a_2})\cdots(1-x^{a_m})\in \mathbb{F}_p/(x^p-1) $$<br>
-$$f(x)=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}=\sum_{k=0}^{p-1}(\sum_{B\in S_k}(-1)^{|B|})x^k\ \ (\star)$$<br>
+$$f(x)=\sum_{B\subset A}(-1)^{|B|}x^{\sigma(B)}=\sum_{k=0}^{p-1}(\sum_{B\in S_k}(-1)^{|B|})x^k\ \ (\star)$$
+
 上式可看作是余式，所以表示方式是唯一的.<br>
 另一方面,又有 $(1-x^{a_j})=(1-x)(\cdots)$ ,则
 $$f(x)=(1-x)^pg(x)$$<br>
 $$(1-x)^p=1-\binom{p}{1}x+ \binom{p}{2}x^2+\cdots+(-1)^px^p \overset{mod\ p}{==}1-x^p\overset{mod\ x^p-1}{==}0$$<br>
 $\Rightarrow\ f(x)=0$ 结合 $(\star)$ $\Rightarrow $
-$$\forall\  0\le k\le p-1,\ \sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p) $$<br>
+$$\forall\  0\le k\le p-1,\ \sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p) $$
+
 特别的，$k=0$ 时，$\emptyset \in S_k$ 而 $\sum_{B\in S_k}(-1)^{|B|}\equiv 0\ (mod\ p)$<br>
 $\Rightarrow\ \exists\ B\in S_0$ and $|B|\ne 0,\ s.t.\ \sigma(B)\equiv 0\ (mod\ p)$.
-<p align="right">$\Box$</p>
+<p align="right">$\square$</p>
 注意到这种方法给出了 比使用鸽巢原理更多的信息.
 
 #### For_Problem-1
@@ -107,7 +110,7 @@ $$\#\mathcal{Z}(F_1,F_2,\dots,F_m)\equiv \sum_{x\in\mathbb{F}_p}\prod_{j=1}^{m}(
 约定 $x^0|_{x=0}=1.$<br>
 $Lemma:$<br>
 $\forall a\ge 0$
-$$
+
 \begin{eqnarray}
 \sum_{x\in \mathbb{F}_p}x^a = \left\{
 \begin{aligned}
@@ -115,7 +118,8 @@ $$
 &0 &others
 \end{aligned}
 \right.
-\end{eqnarray}$$<br>
+\end{eqnarray}
+
 $deg\prod_{j=1}^{m}(1-F_j(x)^{p-1})\le (p-1)\sum degF_j<(p-1)n$
 $$\#\mathcal{Z}=\sum_{\{a_k\}}\ \sum_{(x_1,x_2,\dots,x_n)\in \mathbb{F}_p ^n}x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}=\sum_{\{a_k\}}(\sum_{x_1\in \mathbb{F}_p}x_1^{a_1})(\cdots)(\cdots)\cdots(\cdots)$$<br>
 又 $a_1+a_2+\cdots+a_n<(p-1)n\ \Rightarrow\ \exists \ a_j\le p-2.$<br>
@@ -128,14 +132,15 @@ $$F(x)=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_px_p^{p-1}\in \mathbb{F}_p[x]$$<br>
 $degF\le p-1< p$<br><br>
 $x=(x_1,x_2,\dots,x_n)\in \mathbb{F} _p^n$<br>
 $x\in \mathcal{Z}(F),\ x_{i_1},x_{i_2},\dots,x_{i_k}\ne 0,\ other\ x_i=0\ \Leftrightarrow\ a_{i_1}+a_{i_2}+\cdots+a_{i_k}\equiv 0\ (mod\ p)$<br><br>
-$N_k:=\#\{B\subset A\ |\ |B|=k,\sigma(B)\equiv 0\ (mod\ p)\}\ 0\le k\le p$,即 $k$ 元 $Zero-sum-subset$<br>
+$N_k:=\#\{B\subset A\ |\ |B|=k,\sigma(B)\equiv 0\ (mod\ p)\}\ 0\le k\le p$<br>
+即 $k$ 元 Zero-sum-subset<br>
 $$\#\mathcal{Z}(F)=\sum_{k=0}^pN_k(p-1)^k\overset{C-W}{\equiv}0\ (mod\ p)$$<br>
 $$\#\mathcal{Z}(F)\equiv\sum_{k=0}^p(-1)^kN_k\equiv 0\ (mod\ p)$$<br>
 $ N_0=1\ (\emptyset)\ \Rightarrow\ \exists\ 0< k\le p,N_k\ne 0 $
 <p align="right">$\Box$</p>
 
 #### For_Con.2
-$Erdo ̋s,Ginzburg\ and\ Ziv\ Theorem$<br>
+$Erdos,Ginzburg\ and\ Ziv\ Theorem$<br>
 $a_1,a_2,\dots,a_{2p-1}\in \mathbb{F}_p $
 $$F_1=x_1^{p-1}+x_2^{p-1}+\cdots x_{2p-1}^{p-1}$$<br>
 $$F_2=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{2p-1}x_{2p-1}^{p-1}$$<br>
@@ -156,13 +161,11 @@ $x=(0,0,\dots,0)\in \mathcal{Z}(F_1,F_2)\ \Rightarrow\ \exists\ x\ne(0,0,\dots,0
 ### Kemnitz’_Conjecture's_Proof
 $C.\ Reiher\ \ 2007,(German),1999-2003\ IMO\ 4G1B$<br>
 
-$$
 \begin{cases}
     F_1=x_1^{p-1}+x_2^{p-1}+\cdots x_{m}^{p-1}\\
     F_2=a_1x_1^{p-1}+a_2x_2^{p-1}+\cdots a_{m}x_{m}^{p-1}\\
     F_3=b_1x_1^{p-1}+b_2x_2^{p-1}+\cdots b_{m}x_{m}^{p-1}
 \end{cases}
-$$<br>
 
 $A=\{(a_i,b_i)\ |\ i=1,2,\dots,m\}$<br>
 $N_k(A):=\{B\subset A\ |\ |B|=k,\sigma(B)\equiv(0,0)\ (mod\ p)\}$<br>
