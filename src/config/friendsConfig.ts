@@ -84,7 +84,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "LyerNest",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Yuri.webp",
+		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Lylighte.jpg",
 		desc: "Lylighte's Blog",
 		siteurl: "https://nest.lylighte.cc/",
 		tags: ["Blog"],
