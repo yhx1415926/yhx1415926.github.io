@@ -1,7 +1,7 @@
 ---
 title: "英语读写1(L2)"
 published: 2026-09-08
-categories: English
+category: College
 tags: [English]
 pin: false
 math: false

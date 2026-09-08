@@ -1,7 +1,7 @@
 ---
 title: "线性代数(B1)"
 published: 2026-09-08
-categories: Linear Algebra
+category: College
 tags: [Linear Algebra]
 pin: false
 math: true

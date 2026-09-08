@@ -2,7 +2,7 @@
 title: "USTC入学及其他"
 published: 2026-08-20
 updated: 2026-09-08
-categories: USTC
+category: Blog
 tags: [USTC]
 pin: false
 math: false

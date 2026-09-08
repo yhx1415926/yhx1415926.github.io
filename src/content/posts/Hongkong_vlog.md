@@ -1,8 +1,8 @@
 ---
-title: ""
+title: "Hongkong Travel Journal"
 published: 2026-08-06
 updated: 2026-09-08
-categories: Travel
+category: Blog
 tags: [Travel,Hongkong]
 pin: false
 math: false

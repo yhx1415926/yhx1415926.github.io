@@ -1,7 +1,7 @@
 ---
 title: "计算机系统概论(H)"
 published: 2026-09-07
-categories: Computer Science
+category: College
 tags: [Computer Science]
 pin: false
 math: true

@@ -1,7 +1,7 @@
 ---
 title: "数学分析(B1)"
 published: 2026-09-07
-categories: Mathematics
+category: College
 tags: [Mathematics,Analysis]
 pin: false
 math: true

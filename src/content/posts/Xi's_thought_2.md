@@ -1,7 +1,7 @@
 ---
 title: "习近平新时代中国特色社会主义系统概论"
 published: 2026-09-08
-categories: Politics
+category: College
 tags: [Politics]
 pin: false
 math: false

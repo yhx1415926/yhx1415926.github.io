@@ -1,7 +1,7 @@
 ---
 title: "Zero Sum Subsets"
 published: 2024-07-21
-categories: Mathematics
+category: Blog
 tags: [Mathematics,Combinatorics]
 pin: true
 math: true
