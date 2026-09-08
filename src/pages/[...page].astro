@@ -7,9 +7,11 @@ import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@/utils/content-utils";
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
+	// hidden 仅隐藏首页列表中的文章，归档和文章详情仍正常生成。
+	const visibleBlogPosts = allBlogPosts.filter((post) => !post.data.hidden);
 	// 使用配置中的文章数量
 	const pageSize = siteConfig.pagination.postsPerPage;
-	return paginate(allBlogPosts, { pageSize });
+	return paginate(visibleBlogPosts, { pageSize });
 }) satisfies GetStaticPaths;
 // https://github.com/withastro/astro/issues/6507#issuecomment-1489916992
 

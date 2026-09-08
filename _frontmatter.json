@@ -57,6 +57,12 @@
           "type": "boolean"
         },
         {
+          "title": "hidden (hide from home)",
+          "name": "hidden",
+          "type": "boolean",
+          "default": false
+        },
+        {
           "title": "language",
           "name": "language",
           "type": "string"

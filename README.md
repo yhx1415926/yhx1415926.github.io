@@ -216,11 +216,14 @@ image: ./cover.jpg  # Or use "api" to enable random cover images
 tags: [Foo, Bar]
 category: Front-end
 draft: false
+hidden: false   # Set to true to hide from the home list while keeping archive and post pages
 lang: zh-CN      # Only set when article language differs from site language in `siteConfig.ts`
 pinned: false    # Pin article
 comment: true    # Enable comments
 ---
 ```
+
+`hidden` defaults to `false`. Set `hidden: true` to exclude a post (including pinned posts) from the home list and all its pagination pages. The post is still generated and remains available in archives, tags/categories, search, and RSS. Keep `draft: false` to publish it; `draft: true` excludes it from production builds.
 
 ## 📖 Markdown Extensions
 

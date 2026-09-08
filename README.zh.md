@@ -219,11 +219,14 @@ image: ./cover.jpg  # 或使用 "api" 来启用随机封面图
 tags: [Foo, Bar]
 category: Front-end
 draft: false
+hidden: false   # 设为 true 可从首页文章列表隐藏，归档和详情页仍可访问
 lang: zh-CN      # 仅当文章语言与 `siteConfig.ts` 中的网站语言不同时需要设置
 pinned: false    # 置顶
 comment: true    # 是否允许评论
 ---
 ```
+
+`hidden` 默认为 `false`。设置 `hidden: true` 会从首页及其所有分页中隐藏文章（包括置顶文章），但仍正常生成文章详情页，并保留在归档、标签/分类、搜索和 RSS 中。若只想隐藏首页列表，请保持 `draft: false`；`draft: true` 会使文章在生产构建中被排除。
 
 ## 🧩 Markdown 扩展语法
 
