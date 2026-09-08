@@ -83,6 +83,15 @@ export const friendsConfig: FriendLink[] = [
 		enabled: true,
 	},
 	{
+		title: "LyerNest",
+		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Yuri.webp",
+		desc: "Lylighte's Blog",
+		siteurl: "https://nest.lylighte.cc/",
+		tags: ["Blog"],
+		weight: 72,
+		enabled: true,
+	},
+	{
 		title: "周子衡's 洛谷专栏",
 		imgurl: "https://blog.yhx1415926.top/assets/images/friends/zhouziheng.webp",
 		desc: "Shadow is the light!",
