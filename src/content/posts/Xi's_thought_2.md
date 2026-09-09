@@ -13,7 +13,7 @@ hidden: true
 
 ### Intro
 Instructor: 李金龙<br>
-Email: ljl312@ustc.edu.cn
+Email: [ljl312@ustc.edu.cn](mailto:ljl312@ustc.edu.cn)
 
 平时成绩: 50分(考勤10+预习5+教学互动10+课程作业25)<br>
 期末考核成绩: 50分

@@ -14,7 +14,7 @@ slug: ics
 
 ### Intro
 Instructor: Hong An(安虹)<br>
-Email: han@ustc.edu.cn<br>
+Email: [han@ustc.edu.cn](mailto:han@ustc.edu.cn)<br>
 Midterm: 2026-11-09<br>
 Final: 2027-01-11<br>
 

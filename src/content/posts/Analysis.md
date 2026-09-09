@@ -20,14 +20,14 @@ hidden: false
 
 #### (F) 域公理: $\mathbb{R}$ 是一个域
 (F1) 加法结合律: $x+(y+z)=(x+y)+z$<br>
-(F2) 加法交换律: <br>
-(F3) 加法单位元存在: <br>
-(F4) 加法逆元存在: <br>
-(F5) 乘法结合律: <br>
-(F6) 乘法交换律: <br>
-(F7) 乘法单位元存在: <br>
-(F8) 乘法逆元存在: <br>
-(F9) 乘法分配律: 
+(F2) 加法交换律: $x+y=y+x$<br>
+(F3) 加法单位元存在: $\exists 0\in \mathbb{R}$, s.t. $\forall x\in \mathbb{R},0+x=x$<br>
+(F4) 加法逆元存在: $\forall x\in\mathbb{R},\exists (-x)\in\mathbb{R}$, s.t. $x+(-x)=0$<br>
+(F5) 乘法结合律: $x\cdot (y \cdot z)=(x\cdot y)\cdot z$<br>
+(F6) 乘法交换律: $x\cdot y=y\cdot x$<br>
+(F7) 乘法单位元存在: $\exists 1\in\mathbb{R}$, s.t. $1\ne 0$ and $\forall x\in\mathbb{R},1\cdot x=x$<br>
+(F8) 乘法逆元存在: $\forall x\in\mathbb{R^{\times}},\exists x^{-1}\in\mathbb{R}$, s.t. $x\cdot x^{-1}=1$<br>
+(F9) 乘法分配律: $x\cdot (y+z)=x\cdot y+x\cdot z$
 
 Remark1:<br>
 (F1)-(F4)成立, $(\mathbb{R},+)$ 为(交换)群<br>

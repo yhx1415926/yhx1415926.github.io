@@ -16,7 +16,7 @@ Instructor: 申伊塃<br>
 Homework: Allow of Latex<br>
 Midterm: 2026-11-14 下午<br>
 Final: 2027-01<br>
-Email: yhshen@ustc.edu.cn
+Email: [yhshen@ustc.edu.cn](mailto:yhshen@ustc.edu.cn)
 
 瀚海教学网: [course.ustc.edu.cn/portal](course.ustc.edu.cn/portal)<br>
 BB系统: [www.bb.ustc.edu.cn](www.bb.ustc.edu.cn)
