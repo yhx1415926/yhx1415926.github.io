@@ -32,11 +32,28 @@ hidden: false
 Remark1:<br>
 (F1)-(F4)成立, $(\mathbb{R},+)$ 为(交换)群<br>
 (F5)-(F9)成立, $(\mathbb{R}^{\times},\cdot)$ 为(交换)群<br>
+(F1)-(F7)+(F9)成立, $(\mathbb{R},+,\cdot)$ 为(交换)环<br>
+(F1)-(F9)成立, $(\mathbb{R},+,\cdot)$ 为域
 
+Remark2:<br>
+(F4)中的加法逆元容易证得唯一性<br>
+(F8)中的乘法逆元容易证得唯一性<br>
+(F7)中的 $1\ne 0$ 说明了 $\mathbb{R}$ 中至少要有2个元素
+
+Remark3:<br>
+Prove: $\forall x\in\mathbb{R},(-1)\cdot x=(-x)$<br>
+Hint: $(-1)\cdot x+x=(-1)\cdot x+1\cdot x$
 
 #### (O) 序公理: $\mathbb{R}$ 是有序域
+(O1) 序的传递性: $x\le y,y\le z\Rightarrow x\le z$<br>
+(O2) 序可以决定元素: $x\le y,y\le x\Rightarrow x=y$<br>
+(O3) 全序关系: 任意两个 $\mathbb{R}$ 中元素均可比<br>
+(O4) 与加法相容: $x\le y\Rightarrow x+z\le y+z$<br>
+(O5) 与乘法相容: $x\ge 0,y\ge 0\Rightarrow xy\ge 0$
 
 #### (A) $Achimedes$ 公理: $\mathbb{R}$ 是 Archimedes 有序域
+$$\forall x>0,y$$
+
 
 #### (I) 区间套公理
 
