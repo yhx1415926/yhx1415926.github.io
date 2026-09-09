@@ -9,6 +9,7 @@ licenseName: "CC BY 4.0"
 author: yao1415926
 description: "Week 2"
 hidden: false
+slug: ics
 ---
 
 ### Intro
@@ -19,7 +20,7 @@ Final: 2027-01-11<br>
 
 Problems Sets: \~8<br>
 Labs: 6\~7<br>
-Honor Class Required: A Calculator Design or LC-3 Simulator/Assembler Design
+**Honor Class Required: A Calculator Design or LC-3 Simulator/Assembler Design**
 
 Links: [https://acsa.ustc.edu.cn/ics/](https://acsa.ustc.edu.cn/ics/)
 
