@@ -8,7 +8,7 @@ math: false
 licenseName: "CC BY 4.0"
 author: yao1415926
 description: "Week 2"
-hidden: false
+hidden: true
 slug: iac
 ---
 

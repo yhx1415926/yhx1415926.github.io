@@ -1,6 +1,7 @@
 ---
 title: "Analysis Learning"
 published: 2026-09-09
+updated: 2026-09-10
 category: Blog
 tags: [Mathematics,Analysis]
 pin: false
