@@ -174,4 +174,4 @@ $N_k(A):=\{B\subset A\ |\ |B|=k,\sigma(B)\equiv(0,0)\ (mod\ p)\}$<br>
 后续技巧具体可见[Reference](#Reference)
 
 ### Reference
-[On Kemnitz’ conjecture concerning lattice-points in the plane](https://blog.yhx1415926.top/scr/content/posts/reference/On_Kemnitz’_conjecture_concerning_lattice-points_in_the_plane.pdf)
+[On Kemnitz’ conjecture concerning lattice-points in the plane](https://blog.yhx1415926.top/assets/reference/On_Kemnitz’_conjecture_concerning_lattice-points_in_the_plane.pdf)

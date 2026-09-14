@@ -33,7 +33,8 @@ Grade = Middle(15%)+Final(25%)+Assignments(50%)+EPA(10%)
 3. Abstraction Helps Us Manage Complexity(Layers of Representation/Interpretation)<br>
 4. Software and Hardware Co-design
 
-### Represente Numbers
+### Bits, Data, Types and Operations
+
 #### Unsigned Integers
 Unsigned Binary Arithmetic
 
@@ -81,11 +82,16 @@ $$
 \Rightarrow -6\frac{5}{8}=1\ 10000001\ 101\ 0100\ 0000\ 0000\ 0000\ 0000
 $$
 #### Further Reading
-[Defining Floating Point Precision](https://blog.yhx1415926.top/src/content/posts/reference/Defining_Floating_Point_Precision.pdf)
+[Defining Floating Point Precision](https://blog.yhx1415926.top/assets/reference/Defining_Floating_Point_Precision.pdf)
 
-### Represent Text
+#### Text
 ASCII Characters
 
-### LC3
+#### LC3
 Data type: 16 bit 2's complement signed integer
 operations: ADD, AND, NOT
+
+### Digital Logic Structures
+
+#### Transistor
+
