@@ -47,12 +47,21 @@ export const friendsConfig: FriendLink[] = [
 		enabled: true,
 	},
 	{
+		title: "Minsecrus",
+		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Minsecrus.jpg",
+		desc: "践行博弈与拟合，倾听愿望与呐喊",
+		siteurl: "https://minsecrus.github.io/",
+		tags: ["Blog"],
+		weight: 88,
+		enabled: true,
+	},
+	{
 		title: "x7aNote",
 		imgurl: "https://blog.yhx1415926.top/assets/images/friends/x7anote.svg",
 		desc: "Yuri is life.",
 		siteurl: "https://xeonzilla.top/",
 		tags: ["Blog"],
-		weight: 88,
+		weight: 87,
 		enabled: true,
 	},
 	{

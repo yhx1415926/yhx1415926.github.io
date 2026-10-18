@@ -28,9 +28,9 @@ Links: [https://acsa.ustc.edu.cn/ics/](https://acsa.ustc.edu.cn/ics/)
 Grade = Middle(15%)+Final(25%)+Assignments(50%)+EPA(10%)
 
 ### Four Great Ideas
-1. Computer is an Universal Computing Device(Turing Machine Model)<br>
-2. Stored program computer(Von Neumann Model)<br>
-3. Abstraction Helps Us Manage Complexity(Layers of Representation/Interpretation)<br>
+1. Computer is an Universal Computing Device(Turing Machine Model)
+2. Stored program computer(Von Neumann Model)
+3. Abstraction Helps Us Manage Complexity(Layers of Representation/Interpretation)
 4. Software and Hardware Co-design
 
 ### Bits, Data, Types and Operations
@@ -53,12 +53,12 @@ Signed Magnitude(原码)<br>
 11011B=-5D<br>
 00101B(5)+11011B(-5)=0
 
-To take the two's complement of a number:<br>
-1. copy bits from right to left until (and including) the first '1'<br>
+To take the two's complement of a number:
+1. copy bits from right to left until (and including) the first '1'
 2. fip remaining bits to the left
 
-Methods of converting Decimal to Binary(2's C)<br>
-1. Division $(104/2=52r0)$ <br>
+Methods of converting Decimal to Binary(2's C)
+1. Division $(104/2=52r0)$ 
 2. Subtract Powers of Two $(104-64=40,40-32=8)$
 
 #### Sign Extension
@@ -88,10 +88,12 @@ $$
 ASCII Characters
 
 #### LC3
-Data type: 16 bit 2's complement signed integer
+Data type: 16 bit 2's complement signed integer<br>
 operations: ADD, AND, NOT
 
 ### Digital Logic Structures
 
 #### Transistor
+
+MOS = Metal Oxide Semiconductor
 
