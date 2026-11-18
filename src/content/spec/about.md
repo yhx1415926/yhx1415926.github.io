@@ -21,7 +21,7 @@
 
 **🖥️在线预览： [Firefly - Demo site](https://firefly.cuteleaf.cn/)**
 
-**🏠我的博客： [https://blog.yhx1415926.top](https://blog.yhx1415926.top)**
+**🏠我的博客： [https://blog.elainayao.com](https://blog.elainayao.com)**
 
 ::github{repo="CuteLeaf/Firefly"}
 

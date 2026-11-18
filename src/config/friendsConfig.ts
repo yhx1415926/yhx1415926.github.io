@@ -12,7 +12,7 @@ export const friendsPageConfig: FriendsPageConfig = {
 export const friendsConfig: FriendLink[] = [
 	{
 		title: "夏夜流萤",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/summernight.webp",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/summernight.webp",
 		desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
 		siteurl: "https://blog.cuteleaf.cn",
 		tags: ["Blog"],
@@ -21,7 +21,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
     	"title": "THW's Blog",
-    	"imgurl": "https://blog.yhx1415926.top/assets/images/friends/THW.webp",
+    	"imgurl": "https://blog.elainayao.com/assets/images/friends/THW.webp",
     	"desc": "前途似海，来日方长",
     	"siteurl": "https://blog.tianhw.top",
     	"tags": ["Blog"],
@@ -30,7 +30,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "晓空blog",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/xiaokong.jpg",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/xiaokong.jpg",
 		desc: "来和我们一起来让世界变得更萌一些吧~",
 		siteurl: "https://blog.moeworld.tech/",
 		tags: ["Blog"],
@@ -39,7 +39,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "memset0's Blog",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/memset0.webp",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/memset0.webp",
 		desc: "在海月的虚空中，纵身飞过秋凉的时鸟。",
 		siteurl: "https://mem.ac/",
 		tags: ["Blog"],
@@ -48,16 +48,16 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Minsecrus",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Minsecrus.jpg",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/Minsecrus.jpg",
 		desc: "践行博弈与拟合，倾听愿望与呐喊",
 		siteurl: "https://minsecrus.github.io/",
-		tags: ["Blog"],
+		tags: ["USTC"],
 		weight: 88,
 		enabled: true,
 	},
 	{
 		title: "x7aNote",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/x7anote.svg",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/x7anote.svg",
 		desc: "Yuri is life.",
 		siteurl: "https://xeonzilla.top/",
 		tags: ["Blog"],
@@ -66,7 +66,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Codfish's Blog",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Codfish.ico",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/Codfish.ico",
 		desc: "🐟🐟🐟",
 		siteurl: "https://codfish.top/",
 		tags: ["Blog"],
@@ -75,7 +75,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Elykia",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Elykia.gif",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/Elykia.gif",
 		desc: "致以无瑕之人",
 		siteurl: "https://blog.elykia.cn/",
 		tags: ["Blog"],
@@ -84,7 +84,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Zero - 浮生",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Zero.webp",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/Zero.webp",
 		desc: "浮生一刹万般皆舍",
 		siteurl: "https://vtdd.vip/",
 		tags: ["Blog"],
@@ -93,16 +93,16 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "LyerNest",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/Lylighte.jpg",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/Lylighte.jpg",
 		desc: "Lylighte's Blog",
 		siteurl: "https://nest.lylighte.cc/",
-		tags: ["Blog"],
+		tags: ["USTC"],
 		weight: 72,
 		enabled: true,
 	},
 	{
 		title: "周子衡's 洛谷专栏",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/zhouziheng.webp",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/zhouziheng.webp",
 		desc: "Shadow is the light!",
 		siteurl: "https://www.luogu.com.cn/user/112794/article",
 		tags: ["Blog"],
@@ -111,7 +111,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "TT清沫ukの博客",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/TT_qingmo_uk.webp",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/TT_qingmo_uk.webp",
 		desc: "记录生活，研究技术~",
 		siteurl: "https://ttquk.netlify.app/",
 		tags: ["Blog"],
@@ -119,8 +119,17 @@ export const friendsConfig: FriendLink[] = [
 		enabled: true,
 	},
 	{
+		title: "jenny42's life",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/jenny42.png",
+		desc: "记录生活，研究技术~",
+		siteurl: "https://jenny42.com/",
+		tags: ["USTC"],
+		weight: 30,
+		enabled: true,
+	},
+	{
 		title: "Firefly Docs",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/firefly.png",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/firefly.png",
 		desc: "Firefly主题模板文档",
 		siteurl: "https://docs-firefly.cuteleaf.cn",
 		tags: ["Docs"],
@@ -129,7 +138,7 @@ export const friendsConfig: FriendLink[] = [
 	},
 	{
 		title: "Astro",
-		imgurl: "https://blog.yhx1415926.top/assets/images/friends/astro.png",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/astro.png",
 		desc: "The web framework for content-driven websites. ⭐️ Star to support our work!",
 		siteurl: "https://github.com/withastro/astro",
 		tags: ["Framework"],

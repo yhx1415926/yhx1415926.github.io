@@ -34,7 +34,7 @@ import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://yhx1415926.github.io",
+	site: "https://blog.elainayao.com",
 
 	base: "/",
 	trailingSlash: "always",

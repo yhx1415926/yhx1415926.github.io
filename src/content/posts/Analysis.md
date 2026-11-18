@@ -1,7 +1,7 @@
 ---
 title: "Analysis Learning"
 published: 2026-09-09
-updated: 2026-09-10
+updated: 2026-10-26
 category: Blog
 tags: [Mathematics,Analysis]
 pin: false
@@ -58,3 +58,46 @@ $$\forall x>0,y$$
 
 #### (I) 区间套公理
 
+### Chapter 14
+
+#### 命题84 (Faa di Bruno公式)
+
+$$
+(f\circ g)^{(n)}(x)
+=\sum_{m=1}^{n}\sum_{(k_1,\ldots,k_n)\in\Gamma_m}
+\frac{n!}{k_1!k_2!\cdots k_n!}
+f^{(m)}(g(x))
+\left(\frac{g^{(1)}(x)}{1!}\right)^{k_1}
+\left(\frac{g^{(2)}(x)}{2!}\right)^{k_2}
+\cdots
+\left(\frac{g^{(n)}(x)}{n!}\right)^{k_n}
+$$
+
+### Homework 15
+
+#### 习题A: 导数的定义和计算
+
+(A1) 设 $I$ 是区间，$x_0\in I$。对 $h\neq 0$ 记差商 $q(h)=\frac{f(x_0+h)-f(x_0)}{h}\in\mathbb R^n$，它的第 $k$ 个分量正是 $q_k(h)=\frac{f_k(x_0+h)-f_k(x_0)}{h}$。
+
+关键是对任意 $v\in\mathbb R^n$ 有
+$$|v_k|\le\|v\|_2\le|v_1|+\cdots+|v_n|.$$
+
+(⇒) 设 $f'(x_0)=L=(L_1,\dots,L_n)$。则 $|q_k(h)-L_k|\le\|q(h)-L\|_2\to0$，所以 $f_k'(x_0)$ 存在且等于 $L_k$。
+
+(⇐) 设每个 $f_k'(x_0)$ 都存在，令 $L=(f_1'(x_0),\dots,f_n'(x_0))$。则 $\|q(h)-L\|_2\le\sum_k|q_k(h)-f_k'(x_0)|\to0$（有限个趋于 0 的量之和），所以 $f'(x_0)=L$。∎
+
+(A2) 在 $\mathbb C$ 上用模长作范数。对实数 $h\neq0$，由于 $e^{ih}=\sum_{k\ge0}\frac{(ih)^k}{k!}$ 绝对收敛，可以逐项做线性运算：
+$$\frac{e^{ih}-1}{h}-i=\sum_{k\ge2}\frac{i^kh^{k-1}}{k!}.$$
+收敛级数的模不超过各项模之和（对部分和用三角不等式再取极限），再用 $\frac1{k!}\le\frac1{(k-2)!}$：
+$$\Big|\frac{e^{ih}-1}{h}-i\Big|\le|h|\sum_{k\ge2}\frac{|h|^{k-2}}{k!}\le|h|\sum_{m\ge0}\frac{|h|^m}{m!}=|h|e^{|h|}\to0\quad(h\to0).$$
+所以 $f'(0)=i$。
+一般的 $x$：由 $e^{z_1+z_2}=e^{z_1}e^{z_2}$，
+$$\frac{e^{i(x+h)}-e^{ix}}{h}-ie^{ix}=e^{ix}\Big(\frac{e^{ih}-1}{h}-i\Big),$$
+它的模等于 $|e^{ix}|\cdot\big|\frac{e^{ih}-1}{h}-i\big|=\big|\frac{e^{ih}-1}{h}-i\big|\to0$（$|e^{ix}|=1$ 已在第 6 讲证明；其实只要 $e^{ix}$ 是固定的复数就够了）。所以 $(e^{ix})'=ie^{ix}$。∎
+
+(A3) 对实数 $x$，$\cos x,\sin x$ 由实系数级数给出，都是实数，于是由 Euler 公式 $e^{ix}=\cos x+i\sin x$，在等距同构 $\mathbb C\cong\mathbb R^2$（$a+bi\mapsto(a,b)$，模长对应 $\|\cdot\|_2$）下，$f(x)=e^{ix}$ 就是 $(\cos x,\sin x)$。
+由 A2，$f'(x)$ 存在且
+$$f'(x)=ie^{ix}=i(\cos x+i\sin x)=-\sin x+i\cos x\ \leftrightarrow\ (-\sin x,\ \cos x).$$
+由 A1 的 (⇒)，两个分量都可导且 $f'(x)=(\cos'x,\sin'x)$。比较分量得 $(\cos x)'=-\sin x$，$(\sin x)'=\cos x$。∎
+
+两个容易漏的地方：A2 里要说明为什么能把无穷级数的模放大成各项模之和；A3 里要说明 $\cos x,\sin x$ 在 $x$ 为实数时是实数，否则“实部、虚部”的对应不成立。

@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 	subtitle: "Yao",
 
 	// 站点 URL
-	site_url: "https://blog.yhx1415926.top",
+	site_url: "https://blog.elainayao.com",
 
 	// 站点描述
 	description:

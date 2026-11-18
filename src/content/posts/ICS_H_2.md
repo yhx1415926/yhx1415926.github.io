@@ -82,7 +82,7 @@ $$
 \Rightarrow -6\frac{5}{8}=1\ 10000001\ 101\ 0100\ 0000\ 0000\ 0000\ 0000
 $$
 #### Further Reading
-[Defining Floating Point Precision](https://blog.yhx1415926.top/assets/reference/Defining_Floating_Point_Precision.pdf)
+[Defining Floating Point Precision](https://blog.elainayao.com/assets/reference/Defining_Floating_Point_Precision.pdf)
 
 #### Text
 ASCII Characters
