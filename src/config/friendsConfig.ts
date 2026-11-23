@@ -34,7 +34,7 @@ export const friendsConfig: FriendLink[] = [
 		desc: "来和我们一起来让世界变得更萌一些吧~",
 		siteurl: "https://blog.moeworld.tech/",
 		tags: ["Blog"],
-		weight: 90,
+		weight: 93,
 		enabled: true,
 	},
 	{
@@ -43,7 +43,16 @@ export const friendsConfig: FriendLink[] = [
 		desc: "在海月的虚空中，纵身飞过秋凉的时鸟。",
 		siteurl: "https://mem.ac/",
 		tags: ["Blog"],
-		weight: 89,
+		weight: 92,
+		enabled: true,
+	},
+	{
+		title: "water5",
+		imgurl: "https://blog.elainayao.com/assets/images/friends/water555.webp",
+		desc: "你好，我是五水",
+		siteurl: "https://water555.com/",
+		tags: ["USTC"],
+		weight: 90,
 		enabled: true,
 	},
 	{
@@ -121,7 +130,7 @@ export const friendsConfig: FriendLink[] = [
 	{
 		title: "jenny42's life",
 		imgurl: "https://blog.elainayao.com/assets/images/friends/jenny42.png",
-		desc: "记录生活，研究技术~",
+		desc: "欢迎来到这个博客",
 		siteurl: "https://jenny42.com/",
 		tags: ["USTC"],
 		weight: 30,
